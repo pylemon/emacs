@@ -39,92 +39,12 @@
 (require 'cursor-change)
 (cursor-change-mode 1)
 
-;; dir mode settings
-;;===================================================================
-(setq dired-omit-extensions '("CVS/" ".o" "~" ".bin" ".lbin"
-                              ".fasl" ".ufsl" ".a" ".ln" ".blg"
-                              ".bbl" ".elc" ".lof" ".glo" ".idx"
-                              ".lot" ".fmt" ".tfm" ".class" ".fas" ".lib"
-                              ".x86f" ".sparcf" ".lo" ".la" ".toc" ".log"
-                              ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr"
-                              ".cps" ".fns" ".kys" ".pyc" ".tps" ".vrs" ".pgs"))
-
-
-;; basic function settings
-;; ======================================================================
-
-; prevent autosaving
-(setq make-backup-files nil)
-
-; back up dir
-(setq backup-directory-alist '(("" . "~/Emacs/backup/")))
-
-; always using space to indent
-(setq indent-tabs-mode nil)
-
-; indent anywhere inline
-(setq tab-always-indent t)
-
-; indent tab width 4 space
-(setq tab-width 4)
-
-; middle mouse key past
-(setq mouse-yank-at-point t)
-
-; change line 80 char
-(setq default-fill-column 80)
-
-; emacs clipboard with other programme
-(setq x-select-enable-clipboard t)
-
-;; emacs working directory
+; emacs working directory
 (setq default-directory "~/work/src/")
 
-;; 使用鼠标滚轮翻页时，一次只翻3行
-(defun up-slightly () (interactive) (scroll-up 3))
-(defun down-slightly () (interactive) (scroll-down 3))
-(global-set-key [mouse-4] 'down-slightly)
-(global-set-key [mouse-5] 'up-slightly) 
 
-;; 使用M-;时，如果没有区域被选中且光标不在行尾，直接注释掉当前行
-(defun qiang-comment-dwim-line (&optional arg)
-  "Replacement for the comment-dwim command.
-If no region is selected and current line is not blank and we are not at the end of the line,
-then comment current line.
-Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."
-  (interactive "*P")
-  (comment-normalize-vars)
-  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
-      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
-    (comment-dwim arg)))
-(global-set-key "\M-;" 'qiang-comment-dwim-line)
-
-;;一些好用的键盘绑定
-
-;显示当前buffer的路径，绑定到M-5
-(defun display-buffer-name ()
-  (interactive)
-  (message (buffer-file-name (current-buffer))))
-(global-set-key (kbd "M-5") 'display-buffer-name)
-
-;; 关闭buffer的时候, 如果该buffer有对应的进程存在, 不提示, 烦
-(delq 'process-kill-buffer-query-function kill-buffer-query-functions)
-
-
-;立即关闭当前buffer不需要确认，绑定到M-4
-(defun yic-kill-current-buffer ()
-  "Kill current buffer."
-  (interactive)
-  (kill-buffer (current-buffer)))
-(global-set-key (kbd "M-4") 'yic-kill-current-buffer)
-
-
-(global-set-key (kbd "M-1") 'delete-other-windows)
-(global-set-key (kbd "M-0") 'other-window)
-
-
-; 找到鼠标指针当前所在的文件，返回到minibuffer中已供打开
-(global-set-key (kbd "C-x f") 'find-file-at-point)
+;; dir mode settings
+;;===================================================================
 
 ;; appearance settings
 ;;======================================================================
@@ -186,21 +106,6 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
  '("DejaVu Sans Mono" "Consolas" "Monaco" "Monospace" "Courier New") ":pixelsize=14"
  '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
 
-;; ;; font settings for better CJK support
-;; ;;
-;;(setq set-default-font "DejaVu Sans Mono")
-;; (set-fontset-font (frame-parameter nil 'font)
-;;           'unicode '("Microsoft YaHei" . "unicode-bmp")) 
-;; (set-fontset-font (frame-parameter nil 'font)
-;;           'han '("Microsoft YaHei" . "unicode-bmp"))
-;; (set-fontset-font (frame-parameter nil 'font)
-;;           'symbol '("Microsoft YaHei"  . "unicode-bmp"))
-;; (set-fontset-font (frame-parameter nil 'font)
-;;           'cjk-misc '("Microsoft YaHei"  . "unicode-bmp"))
-;; (set-fontset-font (frame-parameter nil 'font)
-;;           'bopomofo '("Microsoft YaHei"  . "unicode-bmp")) 
-
-
 ;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
 (require 'rainbow-mode)
 
@@ -217,38 +122,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 (require 'tabbar)
 (tabbar-mode)
 (define-prefix-command 'lwindow-map)
-(global-set-key (kbd "<M-up>") 'tabbar-backward-group)
-(global-set-key (kbd "<M-down>") 'tabbar-forward-group)
-(global-set-key (kbd "<M-left>") 'tabbar-backward)
-(global-set-key (kbd "<M-right>") 'tabbar-forward)
-;(set-face-attribute 'tabbar-default-face nil :family "DejaVu Sans-10")
 
-
-;; 全屏函数
-(defun my-fullscreen ()
-  (interactive)
-;  (tool-bar-mode nil)
-;  (menu-bar-mode nil)
-  (x-send-client-message
-   nil 0 nil "_NET_WM_STATE" 32
-   '(2 "_NET_WM_STATE_FULLSCREEN" 0)))
-
-;该函数用于最大化,状态值为1说明最大化后不会被还原
-;因为这里有两次最大化 (分别是水平和垂直)
-(defun my-maximized ()
-  (interactive)
-  (x-send-client-message
-   nil 0 nil "_NET_WM_STATE" 32
-   '(1 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-  (interactive)
-  (x-send-client-message
-   nil 0 nil "_NET_WM_STATE" 32
-   '(1 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))
  
-(run-with-idle-timer 0.1 nil 'my-fullscreen)
-
-(global-set-key (kbd "<f11>") 'my-fullscreen)
-
 ;; 增加更丰富的高亮
 (require 'generic-x)
 
@@ -273,7 +148,6 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 ;; ibus mode settings
 ;;================================================================================
 
-
 (require 'ibus)
 ;; Turn on ibus-mode automatically after loading .emacs
 (add-hook 'after-init-hook 'ibus-mode-on)
@@ -283,9 +157,5 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 (ibus-define-common-key ?\C-/ nil)
 ;; Change cursor color depending on IBus status
 (setq ibus-cursor-color '("red" "blue" "limegreen"))
-
 ;; Use s-SPC to toggle input status
 (ibus-define-common-key ?\S-\s nil)
-
-
-
