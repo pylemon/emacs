@@ -1,8 +1,5 @@
 ;; 功能:
 ;; Emacs界面配色
-;; 
-;; 键盘绑定:
-;; 
 ;;
 ;; 修改时间:
 ;; 2011年12月9日
@@ -13,13 +10,13 @@
   (color-theme-install
    '(color-theme-blackboard
      (
-      ;; (background-color . "#0C1021")
-      (background-color . "black")
-      (background-mode . dark)
-      (border-color . "black")
-      (cursor-color . "#A7A7A7")
-      (foreground-color . "#F8F8F8")
-      (mouse-color . "sienna1"))
+     ;; (background-color . "#0C1021")
+     (background-color . "black")
+     (background-mode . dark)
+     (border-color . "black")
+     (cursor-color . "#A7A7A7")
+     (foreground-color . "#F8F8F8")
+     (mouse-color . "sienna1"))
      ;; (default ((t (:background "#0C1021" :foreground "#F8F8F8"))))
      (default ((t (:background "black" :foreground "#F8F8F8"))))
      (blue ((t (:foreground "blue"))))
@@ -41,13 +38,13 @@
  
      (font-lock-string-face ((t (:foreground "#61CE3C"))))
      (font-lock-type-face ((t (:foreground "#8DA6CE"))))
-     ;(font-lock-variable-name-face ((t (:foreground "#FF6400"))))
+     ;; (font-lock-variable-name-face ((t (:foreground "#FF6400"))))
      (font-lock-variable-name-face ((t (:foreground "#40E0D0"))))
      (font-lock-warning-face ((t (:bold t :foreground "Pink"))))
      (gui-element ((t (:background "#D4D0C8" :foreground "black"))))
      (region ((t (:background "#253B76"))))
      (mode-line ((t (:background "grey75" :foreground "black"))))
-     ;(highlight ((t (:background "#222222"))))
+     ;; (highlight ((t (:background "#222222"))))
      (highlight ((t (:background "#001"))))
      (highline-face ((t (:background "SeaGreen"))))
      (italic ((t (nil))))
@@ -57,8 +54,11 @@
      (underline ((nil (:underline nil))))
      (zmacs-region ((t (:background "snow" :foreground "ble")))))))
 
+;; 初始化配色
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-blackboard)
+
+;; 另一个比较和谐的配色
 ;(color-theme-arjen)
 
