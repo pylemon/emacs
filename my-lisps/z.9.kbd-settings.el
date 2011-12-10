@@ -39,6 +39,9 @@
 ;; C-x
 ;;======================================================================
 
+;; 设置是否显示行号
+(global-set-key (kbd "C-x N") 'linum-mode)
+
 ;; 找到鼠标指针当前所在的文件，返回到minibuffer中已供打开
 (global-set-key (kbd "C-x f") 'find-file-at-point)
 
