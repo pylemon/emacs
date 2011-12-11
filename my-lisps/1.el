@@ -78,8 +78,7 @@
 ;;;;;;change some function;;;;;;;
 ;;my-lisps/dev-settings.el
 
-;; star-dict
-(require 'star-dict)
+;; star-dic(require 'star-dict)
 ;;my-lisps/star-dict.el
 
 ;; 轻量标记语言markdown

@@ -48,13 +48,14 @@
 ;; 跳转到当前 buffer 的 Dired 目录
 (global-set-key (kbd "C-x j") 'dired-jump)
 
-;; 查询天气
-(global-set-key (kbd "C-x w") 'cn-weather)
-
-
 ;; C-c
 ;;======================================================================
 
+;; 查询天气
+(global-set-key (kbd "C-c C-w") 'cn-weather)
+
+;; 查询单词
+(global-set-key (kbd "C-c C-d") 'kid-star-dict)
 
 
 ;; f1-f12 mouse settings
