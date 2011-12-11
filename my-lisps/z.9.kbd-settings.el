@@ -30,10 +30,10 @@
 (global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
 
 ;; 切换 buffer tabbar 
-(global-set-key (kbd "<M-up>") 'tabbar-backward-group)
-(global-set-key (kbd "<M-down>") 'tabbar-forward-group)
-(global-set-key (kbd "<M-left>") 'tabbar-backward)
-(global-set-key (kbd "<M-right>") 'tabbar-forward)
+(global-set-key (kbd "<s-up>") 'tabbar-backward-group)
+(global-set-key (kbd "<s-down>") 'tabbar-forward-group)
+(global-set-key (kbd "<s-left>") 'tabbar-backward)
+(global-set-key (kbd "<s-right>") 'tabbar-forward)
 
 
 ;; C-x

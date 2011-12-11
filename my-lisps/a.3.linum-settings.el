@@ -1,4 +1,9 @@
+;; 功能:
 ;; 显示行号
+;;
+;; 修改时间:
+;; 2011年12月11日
+
 
 ;; http://emacser.com/linum-plus.htm
 (require 'linum+)

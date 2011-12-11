@@ -41,5 +41,5 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
                         charset
                         zh-font))))
 (qiang-set-font
- '("DejaVu Sans Mono" "Consolas" "Monaco" "Monospace" "Courier New") 12
- '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体") 14)
+ '("DejaVu Sans Mono" "Consolas"  "Monospace" "Courier New" "Monaco"  ) ":pixelsize=14"
+ '("文泉驿等宽微米黑" "Microsoft Yahei" "黑体" "宋体" "新宋体"))
