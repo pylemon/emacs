@@ -68,3 +68,21 @@
 ;(setq ibus-cursor-color '("red" "blue" "limegreen"))
 ;; Use s-SPC to toggle input status
 (ibus-define-common-key ?\S-\s nil)
+
+;; tabbar
+(require 'tabbar)
+(tabbar-mode)
+(define-prefix-command 'lwindow-map)
+
+
+;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
+(require 'rainbow-mode)
+(rainbow-mode t)
+
+;; 很炫的`highligh-tail mode'在输入时高亮输入区域
+(require 'highlight-tail)
+(setq highlight-tail-colors
+          '(("black" . 0)
+            ("#bc2525" . 25)
+            ("black" . 66)))
+(highlight-tail-mode t)

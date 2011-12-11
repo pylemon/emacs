@@ -1,4 +1,3 @@
-
 (defconst my-emacs-path "~/.emacs.d/dea-read-only/" "我的emacs相关配置文件的路径")
 (defconst my-emacs-my-lisps-path  (concat my-emacs-path "my-lisps/") "我自己写的emacs lisp包的路径")
 (defconst my-emacs-lisps-path     (concat my-emacs-path "lisps/") "我下载的emacs lisp包的路径")
@@ -42,29 +41,10 @@
 ; emacs working directory
 (setq default-directory "~/work/src/")
 
-;; appearance settings
-;;======================================================================
-
 ;; `mode-line'显示格式
 (require 'mode-line-settings)
 
-;; 很炫的`highligh-tail mode'在输入时高亮输入区域
-(require 'highlight-tail)
-(setq highlight-tail-colors
-          '(("black" . 0)
-            ("#bc2525" . 25)
-            ("black" . 66)))
-(highlight-tail-mode t)
 
-;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
-(require 'rainbow-mode)
-      
-;; tabbar
-(require 'tabbar)
-(tabbar-mode)
-(define-prefix-command 'lwindow-map)
-
- 
 ;; 增加更丰富的高亮
 (require 'generic-x)
 
@@ -77,9 +57,6 @@
 
 ;;;;;;change some function;;;;;;;
 ;;my-lisps/dev-settings.el
-
-;; star-dic(require 'star-dict)
-;;my-lisps/star-dict.el
 
 ;; 轻量标记语言markdown
 (require 'markdown-mode-settings)
