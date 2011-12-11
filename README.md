@@ -1,3 +1,5 @@
+# 下面为 .emacs 的内容 #
+
 
 ;;;;;;;;递归的将~/emacs 及其下的所有目录添加到 load-path中
 ;;;;;;;; 会自动剔除RCS ,CVS等包含一个.nosearch文件的目录
@@ -9,6 +11,7 @@
     (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
         (normal-top-level-add-subdirs-to-load-path))))
 
+;; eval all .el files in ~/emacs/my-lisps/
 (mapc 'load (directory-files "~/emacs/my-lisps/" t "\\.el$"))
 
 ;;;----------------------automatic customize----------------------------
