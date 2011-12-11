@@ -8,19 +8,8 @@
 (my-add-subdirs-to-load-path my-emacs-lisps-path)
 (my-add-subdirs-to-load-path my-emacs-my-lisps-path)
 
-;; 一些基本的小函数
-(require 'ahei-misc)
-
-;; 利用`eval-after-load'加快启动速度的库
-;; 用eval-after-load避免不必要的elisp包的加载
-;; http://emacser.com/eval-after-load.htm
-(require 'eval-after-load)
-
 (require 'util)
-
-;; 一些Emacs的小设置
-(require 'misc-settings)
-
+(require 'ahei-misc)
 ;; Emacs超强的增量搜索Isearch配置
 (require 'isearch-settings)
 
@@ -30,31 +19,17 @@
 ;; 鼠标配置
 (require 'mouse-settings)
 
-;; 可以把光标由方块变成一个小长条
-(require 'bar-cursor)
-
-;; Emacs才是世界上最强大的IDE － 智能的改变光标形状
-;; http://emacser.com/cursor-change.htm
-(require 'cursor-change)
-(cursor-change-mode 1)
-
-; emacs working directory
-(setq default-directory "~/work/src/")
-
 ;; `mode-line'显示格式
 (require 'mode-line-settings)
 
-
 ;; 增加更丰富的高亮
 (require 'generic-x)
-
 
 ;; dev settings
 ;;======================================================================
 
 ;; 各种语言开发方面的设置
 (require 'dev-settings)
-
 ;;;;;;change some function;;;;;;;
 ;;my-lisps/dev-settings.el
 

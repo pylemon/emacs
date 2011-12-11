@@ -12,4 +12,4 @@
 (setq cn-weather-city "上海")
 
 ;; 启动时读取一次，下次查询时不会出现nil
-(cn-weather)
+;(cn-weather)
