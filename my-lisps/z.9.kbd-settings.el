@@ -1,4 +1,9 @@
-;; 功能: 设置所有键盘绑定相关的东东
+;; 功能:
+;; 设置所有键盘绑定相关的东东
+;;
+;; 修改时间:
+;; 2011年12月12日
+
 
 ;; <C-?>
 ;;======================================================================
@@ -21,6 +26,8 @@
 ;; 使用M-0 - 4 管理 buffer
 (global-set-key (kbd "M-0") 'other-window)
 (global-set-key (kbd "M-1") 'delete-other-windows)
+(global-set-key (kbd "M-2") 'wcy-switch-buffer-backward)
+(global-set-key (kbd "M-3") 'wcy-switch-buffer-forward)
 (global-set-key (kbd "M-4") 'yic-kill-current-buffer)
 
 ;; 在 minibuffer 中显示当前 buffer 的文件路径
@@ -30,10 +37,10 @@
 (global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
 
 ;; 切换 buffer tabbar 
-(global-set-key (kbd "<s-up>") 'tabbar-backward-group)
-(global-set-key (kbd "<s-down>") 'tabbar-forward-group)
-(global-set-key (kbd "<s-left>") 'tabbar-backward)
-(global-set-key (kbd "<s-right>") 'tabbar-forward)
+(global-set-key (kbd "<M-up>") 'tabbar-backward-group)
+(global-set-key (kbd "<M-down>") 'tabbar-forward-group)
+(global-set-key (kbd "<M-left>") 'tabbar-backward)
+(global-set-key (kbd "<M-right>") 'tabbar-forward)
 
 
 ;; C-x

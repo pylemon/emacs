@@ -16,9 +16,3 @@
 ;;;;;;change some function;;;;;;;
 ;;my-lisps/dev-settings.el
 
-(load "python-mode")
-(require 'ropemacs-settings)
-(require 'pycomplete-settings)
-(require 'pdb-settings)
-(require 'pydb)
-(require 'ipython)
