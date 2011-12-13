@@ -4,6 +4,8 @@
 ;; 修改时间:
 ;; 2011年12月9日
 
+;; 初始化配色
+(require 'color-theme)
 (defun color-theme-blackboard ()
   "Color theme by JD Huntington, based off the TextMate Blackboard theme, created 2008-11-27"
   (interactive)
@@ -54,9 +56,8 @@
      (underline ((nil (:underline nil))))
      (zmacs-region ((t (:background "snow" :foreground "ble")))))))
 
-;; 初始化配色
-(require 'color-theme)
-(color-theme-initialize)
+
+;(color-theme-initialize)
 (color-theme-blackboard)
 
 ;; 另一个比较和谐的配色

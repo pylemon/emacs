@@ -56,8 +56,8 @@
 (delq 'process-kill-buffer-query-function kill-buffer-query-functions)
 
 ;; 不要menu-bar和tool-bar
-(menu-bar-mode nil)
-(tool-bar-mode nil)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 
 ;; 显示列号
 (setq column-number-mode t)
