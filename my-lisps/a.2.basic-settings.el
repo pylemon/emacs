@@ -138,11 +138,38 @@
 (require 'tabbar)
 (tabbar-mode)
 (define-prefix-command 'lwindow-map)
+;; tabbar 外观设置
+(set-face-attribute 'tabbar-default nil  
+                    :family "DejaVu Sans Mono"  
+                    :background "gray90"
+		    :foreground "gray30" 
+                    :height 1.0  
+                    )
+
+(set-face-attribute 'tabbar-button nil  
+                    :inherit 'tabbar-default  
+                    :box '(:line-width 1 :color "yellow70")  
+                    )
+
+(set-face-attribute 'tabbar-selected nil  
+                    :inherit 'tabbar-default  
+                    :foreground "DarkGreen"  
+                    :background "LightGoldenrod"  
+                    :box '(:line-width 2 :color "DarkGoldenrod")  
+                    :overline "black"  
+                    :underline nil  
+                    :weight 'bold  
+                    )
+
+(set-face-attribute 'tabbar-unselected nil  
+                    :inherit 'tabbar-default  
+                    :box '(:line-width 2 :color "#00B2BE")  
+                    )
 
 
 ;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
 (require 'rainbow-mode)
-(rainbow-mode t)
+(rainbow-turn-on)
 
 ;; 很炫的`highligh-tail mode'在输入时高亮输入区域
 (require 'highlight-tail)
