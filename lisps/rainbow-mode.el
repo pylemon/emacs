@@ -401,7 +401,7 @@ Returned value between 0 and 1."
      ,@rainbow-html-colors-font-lock-keywords
      ,@rainbow-html-rgb-colors-font-lock-keywords)))
 
-;;;###autoload
+
 (define-minor-mode rainbow-mode
   "Colorize strings that represent colors.
 This will fontify with colors the string like \"#aabbcc\" or \"blue\"."
