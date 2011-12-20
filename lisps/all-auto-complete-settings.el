@@ -26,10 +26,10 @@
 ;; (require 'company-settings)
 
 ;; 自动插入一些文件模板,用template
-(require 'template-settings)
+;(require 'template-settings)
 
 ;; 自动插入一些文件模板
-(require 'auto-insert-settings)
+;(require 'auto-insert-settings)
 
 ;; 超强的snippet
 (require 'yasnippet-settings)

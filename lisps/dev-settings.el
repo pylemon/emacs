@@ -32,56 +32,56 @@
 ;;      ("<\\|>" . cyan-face)
 ;;      ("{\\|}" . green-face))))
 
-(defun generate-tag-table ()
-  "Generate tag tables under current directory(Linux)."
-  (interactive)
-  (let ((exp "") (dir ""))
-    (setq dir (read-from-minibuffer "generate tags in: " default-directory)
-          exp (read-from-minibuffer "suffix: "))
-    (with-temp-buffer
-      (shell-command
-       (concat "find " dir " -name \"" exp "\" | xargs etags ")
-       (buffer-name)))))
+;; (defun generate-tag-table ()
+;;   "Generate tag tables under current directory(Linux)."
+;;   (interactive)
+;;   (let ((exp "") (dir ""))
+;;     (setq dir (read-from-minibuffer "generate tags in: " default-directory)
+;;           exp (read-from-minibuffer "suffix: "))
+;;     (with-temp-buffer
+;;       (shell-command
+;;        (concat "find " dir " -name \"" exp "\" | xargs etags ")
+;;        (buffer-name)))))
 
 ;; hs-minor-mode,折叠代码
 (require 'hs-minor-mode-settings)
 
 ;; 输入左大花扩号自动补齐右大花括号
-(eal-define-keys
- `(c-mode-base-map awk-mode-map)
- `(("{" skeleton-c-mode-left-brace)))
+;; (eal-define-keys
+;;  `(c-mode-base-map awk-mode-map)
+;;  `(("{" skeleton-c-mode-left-brace)))
 
 ;; 动态检查语法错误
 ;(require 'flymake-settings)
 
-(defun skeleton-c-mode-left-brace (arg)
-  (interactive "P")
-  (if  (c-in-literal (c-most-enclosing-brace (c-parse-state)))
-      (self-insert-command 1)
-    ;; auto insert complex things.
-    (let* ((current-line (delete-and-extract-region (line-beginning-position) (line-end-position)))
-           (lines (and arg (mark t) (delete-and-extract-region (mark t) (point))))
-           (after-point (make-marker)))
-       ;;; delete extra blank begin and after the LINES
-      (setq lines (and lines
-                       (with-temp-buffer
-                         (insert lines)
-                         (beginning-of-buffer)
-                         (delete-blank-lines)
-                         (delete-blank-lines)
-                         (end-of-buffer)
-                         (delete-blank-lines)
-                         (delete-blank-lines)
-                         (buffer-string))))
-      (save-excursion
-        (let* ((old-point (point)))
-          (insert (if current-line current-line "")  "{\n")
-          (and lines (insert lines))
-          (move-marker after-point (point))
-          (insert "\n}")
-          (indent-region old-point (point) nil)))
-      (goto-char after-point)
-      (c-indent-line))))
+;; (defun skeleton-c-mode-left-brace (arg)
+;;   (interactive "P")
+;;   (if  (c-in-literal (c-most-enclosing-brace (c-parse-state)))
+;;       (self-insert-command 1)
+;;     ;; auto insert complex things.
+;;     (let* ((current-line (delete-and-extract-region (line-beginning-position) (line-end-position)))
+;;            (lines (and arg (mark t) (delete-and-extract-region (mark t) (point))))
+;;            (after-point (make-marker)))
+;;        ;;; delete extra blank begin and after the LINES
+;;       (setq lines (and lines
+;;                        (with-temp-buffer
+;;                          (insert lines)
+;;                          (beginning-of-buffer)
+;;                          (delete-blank-lines)
+;;                          (delete-blank-lines)
+;;                          (end-of-buffer)
+;;                          (delete-blank-lines)
+;;                          (delete-blank-lines)
+;;                          (buffer-string))))
+;;       (save-excursion
+;;         (let* ((old-point (point)))
+;;           (insert (if current-line current-line "")  "{\n")
+;;           (and lines (insert lines))
+;;           (move-marker after-point (point))
+;;           (insert "\n}")
+;;           (indent-region old-point (point) nil)))
+;;       (goto-char after-point)
+;;       (c-indent-line))))
 
 ;; 所有关于括号的配置
 (require 'all-paren-settings)
@@ -92,7 +92,7 @@
 ;; 像Eclipse那样高亮光标处单词
 (require 'highlight-symbol-settings)
 
-;; `gdb'
+;; gdb'
 ;(require 'gud-settings)
 
 ;; subversion
@@ -174,10 +174,10 @@
                  python-mode-map perl-mode-map)
  `(("RET" newline-and-indent)))
 
-(defun copy-current-fun-name ()
-  "Copy current function name."
-  (interactive)
-  (kill-new (which-function)))
+;; (defun copy-current-fun-name ()
+;;   "Copy current function name."
+;;   (interactive)
+;;   (kill-new (which-function)))
 
 
 ;; (mapc 'require '(;; hide region

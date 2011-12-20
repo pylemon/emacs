@@ -3,7 +3,7 @@
 ;; Time-stamp: <2010-09-18 23:42:19 Saturday by taoshanwen>
 
 (am-add-hooks
- `(c-mode-common-hook lisp-mode-hook emacs-lisp-mode-hook java-mode-hook)
+ `(c-mode-common-hook lisp-mode-hook python-mode-hook emacs-lisp-mode-hook java-mode-hook)
  'hs-minor-mode)
 
 (defun hs-minor-mode-settings ()

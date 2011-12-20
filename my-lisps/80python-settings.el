@@ -13,25 +13,25 @@
 ;; ropemacs settings
 ;;======================================================================
 
-(require 'pymacs)
-(pymacs-load "ropemacs" "rope-")
+;; (require 'pymacs)
+;; (pymacs-load "ropemacs" "rope-")
 
-(defun ropemacs-settings ()
-  "Settings for `ropemacs'."
-  (setq ropemacs-enable-autoimport t)
+;; (defun ropemacs-settings ()
+;;   "Settings for `ropemacs'."
+;;   (setq ropemacs-enable-autoimport t)
 
-  (defun ropemacs-settings-4-emaci ()
-    "`ropemacs' settings for `emaci'."
-    (emaci-add-key-definition
-     "." 'rope-goto-definition
-     '(memq major-mode dev-modes)))
+;;   (defun ropemacs-settings-4-emaci ()
+;;     "`ropemacs' settings for `emaci'."
+;;     (emaci-add-key-definition
+;;      "." 'rope-goto-definition
+;;      '(memq major-mode dev-modes)))
 
-  (eval-after-load "emaci"
-    `(ropemacs-settings-4-emaci)))
+;;   (eval-after-load "emaci"
+;;     `(ropemacs-settings-4-emaci)))
 
 
-(eval-after-load "python"
-  `(ropemacs-settings))
+;; (eval-after-load "python"
+;;   `(ropemacs-settings))
 
 ;; pycomplete settings
 ;;======================================================================

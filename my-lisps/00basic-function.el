@@ -2,6 +2,9 @@
 (require 'ahei-misc)
 (require 'wcy-swbuff)
 
+(setq wcy-switch-buffer-active-buffer-face  'highlight)
+(setq wcy-switch-buffer-inactive-buffer-face  'secondary-selection )
+
 ; 全屏函数
 ;;======================================================================
 
@@ -140,8 +143,8 @@
 ;; ======================================================================
 
 ; 使用鼠标滚轮翻页时，一次只翻3行
-(defun up-slightly () (interactive) (scroll-up 3))
-(defun down-slightly () (interactive) (scroll-down 3))
+(defun up-slightly () (interactive) (scroll-up 2))
+(defun down-slightly () (interactive) (scroll-down 2))
 
 ; 显示当前buffer的路径，绑定到 M-5
 (defun display-buffer-name ()
