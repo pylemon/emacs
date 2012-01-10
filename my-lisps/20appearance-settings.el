@@ -1,124 +1,54 @@
+;; 功能:
+;; emacs外观设置
+;;
+;; 2012年1月6日
 
-;; basic
+;; 基本外观
 ;;======================================================================
 
-;; 显示列号
+;个性化配色 
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-arjen)
+
+; 显示列号
 (setq column-number-mode t)
 
-;; 不要滚动条
-(customize-set-variable 'scroll-bar-mode nil)
+; 不要滚动条
+;;(customize-set-variable 'scroll-bar-mode nil)
 
-;; 在fringe上显示一个小箭头指示当前buffer的边界
+; 在fringe上显示一个小箭头指示当前buffer的边界
 (setq-default indicate-buffer-boundaries 'left)
 
-;; init message
+; init message
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
-;; 不要menu-bar和tool-bar
-(menu-bar-mode -1)
+; 不要menu-bar和tool-bar
+(menu-bar-mode t)
 (tool-bar-mode -1)
 
 ;; 在状态栏显示日期时间
-(setq display-time-day-and-date t)
+(setq display-time-day-and-date nil)
 (display-time)
 
 
-;; 初始化配色
-;;======================================================================
-
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-blackboard)
-
 ;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
 (require 'rainbow-mode)
-;; mode need rainbow-mode
-(add-hook 'text-mode-hook 'rainbow-mode)
-(add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
-(add-hook 'xhtml-mode-hook 'rainbow-mode)
-(add-hook 'html-mode-hook 'rainbow-mode)
-(add-hook 'python-mode-hook 'rainbow-mode)
-
-
-;; 很炫的`highligh-tail mode'在输入时高亮输入区域
-(require 'highlight-tail)
-(setq highlight-tail-colors
-          '(("black" . 0)
-            ("#bc2525" . 25)
-            ("black" . 66)))
-(highlight-tail-mode t)
-
-;; mode-line settings
-(defun mode-line-face-settings ()
-  "Face settings for `mode-line'."
-  (unless is-before-emacs-21
-    (custom-set-faces
-     '(mode-line-buffer-id
-       ((((class grayscale) (background light)) (:foreground "LightGray" :background "yellow" :weight bold))
-        (((class grayscale) (background dark)) (:foreground "DimGray" :background "yellow" :weight bold))
-        (((class color) (min-colors 88) (background light)) (:foreground "Orchid" :background "yellow"))
-        (((class color) (min-colors 88) (background dark)) (:foreground "yellow" :background "dark slate blue"))
-        (((class color) (min-colors 16) (background light)) (:foreground "Orchid" :background "yellow"))
-        (((class color) (min-colors 16) (background dark)) (:foreground "LightSteelBlue" :background "yellow"))
-        (((class color) (min-colors 8)) (:foreground "blue" :background "yellow" :weight bold))
-        (t (:weight bold))))))
-  (if window-system
-      (progn
-        (set-face-foreground 'mode-line "black")
-        (set-face-background 'mode-line "lightgreen")
-        (unless is-before-emacs-21
-          (set-face-foreground 'mode-line-inactive "black")
-          (set-face-background 'mode-line-inactive "white")))
-    (set-face-foreground 'mode-line "green")
-    (set-face-background 'mode-line "black")
-    (unless is-before-emacs-21
-      (set-face-foreground 'mode-line-buffer-id "blue")
-      (set-face-background 'mode-line-buffer-id "yellow")
-      (set-face-foreground 'mode-line-inactive "white")
-      (set-face-background 'mode-line-inactive "black")))
-
-  (custom-set-faces
-   '(header-line
-     ((default
-        :inherit mode-line)
-      (((type tty))
-       :foreground "black" :background "yellow" :inverse-video nil)
-      (((class color grayscale) (background light))
-       :background "grey90" :foreground "grey20" :box nil)
-      (((class color grayscale) (background dark))
-       :background "#D58EFFFFFC18" :foreground "blue")
-      (((class mono) (background light))
-       :background "white" :foreground "black"
-       :inverse-video nil
-       :box nil
-       :underline t)
-      (((class mono) (background dark))
-       :background "black" :foreground "white"
-       :inverse-video nil
-       :box nil
-       :underline t)))))
-
-(eval-after-load "mode-line-settings"
-  '(progn
-     (defface mode-line-lines-face
-       '((((type tty pc)) :background "red" :foreground "white")
-         (t (:background "dark slate blue" :foreground "yellow")))
-       "Face used to highlight lines on mode-line.")))
-
-(eval-after-load "faces"
-  `(mode-line-face-settings))
+;; (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
+;; (add-hook 'xhtml-mode-hook 'rainbow-mode)
+;; (add-hook 'html-mode-hook 'rainbow-mode)
+;; (add-hook 'python-mode-hook 'rainbow-mode)
 
 ;; linum+ settings
 ;;======================================================================
-
 (require 'linum+)
 (setq linum-format '("%%%dd|"))
-(add-hook 'text-mode-hook 'linum-mode)
-(add-hook 'emacs-lisp-mode-hook 'linum-mode)
-(add-hook 'xhtml-mode-hook 'linum-mode)
-(add-hook 'html-mode-hook 'linum-mode)
-(add-hook 'python-mode-hook 'linum-mode)
+;; (add-hook 'text-mode-hook 'linum-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'linum-mode)
+;; (add-hook 'xhtml-mode-hook 'linum-mode)
+;; (add-hook 'html-mode-hook 'linum-mode)
+;; (add-hook 'python-mode-hook 'linum-mode)
 
 
 ;; 字体设置
@@ -154,10 +84,8 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
                         charset
                         zh-font))))
 (qiang-set-font
- '("DejaVu Sans Mono" "Consolas"  "Monospace" "Courier New" "Monaco"  ) ":pixelsize=14"
- '("文泉驿等宽微米黑" "Microsoft Yahei" "黑体" "宋体" "新宋体"))
-
-
+ '("微软雅黑Monaco" "DejaVu Sans Mono" "Consolas"  "Monospace" "Courier New") ":pixelsize=13"
+ '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "宋体" "新宋体"))
 
 ;; tabbar
 ;;======================================================================
@@ -166,7 +94,7 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 (define-prefix-command 'lwindow-map)
 ;; tabbar 外观设置
 (set-face-attribute 'tabbar-default nil  
-                    :family "DejaVu Sans Mono"  
+                    :family "微软雅黑Monaco"
                     :background "gray90"
 		    :foreground "gray30" 
                     :height 1.0  
@@ -180,11 +108,11 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
 (set-face-attribute 'tabbar-selected nil  
                     :inherit 'tabbar-default  
                     :foreground "DarkGreen"  
-                    :background "LightGoldenrod"  
+                    :background "LightGoldenrod"
                     :box '(:line-width 2 :color "DarkGoldenrod")  
                     :overline "black"  
                     :underline nil  
-                    :weight 'bold  
+                    :weight 'normal
                     )
 
 (set-face-attribute 'tabbar-unselected nil  
