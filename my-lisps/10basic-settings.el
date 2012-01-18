@@ -77,6 +77,12 @@
 (setq dired-omit-extensions '(".elc" ".pyc" ".project" ".pydevproject"
 			      ".svn/" ))
 
+; 可以递归的删除目录
+(setq dired-recursive-deletes t)
+
+; 可以递归的进行拷贝
+(setq dired-recursive-copies t)
+
 
 ;; 缩进设置
 ;;======================================================================

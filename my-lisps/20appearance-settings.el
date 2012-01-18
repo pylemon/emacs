@@ -15,7 +15,7 @@
 (setq column-number-mode t)
 
 ; 不要滚动条
-;;(customize-set-variable 'scroll-bar-mode nil)
+(customize-set-variable 'scroll-bar-mode nil)
 
 ; 在fringe上显示一个小箭头指示当前buffer的边界
 (setq-default indicate-buffer-boundaries 'left)
@@ -35,20 +35,20 @@
 
 ;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
 (require 'rainbow-mode)
-;; (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
-;; (add-hook 'xhtml-mode-hook 'rainbow-mode)
-;; (add-hook 'html-mode-hook 'rainbow-mode)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
+(add-hook 'xhtml-mode-hook 'rainbow-mode)
+(add-hook 'html-mode-hook 'rainbow-mode)
 ;; (add-hook 'python-mode-hook 'rainbow-mode)
 
 ;; linum+ settings
 ;;======================================================================
 (require 'linum+)
 (setq linum-format '("%%%dd|"))
-;; (add-hook 'text-mode-hook 'linum-mode)
-;; (add-hook 'emacs-lisp-mode-hook 'linum-mode)
-;; (add-hook 'xhtml-mode-hook 'linum-mode)
-;; (add-hook 'html-mode-hook 'linum-mode)
-;; (add-hook 'python-mode-hook 'linum-mode)
+(add-hook 'text-mode-hook 'linum-mode)
+(add-hook 'emacs-lisp-mode-hook 'linum-mode)
+(add-hook 'xhtml-mode-hook 'linum-mode)
+(add-hook 'html-mode-hook 'linum-mode)
+(add-hook 'python-mode-hook 'linum-mode)
 
 
 ;; 字体设置
