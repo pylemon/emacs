@@ -12,7 +12,7 @@
 (setq wcy-switch-buffer-active-buffer-face  'highlight)
 (setq wcy-switch-buffer-inactive-buffer-face  'secondary-selection )
 (global-set-key (kbd "<C-tab>") 'wcy-switch-buffer-forward)
-(global-set-key (kbd "C-`") 'wcy-switch-buffer-backward)
+(global-set-key (kbd "<C-S-iso-lefttab>") 'wcy-switch-buffer-backward)
 
 ;; 更改设置标记 Mark set
 (global-set-key (kbd "<s-SPC>") 'set-mark-command)
@@ -21,26 +21,26 @@
 (global-set-key (kbd "<C-SPC>") nil)
 
 
-;; <C-?>
-;;======================================================================
+;; <s-?> 
+;;=====================================================================
 
 ;; 使用M- 0-4 管理 buffer
-(global-set-key (kbd "C-0") 'other-window)
-(global-set-key (kbd "C-1") 'delete-other-windows)
-(global-set-key (kbd "C-2") 'split-window-vertically)
-(global-set-key (kbd "C-3") 'split-window-horizontally)
+(global-set-key (kbd "s-2") 'other-window)
+(global-set-key (kbd "s-`") 'delete-other-windows)
+(global-set-key (kbd "s-1") 'split-window-horizontally)
+;;(global-set-key (kbd "s-3") 'split-window-vertically)
 
 ; 立即关闭当前buffer
 (defun yic-kill-current-buffer ()
   (interactive)
   (kill-buffer (current-buffer)))
-(global-set-key (kbd "C-4") 'yic-kill-current-buffer)
+(global-set-key (kbd "C-`") 'yic-kill-current-buffer)
 
 ; 在 minibuffer 中显示当前 buffer 的文件路径
 (defun display-buffer-name ()
   (interactive)
   (message (buffer-file-name (current-buffer))))
-(global-set-key (kbd "C-5") 'display-buffer-name)
+(global-set-key (kbd "s-3") 'display-buffer-name)
 
 ; 使用 M-; 时，如果没有区域被选中且光标不在行尾，直接注释掉当前行
 (defun qiang-comment-dwim-line (&optional arg)
