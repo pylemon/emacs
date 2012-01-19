@@ -17,12 +17,12 @@
 (setq user-full-name    "pylemon")
 
 ; 启动时全屏显示
-(defun my-fullscreen ()
-  (interactive)
-  (x-send-client-message
-   nil 0 nil "_NET_WM_STATE" 32
-   '(2 "_NET_WM_STATE_FULLSCREEN" 0)))
-(my-fullscreen)
+;;(defun my-fullscreen ()
+;;  (interactive)
+;;  (x-send-client-message
+;;   nil 0 nil "_NET_WM_STATE" 32
+;;   '(2 "_NET_WM_STATE_FULLSCREEN" 0)))
+;;(my-fullscreen)
 
 ; 全局语法高亮
 (global-font-lock-mode t)
