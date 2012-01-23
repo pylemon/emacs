@@ -10,7 +10,7 @@
 ;;======================================================================
 
 ; emacs工作目录
-(setq default-directory "~/work/src/")
+;(setq default-directory "~/work/src/")
 
 ; 个人信息
 (setq user-mail-address "leeway185@gmail.com")

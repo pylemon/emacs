@@ -25,7 +25,7 @@
 (setq initial-scratch-message "")
 
 ; 不要menu-bar和tool-bar
-(menu-bar-mode t)
+(menu-bar-mode -1)
 (tool-bar-mode -1)
 
 ;; 在状态栏显示日期时间
@@ -54,7 +54,7 @@
 ;; 字体设置
 ;;======================================================================
 
-(set-default-font "微软雅黑Monaco 11")
+(set-default-font "微软雅黑Monaco:pixelsize=13")
 
 ;; (require 'cl)
 ;; (defun qiang-font-existsp (font)
@@ -99,12 +99,12 @@
                     :family "微软雅黑Monaco"
                     :background "gray90"
 		    :foreground "gray30" 
-                    :height 1.0  
+                    :height 0.9
                     )
 
 (set-face-attribute 'tabbar-button nil  
                     :inherit 'tabbar-default  
-                    :box '(:line-width 1 :color "yellow70")  
+                    :box '(:line-width 1 :color "gray90")  
                     )
 
 (set-face-attribute 'tabbar-selected nil  
