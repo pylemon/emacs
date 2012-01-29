@@ -34,7 +34,7 @@
 (defun yic-kill-current-buffer ()
   (interactive)
   (kill-buffer (current-buffer)))
-(global-set-key (kbd "C-`") 'yic-kill-current-buffer)
+(global-set-key (kbd "M-`") 'yic-kill-current-buffer)
 
 ; 在 minibuffer 中显示当前 buffer 的文件路径
 (defun display-buffer-name ()
