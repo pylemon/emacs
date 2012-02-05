@@ -10,6 +10,8 @@
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-arjen)
+;; (color-theme-julie)
+;; (color-theme-blackborad)
 
 ; 显示列号
 (setq column-number-mode t)
@@ -54,8 +56,8 @@
 ;; 字体设置
 ;;======================================================================
 
-(set-default-font "DejaVu Sans Mono:pixelsize=13")
-;; (set-default-font "Monaco:pixelsize=12")
+;; (set-default-font "DejaVu Sans Mono:pixelsize=13")
+(set-default-font "微软雅黑Monaco:pixelsize=13")
 
 ;; (require 'cl)
 ;; (defun qiang-font-existsp (font)

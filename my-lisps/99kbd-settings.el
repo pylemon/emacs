@@ -11,13 +11,12 @@
 (require 'wcy-swbuff)
 (setq wcy-switch-buffer-active-buffer-face  'highlight)
 (setq wcy-switch-buffer-inactive-buffer-face  'secondary-selection )
-(global-set-key (kbd "<C-tab>") 'wcy-switch-buffer-forward)
-(global-set-key (kbd "<C-S-iso-lefttab>") 'wcy-switch-buffer-backward)
+(global-set-key (kbd "<M-tab>") 'wcy-switch-buffer-forward)
+(global-set-key (kbd "<M-S-iso-lefttab>") 'wcy-switch-buffer-backward)
 
 ;; 更改设置标记 Mark set
 (global-set-key (kbd "<s-SPC>") 'set-mark-command)
-
-;; ibus 输入法切换
+;; fcitx 输入法切换
 (global-set-key (kbd "<C-SPC>") nil)
 
 
@@ -69,6 +68,12 @@
 
 ;; 跳转到当前 buffer 的 Dired 目录
 (global-set-key (kbd "C-x C-j") 'dired-jump)
+
+;; ibuffer
+;; (require 'bs)
+;; (global-set-key (kbd "M-s M-s") 'bs-show)
+(global-set-key (kbd "M-s M-s") 'ibuffer)
+
 
 ;; C-c
 ;;======================================================================

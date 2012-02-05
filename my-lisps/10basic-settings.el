@@ -12,6 +12,11 @@
 ; emacs工作目录
 ;(setq default-directory "~/work/src/")
 
+;;Return nill if buffer is not sutable for switch
+;; (defun pc-bufsw::can-work-buffer (buffer)
+;;   (let ((name (buffer-name buffer)))
+;;     (and (not (char-equal ?\  (aref name 0))) (not (string= name "*Messages*"))) ))
+
 ; 个人信息
 (setq user-mail-address "leeway185@gmail.com")
 (setq user-full-name    "pylemon")
@@ -94,10 +99,11 @@
 
 ;; 备份设置
 ;;======================================================================
+
 (setq auto-save-default nil)                         ; 不生成 #filename# 文件
-(setq make-backup-files t)   	                     ; 设定不产生备份文件
+(setq make-backup-files nil)   	                     ; 设定不产生备份文件
 (setq auto-save-mode nil)		             ; 自动保存模式
-(setq-default make-backup-files t)                   ; 不生成临时文件
+(setq-default make-backup-files nil)                 ; 不生成临时文件
 (setq delete-old-versions t)                         ; 自动删除旧版备份
 (setq kept-old-versions 2)                           ; 备份最原始的版本两次，及第一次编辑前的文档，和第二次编辑前的文档
 (setq kept-new-versions 1)                           ; 备份最新的版本1次，理解同上
