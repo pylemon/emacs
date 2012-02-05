@@ -9,8 +9,8 @@
 ;个性化配色 
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-arjen)
-;; (color-theme-julie)
+;; (color-theme-arjen)
+(color-theme-julie)
 ;; (color-theme-blackborad)
 
 ; 显示列号
@@ -100,29 +100,29 @@
 ;; tabbar 外观设置
 (set-face-attribute 'tabbar-default nil  
                     :family "DejaVu Sans Mono"  ;微软雅黑Monaco"
-                    :background "gray90"
-		    :foreground "gray30" 
+                    :background "#505050"
+		    :foreground "#909737" 
                     :height 1.0
                     )
 
 (set-face-attribute 'tabbar-button nil  
                     :inherit 'tabbar-default  
-                    :box '(:line-width 1 :color "gray90")  
+                    :box '(:line-width 1 :color "#909737")  
                     )
 
 (set-face-attribute 'tabbar-selected nil  
                     :inherit 'tabbar-default  
-                    :foreground "DarkGreen"  
-                    :background "LightGoldenrod"
-                    :box '(:line-width 2 :color "DarkGoldenrod")  
-                    :overline "black"  
+                    :foreground "yellow";DarkGreen"  
+                    :background "#202020";LightGoldenrod"
+                    :box '(:line-width 1 :color "#909737")  
+                    :overline "#909737"  
                     :underline nil  
                     :weight 'normal
                     )
 
 (set-face-attribute 'tabbar-unselected nil  
                     :inherit 'tabbar-default  
-                    :box '(:line-width 2 :color "#00B2BE")  
+                    :box '(:line-width 1 :color "#909737")  
                     )
 
 
@@ -138,7 +138,7 @@
 (defvar cursor-change-old-cursor-type nil "Cursor type before toggle on function `cursor-change-mode'.")
 (defvar cursor-change-old-blink-cursor-mode nil "`blink-cursor-mode' before toggle on function `crsor-change-mode'.")
 
-(setq curchg-default-cursor-color "green")
+(setq curchg-default-cursor-color "yellow")
 
 ;;;###autoload
 (define-minor-mode cursor-change-mode

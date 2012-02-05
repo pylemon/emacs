@@ -58,3 +58,9 @@
 (setq uniquify-separator "/")
 (setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+
+;; undo-tree
+(require 'undo-tree)
+(global-undo-tree-mode)
+(defadvice undo-tree-visualizer-mode (after undo-tree-face activate)
+  (buffer-face-mode))

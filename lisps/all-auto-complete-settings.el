@@ -21,7 +21,7 @@
 (require 'hippie-expand-settings)
 
 ;; 自动补全
-;(require 'auto-complete-settings)
+(require 'auto-complete-settings)
 
 ;; (require 'company-settings)
 
