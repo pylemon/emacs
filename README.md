@@ -22,16 +22,15 @@
 
 ### My Tool List ###
 
-OS              Ubuntu11.10
-Shell           Zsh
-WindowManager   Awesome
-Terminal        Sakura
-Webbrowser      Chrome, Firefox
-IM              Pidgin
-Mail            Evolution
-
-Editor          Emacs
-Language        Python, Elisp, JS
-VersionControl  Git, SVN
-WebFramework    Django
-Database        MySQL
+* OS              Ubuntu11.10
+* Shell           Zsh
+* WindowManager   Awesome
+* Terminal        Sakura
+* Webbrowser      Chrome, Firefox
+* IM              Pidgin
+* Mail            Evolution
+* Editor          Emacs
+* Language        Python, Elisp, JS
+* VersionControl  Git, SVN
+* WebFramework    Django
+* Database        MySQL, SQLite
