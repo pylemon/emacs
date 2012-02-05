@@ -25,38 +25,26 @@
 
 ### My Tool List ###
 
-* OS
-Ubuntu11.10
+* 操作系统： Ubuntu11.10
 
-* Shell
-Zsh
+* Shell： zsh(.oh-my-zsh)
 
-* WindowManager
-Awesome, Ubuntu-Unity
+* 窗口管理器： Awesome, Ubuntu-Unity
 
-* Terminal
-Sakura
+* 终端： Sakura
 
-* Webbrowser
-Chrome, Firefox
+* 浏览器： Chrome, Firefox
 
-* IM
-Pidgin, WebQQ(Prism)
+* IM： Pidgin, WebQQ(Prism)
 
-* Mail
-Evolution
+* 邮件： Evolution
 
-* Editor          
-Emacs
+* 编辑器： Emacs
 
-* Language        
-Python, Elisp, JS
+* 编程语言： Python, Elisp, JS
 
-* VersionControl  
-Git, SVN
+* 版本控制： Git, SVN
 
-* WebFramework
-Django
+* Web框架： Django
 
-* Database        
-MySQL, SQLite
+* 数据库： MySQL, SQLite
