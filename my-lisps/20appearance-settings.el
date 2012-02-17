@@ -10,8 +10,8 @@
 (require 'color-theme)
 (color-theme-initialize)
 ;; (color-theme-arjen)
-(color-theme-julie)
-;; (color-theme-blackborad)
+;; (color-theme-julie)
+(color-theme-blackboard)
 
 ; 显示列号
 (setq column-number-mode t)
@@ -33,16 +33,6 @@
 ;; 在状态栏显示日期时间
 (setq display-time-day-and-date nil)
 (display-time)
-
-;;时间为24小时制
-(setq display-time-24hr-format t)
-;;时间显示包括日期和具体时间
-(setq display-time-day-and-date t)
-;;时间栏旁边启动邮件设置
-(setq display-time-use-mail-icon t)
-;;时间的变化频率
-(setq display-time-interval 10)
-
 
 ;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
 (require 'rainbow-mode)
@@ -108,7 +98,7 @@
 (define-prefix-command 'lwindow-map)
 ;; tabbar 外观设置
 (set-face-attribute 'tabbar-default nil  
-                    :family "DejaVu Sans Mono"  ;微软雅黑Monaco"
+                    :family "微软雅黑Monaco"
                     :background "#505050"
 		    :foreground "#909737" 
                     :height 1.0

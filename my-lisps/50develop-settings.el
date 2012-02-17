@@ -26,7 +26,7 @@
 (require 'html-mode-settings)
 
 ;; 自动给你加上括号
-(require 'autopair-settings)
+;; (require 'autopair-settings)
 
 ;; markdown 模式
 (require 'markdown-mode)
@@ -64,3 +64,9 @@
 (global-undo-tree-mode)
 (defadvice undo-tree-visualizer-mode (after undo-tree-face activate)
   (buffer-face-mode))
+
+;; solve emacs cupload 100% bug
+(setq semantic-idle-scheduler-idle-time 432000)
+
+(require 'ido)
+(ido-mode t)

@@ -18,10 +18,10 @@
 ;; Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 ;; hippie expand
-(require 'hippie-expand-settings)
+;; (require 'hippie-expand-settings)
 
 ;; 自动补全
-(require 'auto-complete-settings)
+;; (require 'auto-complete-settings)
 
 ;; (require 'company-settings)
 

@@ -72,8 +72,10 @@
 ;; ibuffer
 ;; (require 'bs)
 ;; (global-set-key (kbd "M-s M-s") 'bs-show)
-(global-set-key (kbd "M-s M-s") 'ibuffer)
+;; (global-set-key (kbd "M-s M-s") 'ibuffer)
 
+(global-set-key (kbd "C-x C-x" ) 'ido-switch-buffer)
+(global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)
 
 ;; C-c
 ;;======================================================================

@@ -29,11 +29,11 @@
 
 * Shell： zsh(.oh-my-zsh)
 
-* 窗口管理器： Awesome, Ubuntu-Unity
+* 窗口管理器： Awesome, Gnome-shell, Ubuntu-Unity
 
-* 终端： Sakura
+* 终端： Guake, Terminator
 
-* 浏览器： Chrome, Firefox
+* 浏览器： Firefox, Chrome
 
 * IM： Pidgin, WebQQ(Prism)
 
