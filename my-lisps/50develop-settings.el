@@ -23,10 +23,12 @@
 (require 'all-lisp-settings)
 
 ;; html配置
-(require 'html-mode-settings)
+;;(require 'html-mode-settings)
 
 ;; 自动给你加上括号
 ;; (require 'autopair-settings)
+
+
 
 ;; markdown 模式
 (require 'markdown-mode)
@@ -71,5 +73,10 @@
 (require 'ido)
 (ido-mode t)
 
+;; js2-mode for .js files autocorrect js error
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+;; django-html-mode
+(autoload 'django-html-mode "django-html-mode")
+(add-to-list 'auto-mode-alist '("\\.[sx]?html?\\'" . django-html-mode))

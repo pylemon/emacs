@@ -1,0 +1,6 @@
+# -*- coding: utf-8 -*-
+# key: trans
+# name: trans
+# contributor: pylemon
+# --
+{% trans '${}' %}
