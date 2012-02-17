@@ -109,10 +109,10 @@
 (global-set-key (kbd "C-c d") 'kid-star-dict)
 
 ;; 插入当前时间
-(defun my-insert-datetime ()
-  (interactive)
-  (insert (format-time-string "%Y/%m/%d %H:%M:%S" (current-time))))
-(global-set-key (kbd "C-c C-t") 'my-insert-datetime)
+;; (defun my-insert-datetime ()
+;;   (interactive)
+;;   (insert (format-time-string "%Y/%m/%d %H:%M:%S" (current-time))))
+;; (global-set-key (kbd "C-c C-t") 'my-insert-datetime)
 
 ;; f1-f12 mouse settings
 ;;======================================================================
@@ -126,4 +126,6 @@
 (global-set-key [mouse-4] 'down-slightly)
 (global-set-key [mouse-5] 'up-slightly) 
 
-
+;; add trans to selected html word
+(global-set-key (kbd "C-c C-t") 'django-insert-trans)
+;; (global-set-key (kbd "C-c C-t") 'django-insert-transpy)
