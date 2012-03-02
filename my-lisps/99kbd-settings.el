@@ -20,7 +20,7 @@
 (global-set-key (kbd "<C-SPC>") nil)
 
 
-;; <s-?> 
+;; <s-?>
 ;;=====================================================================
 
 ;; 使用M- 0-4 管理 buffer
@@ -46,11 +46,14 @@
   (interactive "*P")
   (comment-normalize-vars)
   (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
-      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+      (comment-or-uncomment-region
+       (line-beginning-position)
+       (line-end-position)
+      )
     (comment-dwim arg)))
 (global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
 
-;; 切换 buffer tabbar 
+;; 切换 buffer tabbar
 (global-set-key (kbd "<M-up>") 'tabbar-backward-group)
 (global-set-key (kbd "<M-down>") 'tabbar-forward-group)
 (global-set-key (kbd "<M-left>") 'tabbar-backward)
@@ -124,7 +127,7 @@
 (defun up-slightly () (interactive) (scroll-up 2))
 (defun down-slightly () (interactive) (scroll-down 2))
 (global-set-key [mouse-4] 'down-slightly)
-(global-set-key [mouse-5] 'up-slightly) 
+(global-set-key [mouse-5] 'up-slightly)
 
 ;; add trans to selected html word
 (global-set-key (kbd "C-c C-t") 'django-insert-trans)

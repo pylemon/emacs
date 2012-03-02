@@ -12,11 +12,6 @@
 ; emacs工作目录
 ;(setq default-directory "~/work/src/")
 
-;;Return nill if buffer is not sutable for switch
-;; (defun pc-bufsw::can-work-buffer (buffer)
-;;   (let ((name (buffer-name buffer)))
-;;     (and (not (char-equal ?\  (aref name 0))) (not (string= name "*Messages*"))) ))
-
 ; 个人信息
 (setq user-mail-address "leeway185@gmail.com")
 (setq user-full-name    "pylemon")
@@ -79,7 +74,7 @@
 (setq tab-always-indent 'complete)
 
 ; 在dired中忽略下面文件
-(setq dired-omit-extensions '(".elc" ".pyc" ".project" ".pydevproject" ".svn/" ))
+(setq dired-omit-extensions '(".elc" ".pyc" ".project" ".pydevproject" ".svn/"))
 
 ; 可以递归的删除目录
 (setq dired-recursive-deletes t)
@@ -88,24 +83,53 @@
 (setq dired-recursive-copies t)
 
 
+
 ;; 缩进设置
 ;;======================================================================
 
-(setq indent-tabs-mode nil)   	; 总是使用空格缩进
-(setq tab-always-indent t)      ; 在一行的任意地方使用tab缩进
-(setq tab-width 4)		; 使用4个空格缩进
+; 总是使用空格缩进
+(setq indent-tabs-mode nil)
+
+; 在一行的任意地方使用tab缩进
+(setq tab-always-indent t)
+
+; 使用4个空格缩进
+(setq tab-width 4)
+
+; 保存时自动删除多余的空格
+;; (add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
 ;; 备份设置
 ;;======================================================================
 
-(setq auto-save-default nil)                         ; 不生成 #filename# 文件
-(setq make-backup-files nil)   	                     ; 设定不产生备份文件
-(setq auto-save-mode nil)		             ; 自动保存模式
-(setq-default make-backup-files nil)                 ; 不生成临时文件
-(setq delete-old-versions t)                         ; 自动删除旧版备份
-(setq kept-old-versions 2)                           ; 备份最原始的版本两次，及第一次编辑前的文档，和第二次编辑前的文档
-(setq kept-new-versions 1)                           ; 备份最新的版本1次，理解同上
-(setq delete-old-versions t)	                     ; 删掉不属于以上3中版本的版本
-(setq backup-directory-alist '((" " . "~/backup/"))) ; 设置备份文件的路径
-(setq backup-by-copying t)	             	     ; 备份设置方法，直接拷贝
+; 不生成 #filename# 文件
+(setq auto-save-default nil)
+
+; 设定不产生备份文件
+(setq make-backup-files nil)
+
+; 自动保存模式
+(setq auto-save-mode nil)
+
+; 不生成临时文件
+(setq-default make-backup-files nil)
+
+; 自动删除旧版备份
+(setq delete-old-versions t)
+
+; 备份最原始的版本两次，及第一次编辑前的文档，和第二次编辑前的文档
+(setq kept-old-versions 2)
+
+; 备份最新的版本1次，理解同上
+(setq kept-new-versions 1)
+
+; 删掉不属于以上3中版本的版本
+(setq delete-old-versions t)
+
+; 设置备份文件的路径
+(setq backup-directory-alist '((" " . "~/backup/")))
+
+; 备份设置方法，直接拷贝
+(setq backup-by-copying t)

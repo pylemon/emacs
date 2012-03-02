@@ -75,10 +75,6 @@
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
-;; django-html-mode
-(autoload 'django-html-mode "django-html-mode")
-(add-to-list 'auto-mode-alist '("\\.[sx]?html?\\'" . django-html-mode))
-
 
 ;; insert trans function
 (defun django-insert-trans (from to &optional buffer)
@@ -91,35 +87,7 @@
      (insert "{% trans \'")
      (goto-char (point-max))
      (insert "\' %}")
-     (point-max))))
-
-;; (defun django-insert-transpy (from to &optional buffer)
-;;  (interactive "*r")
-;;  (save-excursion
-;;    (save-restriction
-;;      (narrow-to-region from to)
-;;      (goto-char from)
-;;      (iso-iso2sgml from to)
-;;      (insert "_(")
-;;      (goto-char (point-max))
-;;      (insert ")")
-;;      (point-max))))
-
-
-;; #TODO why hook doesn't work
-;; (add-hook 'sgml-mode-hook
-;;         (lambda ()
-;;           (local-set-key "\C-c\C-g" 'django-insert-trans)
-;;           (setq indent-tabs-mode nil)
-;;           ))
-
-;; (add-hook 'python-mode-hook
-;;         '(lambda ()
-;;            (outline-minor-mode 1)
-;;            (setq
-;;             tab-width 4
-;;             python-indent 4
-;;             outline-regexp py-outline-regexp
-;;             outline-level 'py-outline-level)
-;;            (local-set-key "\C-c\C-g" 'django-insert-transpy)
-;;            ))
+     (point-max)
+   )
+ )
+)
