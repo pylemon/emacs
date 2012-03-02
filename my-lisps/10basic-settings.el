@@ -24,8 +24,17 @@
 ;;   '(2 "_NET_WM_STATE_FULLSCREEN" 0)))
 ;;(my-fullscreen)
 
+;;在minibuffer里启用自动补全函数和变量
+(icomplete-mode 1)
+
 ; 全局语法高亮
 (global-font-lock-mode t)
+
+;; 启用部分补全功能，如输入M-x q r r相当于M-x query-replace-regexp
+(partial-completion-mode t)
+
+;;当鼠标移动的时候自动转换frame，window或者minibuffer
+(setq mouse-autoselect-window t)
 
 ;; 不要总是没完没了的问yes or no, 为什么不能用y/n
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -100,6 +109,17 @@
 ;; (add-hook 'before-save-hook 'whitespace-cleanup)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;;shell,gdb退出后，自动关闭该buffer
+(defun kill-buffer-when-exit ()
+  "Close assotiated buffer when a process exited"
+  (let ((current-process (ignore-errors (get-buffer-process (current-buffer)))))
+    (when current-process
+      (set-process-sentinel current-process
+                   (lambda (watch-process change-state)
+                     (when (string-match "//(finished//|exited//)" change-state)
+                    (kill-buffer (process-buffer watch-process))))))))
+(add-hook 'gdb-mode-hook 'kill-buffer-when-exit)
+(add-hook 'shell-mode-hook 'kill-buffer-when-exit)
 
 ;; 备份设置
 ;;======================================================================

@@ -22,6 +22,9 @@
 ; 在fringe上显示一个小箭头指示当前buffer的边界
 (setq-default indicate-buffer-boundaries 'left)
 
+;; minibuffer不要自动变化高度
+(setq resize-mini-windows nil)
+
 ; init message
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
@@ -31,8 +34,10 @@
 (tool-bar-mode -1)
 
 ;; 在状态栏显示日期时间
+(setq display-time-24hr-format t)
 (setq display-time-day-and-date nil)
-(display-time)
+(setq display-time-interval 60)
+(display-time-mode t)
 
 ;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
 (require 'rainbow-mode)
