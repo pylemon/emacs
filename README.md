@@ -31,17 +31,17 @@
 
 * 窗口管理器： Awesome, Gnome-shell, Ubuntu-Unity
 
-* 终端： Guake, Terminator
+* 终端： Tilda, Terminator
 
 * 浏览器： Firefox, Chrome
 
 * IM： Pidgin, WebQQ(Prism)
 
-* 邮件： Evolution
+* 邮件： Thunderbird, Evolution
 
-* 编辑器： Emacs
+* 编辑器： Emacs23
 
-* 编程语言： Python, Elisp, JS
+* 编程语言： Python, Elisp, JS, Lua
 
 * 版本控制： Git, SVN
 

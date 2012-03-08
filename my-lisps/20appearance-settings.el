@@ -11,7 +11,9 @@
 (color-theme-initialize)
 ;; (color-theme-arjen)
 ;; (color-theme-julie)
-(color-theme-blackboard)
+(color-theme-tangotango)
+;; (color-theme-blackboard)
+
 
 ; 显示列号
 (setq column-number-mode t)

@@ -107,7 +107,7 @@
 
 ; 保存时自动删除多余的空格
 ;; (add-hook 'before-save-hook 'whitespace-cleanup)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;shell,gdb退出后，自动关闭该buffer
 (defun kill-buffer-when-exit ()
@@ -153,3 +153,9 @@
 
 ; 备份设置方法，直接拷贝
 (setq backup-by-copying t)
+
+(defun remove-dos-eol ()
+  "Do not show ^M in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
