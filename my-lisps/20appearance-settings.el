@@ -14,6 +14,8 @@
 (color-theme-tangotango)
 ;; (color-theme-blackboard)
 
+; 全局语法高亮
+(global-font-lock-mode t)
 
 ; 显示列号
 (setq column-number-mode t)
@@ -50,13 +52,13 @@
 
 ;; linum+ settings
 ;;======================================================================
-(require 'linum+)
-(setq linum-format '("%%%dd|"))
+;; (require 'linum+)
+;; (setq linum-format '("%%%dd|"))
 
-(add-hook 'text-mode-hook 'linum-mode)
-(add-hook 'emacs-lisp-mode-hook 'linum-mode)
-(add-hook 'html-mode-hook 'linum-mode)
-(add-hook 'python-mode-hook 'linum-mode)
+;; (add-hook 'text-mode-hook 'linum-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'linum-mode)
+;; (add-hook 'html-mode-hook 'linum-mode)
+;; (add-hook 'python-mode-hook 'linum-mode)
 
 
 ;; 字体设置
@@ -67,36 +69,36 @@
 
 ;; tabbar
 ;;======================================================================
-(require 'tabbar)
-(tabbar-mode)
-(define-prefix-command 'lwindow-map)
-;; tabbar 外观设置
-(set-face-attribute 'tabbar-default nil
-                    :family "微软雅黑Monaco"
-                    :background "#505050"
-                    :foreground "#909737"
-                    :height 1.0
-                    )
+;; (require 'tabbar)
+;; (tabbar-mode)
+;; (define-prefix-command 'lwindow-map)
+;; ;; tabbar 外观设置
+;; (set-face-attribute 'tabbar-default nil
+;;                     :family "微软雅黑Monaco"
+;;                     :background "#505050"
+;;                     :foreground "#909737"
+;;                     :height 1.0
+;;                     )
 
-(set-face-attribute 'tabbar-button nil
-                    :inherit 'tabbar-default
-                    :box '(:line-width 1 :color "#909737")
-                    )
+;; (set-face-attribute 'tabbar-button nil
+;;                     :inherit 'tabbar-default
+;;                     :box '(:line-width 1 :color "#909737")
+;;                     )
 
-(set-face-attribute 'tabbar-selected nil
-                    :inherit 'tabbar-default
-                    :foreground "orange";DarkGreen"
-                    :background "#202020";LightGoldenrod"
-                    :box '(:line-width 1 :color "#909737")
-                    :overline "#909737"
-                    :underline nil
-                    :weight 'normal
-                    )
+;; (set-face-attribute 'tabbar-selected nil
+;;                     :inherit 'tabbar-default
+;;                     :foreground "yellow"
+;;                     :background "#202020";LightGoldenrod"
+;;                     :box '(:line-width 1 :color "#909737")
+;;                     :overline "#909737"
+;;                     :underline nil
+;;                     :weight 'normal
+;;                     )
 
-(set-face-attribute 'tabbar-unselected nil
-                    :inherit 'tabbar-default
-                    :box '(:line-width 1 :color "#909737")
-                    )
+;; (set-face-attribute 'tabbar-unselected nil
+;;                     :inherit 'tabbar-default
+;;                     :box '(:line-width 1 :color "#909737")
+;;                     )
 
 
 ;; cursor settings
@@ -145,3 +147,4 @@
      curchg-default-cursor-type)))
 
 (cursor-change-mode 1)
+

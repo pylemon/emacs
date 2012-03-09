@@ -26,23 +26,19 @@
 ;;(require 'html-mode-settings)
 
 ;; 自动给你加上括号
-;; (require 'autopair-settings)
+(require 'autopair-settings)
 
 ;; markdown 模式
 (require 'markdown-mode)
-
 (add-to-list 'auto-mode-alist '("\\.mkd$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
-
 (eal-define-keys
  'markdown-mode-map
  `(("C-c M-h" markdown)
    ("C-c M-b" markdown-preview)))
-
 (defun markdown-mode-settings ()
   "Settings for `markdown-mode'.")
-
 (eval-after-load "markdown-mode"
   `(markdown-mode-settings))
 
@@ -59,17 +55,18 @@
 (setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
+
 ;; undo-tree
 (require 'undo-tree)
 (global-undo-tree-mode)
 (defadvice undo-tree-visualizer-mode (after undo-tree-face activate)
   (buffer-face-mode))
 
-;; solve emacs cupload 100% bug
-(setq semantic-idle-scheduler-idle-time 432000)
 
+;; ido mode
 (require 'ido)
 (ido-mode t)
+
 
 ;; js2-mode for .js files autocorrect js error
 (autoload 'js2-mode "js2" nil t)
@@ -87,7 +84,5 @@
      (insert "{% trans \'")
      (goto-char (point-max))
      (insert "\' %}")
-     (point-max)
-   )
- )
+     (point-max)))
 )

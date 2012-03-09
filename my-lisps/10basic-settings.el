@@ -6,6 +6,9 @@
 (require 'util)
 (require 'ahei-misc)
 
+(require 'smooth-scroll)
+(smooth-scroll-mode t)
+
 ;; 基本设置
 ;;======================================================================
 
@@ -26,9 +29,6 @@
 
 ;;在minibuffer里启用自动补全函数和变量
 (icomplete-mode 1)
-
-; 全局语法高亮
-(global-font-lock-mode t)
 
 ;; 启用部分补全功能，如输入M-x q r r相当于M-x query-replace-regexp
 (partial-completion-mode t)
@@ -61,8 +61,8 @@
 (autoload 'toggle-emacs-lock "emacs-lock" "Emacs lock" t)
 
 ;; 防止页面滚动时跳动,scroll-margin 3可以在靠近屏幕边沿3行时就开始滚动,可以很好的看到上下文
-(setq scroll-margin 3
-      scroll-conservatively 10000)
+;; (setq scroll-margin 3
+;;       scroll-conservatively 10000)
 
 ;; 没有提示音,也不闪屏
 (setq ring-bell-function 'ignore)
@@ -92,7 +92,6 @@
 (setq dired-recursive-copies t)
 
 
-
 ;; 缩进设置
 ;;======================================================================
 
@@ -106,7 +105,7 @@
 (setq tab-width 4)
 
 ; 保存时自动删除多余的空格
-;; (add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'before-save-hook 'whitespace-cleanup)
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;shell,gdb退出后，自动关闭该buffer
