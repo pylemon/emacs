@@ -125,8 +125,8 @@
   :group 'cursor-change
   (if cursor-change-mode
       (progn
-        (setq cursor-change-old-cursor-type (cursor-change-get-cursor-type))
-        (setq cursor-change-old-blink-cursor-mode blink-cursor-mode))
+	(setq cursor-change-old-cursor-type (cursor-change-get-cursor-type))
+	(setq cursor-change-old-blink-cursor-mode blink-cursor-mode))
     (blink-cursor-mode (if cursor-change-old-blink-cursor-mode 1 -1)))
   (toggle-cursor-type-when-idle cursor-change-mode)
   (change-cursor-mode cursor-change-mode)
@@ -147,4 +147,3 @@
      curchg-default-cursor-type)))
 
 (cursor-change-mode 1)
-

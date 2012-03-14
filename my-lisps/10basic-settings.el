@@ -105,7 +105,7 @@
 (setq tab-width 4)
 
 ; 保存时自动删除多余的空格
-(add-hook 'before-save-hook 'whitespace-cleanup)
+;; (add-hook 'before-save-hook 'whitespace-cleanup)
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;shell,gdb退出后，自动关闭该buffer
