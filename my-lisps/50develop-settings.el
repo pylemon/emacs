@@ -49,11 +49,11 @@
 
 
 ;; uniquify changes conflicting buffer names from file<2> etc
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
-(setq uniquify-separator "/")
-(setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
-(setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+;; (require 'uniquify)
+;; (setq uniquify-buffer-name-style 'forward)
+;; (setq uniquify-separator "/")
+;; (setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
+;; (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
 
 ;; undo-tree
@@ -62,15 +62,15 @@
 (defadvice undo-tree-visualizer-mode (after undo-tree-face activate)
   (buffer-face-mode))
 
-
 ;; ido mode
 (require 'ido)
 (ido-mode t)
 
 
 ;; js2-mode for .js files autocorrect js error
-(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;; (autoload 'js2-mode "js2" nil t)
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
+;; (setq js2-basic-offset 2)
 
 
 ;; insert trans function
@@ -86,3 +86,4 @@
      (insert "\' %}")
      (point-max)))
 )
+

@@ -6,11 +6,35 @@
 (require 'util)
 (require 'ahei-misc)
 
-(require 'smooth-scroll)
-(smooth-scroll-mode t)
 
 ;; 基本设置
 ;;======================================================================
+
+;; cua-mode 设置
+(cua-mode t)
+(setq cua-auto-tabify-rectangles nil) ;;don't tabify after rectangle commands
+(transient-mark-mode 1) ;;no region when it is not highlighted
+(setq cua-keep-region-after-copy t) ;;standard windows behavior
+
+;; delete the selected region when something is typed or with DEL
+(delete-selection-mode 1)
+
+
+;; WHITESPACE
+(require 'whitespace)
+(setq whitespace-display-mappings
+      '(
+	(newline-mark nil) ; newlne, <
+	(tab-mark 9 [187 9] [92 9]) ; tab, Â»
+))
+(setq
+ whitespace-space 'whitespace-space
+ whitespace-tab 'whitespace-tab
+ whitespace-trailing 'whitespace-trailing
+ whitespace-newline 'whitespace-newline
+ whitespace-emtpy 'whitespace-empty)
+(whitespace-mode 1)
+
 
 ; emacs工作目录
 ;(setq default-directory "~/work/src/")
@@ -19,13 +43,15 @@
 (setq user-mail-address "leeway185@gmail.com")
 (setq user-full-name    "pylemon")
 
-; 启动时全屏显示
-;;(defun my-fullscreen ()
-;;  (interactive)
-;;  (x-send-client-message
-;;   nil 0 nil "_NET_WM_STATE" 32
-;;   '(2 "_NET_WM_STATE_FULLSCREEN" 0)))
-;;(my-fullscreen)
+;; always end a file with a newline
+(setq require-final-newline nil)
+
+;; 括号提示
+(show-paren-mode nil)
+
+;; 离行首或行尾10行时向下
+(require 'smooth-scrolling)
+(setq smooth-scroll-margin 10)
 
 ;;在minibuffer里启用自动补全函数和变量
 (icomplete-mode 1)
@@ -158,3 +184,9 @@
   (interactive)
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
+
+(defun highlight-todo ()
+  (font-lock-add-keywords nil
+    '(("\\(REVIEW\\|FIXME\\|TODO\\|BUG\\)" 1 font-lock-warning-face t))))
+(add-hook 'python-mode-hook 'highlight-todo)
+(add-hook 'html-mode-hook 'highlight-todo)

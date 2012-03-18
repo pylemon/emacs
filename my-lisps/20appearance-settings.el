@@ -6,6 +6,36 @@
 ;; 基本外观
 ;;======================================================================
 
+;; 高亮当前行
+;; (global-hl-line-mode 1)
+;; (set-face-background 'hl-line "#222")
+
+;; mode line 状态栏内容
+;; (setq-default mode-line-format
+;;               (quote
+;;                (" "
+;;                 ;; mode string
+;;                 (:propertize global-mode-string face 'mode-line-mode-string)
+;;                 "  "
+;;                 ;; value of 'mode-name'
+;;                 (:propertize "%m" face 'mode-line-mode-name)
+;; 		"  "
+;;                 ;; file path
+;;                 (:propertize (:eval (if (> (length default-directory) 17)
+;;                                         (concat ".." (substring default-directory -20))
+;;                                       default-directory))
+;;                              face 'mode-line-folder-face)
+;;                 ;; file name
+;;                 (:propertize mode-line-buffer-identification face 'mode-line-buffer-name)
+;;                 (:propertize mode-line-modified face 'mode-line-modified-face)
+;;                 "   @ "
+;;                 ;; line #
+;;                 "line %l, %p")))
+
+
+;; minimap
+(require 'minimap)
+
 ;个性化配色
 (require 'color-theme)
 (color-theme-initialize)
