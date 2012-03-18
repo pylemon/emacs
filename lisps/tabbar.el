@@ -826,7 +826,7 @@ The variable `tabbar-separator-widget' gives details on this widget."
 
 ;;; Images
 ;;
-(defcustom tabbar-use-images t
+(defcustom tabbar-use-images nil
   "*Non-nil means to try to use images in tab bar.
 That is for buttons and separators."
   :group 'tabbar
