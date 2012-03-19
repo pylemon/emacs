@@ -4,6 +4,17 @@
 
 (require 'highlight-parentheses)
 
+(defun am-add-hooks (hooks function &optional append local)
+  "Call `add-hook' on hook list HOOKS use arguments FUNCTION, APPEND, LOCAL.
+
+HOOKS can be one list or just a hook."
+  (if (listp hooks)
+      (mapc
+       `(lambda (hook)
+          (add-hook hook ',function append local))
+       hooks)
+    (add-hook hooks function append local)))
+
 ;; TODO: 最后一项不知道为啥不起作用
 (setq hl-paren-colors '("red" "yellow" "cyan" "magenta" "green" "red"))
 

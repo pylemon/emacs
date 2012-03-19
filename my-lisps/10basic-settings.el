@@ -1,57 +1,38 @@
-;; 功能:
-;; emacs基本功能设置
-;;
-;; 2012年1月6日
-
-(require 'util)
-(require 'ahei-misc)
-
-
-;; 基本设置
-;;======================================================================
-
-;; cua-mode 设置
-(cua-mode t)
-(setq cua-auto-tabify-rectangles nil) ;;don't tabify after rectangle commands
-(transient-mark-mode 1) ;;no region when it is not highlighted
-(setq cua-keep-region-after-copy t) ;;standard windows behavior
-
-;; delete the selected region when something is typed or with DEL
-(delete-selection-mode 1)
-
-
-;; WHITESPACE
-(require 'whitespace)
-(setq whitespace-display-mappings
-      '(
-	(newline-mark nil) ; newlne, <
-	(tab-mark 9 [187 9] [92 9]) ; tab, Â»
-))
-(setq
- whitespace-space 'whitespace-space
- whitespace-tab 'whitespace-tab
- whitespace-trailing 'whitespace-trailing
- whitespace-newline 'whitespace-newline
- whitespace-emtpy 'whitespace-empty)
-(whitespace-mode 1)
-
+;; -------~-------~--~------------------~------------------------~------
+;; basic SETTINGS
+;; -------~-------~--~------------------~------------------------~------
 
 ; emacs工作目录
-;(setq default-directory "~/work/src/")
+;; (setq default-directory "~/em/my-lisps/")
 
 ; 个人信息
 (setq user-mail-address "leeway185@gmail.com")
 (setq user-full-name    "pylemon")
 
-;; always end a file with a newline
-(setq require-final-newline nil)
-
-;; 括号提示
-(show-paren-mode nil)
-
 ;; 离行首或行尾10行时向下
 (require 'smooth-scrolling)
 (setq smooth-scroll-margin 10)
+
+;; 括号提示
+(show-paren-mode t)
+
+;; cua-mode 设置
+(cua-mode t)
+
+;;don't tabify after rectangle commands
+(setq cua-auto-tabify-rectangles nil)
+
+;;no region when it is not highlighted
+(transient-mark-mode 1)
+
+;;standard windows behavior
+(setq cua-keep-region-after-copy t)
+
+;; always end a file with a newline
+(setq require-final-newline nil)
+
+;; delete the selected region when something is typed or with DEL
+(delete-selection-mode 1)
 
 ;;在minibuffer里启用自动补全函数和变量
 (icomplete-mode 1)
@@ -69,7 +50,7 @@
 (setq mouse-yank-at-point t)
 
 ; 一行的宽度最大80 使用 C-q 切行
-(setq default-fill-column 80)
+(setq default-fill-column 90)
 
 ; 与其他程序共享剪切版
 (setq x-select-enable-clipboard t)
@@ -82,13 +63,6 @@
 
 ;; Emacs找不到合适的模式时，缺省使用text-mode
 (setq default-major-mode 'text-mode)
-
-;; emacs lock
-(autoload 'toggle-emacs-lock "emacs-lock" "Emacs lock" t)
-
-;; 防止页面滚动时跳动,scroll-margin 3可以在靠近屏幕边沿3行时就开始滚动,可以很好的看到上下文
-;; (setq scroll-margin 3
-;;       scroll-conservatively 10000)
 
 ;; 没有提示音,也不闪屏
 (setq ring-bell-function 'ignore)
@@ -117,10 +91,6 @@
 ; 可以递归的进行拷贝
 (setq dired-recursive-copies t)
 
-
-;; 缩进设置
-;;======================================================================
-
 ; 总是使用空格缩进
 (setq indent-tabs-mode nil)
 
@@ -129,25 +99,6 @@
 
 ; 使用4个空格缩进
 (setq tab-width 4)
-
-; 保存时自动删除多余的空格
-;; (add-hook 'before-save-hook 'whitespace-cleanup)
-;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;;shell,gdb退出后，自动关闭该buffer
-(defun kill-buffer-when-exit ()
-  "Close assotiated buffer when a process exited"
-  (let ((current-process (ignore-errors (get-buffer-process (current-buffer)))))
-    (when current-process
-      (set-process-sentinel current-process
-                   (lambda (watch-process change-state)
-                     (when (string-match "//(finished//|exited//)" change-state)
-                    (kill-buffer (process-buffer watch-process))))))))
-(add-hook 'gdb-mode-hook 'kill-buffer-when-exit)
-(add-hook 'shell-mode-hook 'kill-buffer-when-exit)
-
-;; 备份设置
-;;======================================================================
 
 ; 不生成 #filename# 文件
 (setq auto-save-default nil)
@@ -179,14 +130,52 @@
 ; 备份设置方法，直接拷贝
 (setq backup-by-copying t)
 
+; 保存时自动删除多余的空格
+;; (add-hook 'before-save-hook 'whitespace-cleanup)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; subversion
+(require 'psvn)
+
+;; ido mode
+(require 'ido)
+(ido-mode t)
+
+;; undo-tree
+(require 'undo-tree)
+(global-undo-tree-mode)
+(defadvice undo-tree-visualizer-mode (after undo-tree-face activate)
+  (buffer-face-mode))
+
+;; 不显示 ^M
 (defun remove-dos-eol ()
   "Do not show ^M in files containing mixed UNIX and DOS line endings."
   (interactive)
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
 
+;; 在buffer文件名重名时候 不显示 file<2> 带上上级目录
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+(setq uniquify-separator "/")
+(setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
+(setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+
+;; 高亮 TODO FIXME 等
 (defun highlight-todo ()
   (font-lock-add-keywords nil
     '(("\\(REVIEW\\|FIXME\\|TODO\\|BUG\\)" 1 font-lock-warning-face t))))
 (add-hook 'python-mode-hook 'highlight-todo)
 (add-hook 'html-mode-hook 'highlight-todo)
+
+;; shell, gdb退出后，自动关闭该buffer
+(defun kill-buffer-when-exit ()
+  "Close assotiated buffer when a process exited"
+  (let ((current-process (ignore-errors (get-buffer-process (current-buffer)))))
+    (when current-process
+      (set-process-sentinel current-process
+                   (lambda (watch-process change-state)
+                     (when (string-match "//(finished//|exited//)" change-state)
+                    (kill-buffer (process-buffer watch-process))))))))
+(add-hook 'gdb-mode-hook 'kill-buffer-when-exit)
+(add-hook 'shell-mode-hook 'kill-buffer-when-exit)

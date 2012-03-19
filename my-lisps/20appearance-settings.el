@@ -50,6 +50,8 @@
 (add-hook 'emacs-lisp-mode-hook 'linum-mode)
 (add-hook 'html-mode-hook 'linum-mode)
 (add-hook 'python-mode-hook 'linum-mode)
+;; (require 'wb-line-number)
+;; (wb-line-number-toggle)
 
 ;; 字体设置
 (set-default-font "微软雅黑Monaco:pixelsize=13")
@@ -75,39 +77,48 @@
 		    :foreground "#96bf33"
 		    :overline "#505050"
 		    :underline nil
-		    :box '(:line-width 1 :color "#505050")
+		    :box '(:line-width 1 :color "#96bf33")
 		    )
 (set-face-attribute 'tabbar-unselected nil
 		    :inherit 'tabbar-default
-		    :box '(:line-width 1 :color "#505050")
+		    :overline "#505050"
+		    :box '(:line-width 1 :color "#96bf33")
 		    )
 
-;; mode line 状态栏内容
-(setq-default mode-line-format
-              (quote
-               ("  "
-                ;; value of 'mode-name'
-                (:propertize "%m" face 'mode-line-mode-name)
-		"  "
-                ;; file path
-                (:propertize (:eval (if (> (length default-directory) 17)
-                                        (concat ".." (substring default-directory -20))
-                                      default-directory))
-                             face 'mode-line-folder-face)
-                ;; file name
-                (:propertize mode-line-buffer-identification face 'mode-line-buffer-name)
-                (:propertize mode-line-modified face 'mode-line-modified-face)
-                "   "
-                ;; line #
-                "Line %l, %p   "
-                ;; mode string
-                (:propertize global-mode-string face 'mode-line-mode-string)
-)))
 
+;; 高亮光标处单词
+(require 'highlight-symbol)
+(setq highlight-symbol-idle-delay 0.4)
+(highlight-symbol-mode t)
+
+
+
+;; mode line 状态栏内容
+;; (setq-default mode-line-format
+;;               (quote
+;;                ("  ..  "
+;;                 ;; value of 'mode-name'
+;;                 (:propertize "%m" face 'mode-line-mode-name)
+;; 		"  "
+;;                 ;; file path
+;;                 (:propertize (:eval (if (> (length default-directory) 17)
+;;                                         (concat ".." (substring default-directory -20))
+;;                                       default-directory))
+;;                              face 'mode-line-folder-face)
+;;                 ;; file name
+;;                 (:propertize mode-line-buffer-identification face 'mode-line-buffer-name)
+;;                 (:propertize mode-line-modified face 'mode-line-modified-face)
+;;                 "   "
+;;                 ;; line #
+;;                 "Line %l:%c "
+;; 		" %s %-"
+;;                 ;; mode string
+;;                 ;; (:propertize global-mode-string face 'mode-line-mode-string)
+;; )))
 
 ;; minimap
-;; (require 'minimap)			
+(require 'minimap)
 
 ;; 高亮当前行
-;; (global-hl-line-mode 1)
-;; (set-face-background 'hl-line "#303030")
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "gray21")
