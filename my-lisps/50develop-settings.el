@@ -4,9 +4,6 @@
 
 (require 'eval-after-load)
 
-;; 错误检查
-(require 'flymake-settings)
-
 ;; 所有关于lisp方面的配置
 (require 'all-lisp-settings)
 
@@ -26,13 +23,7 @@
 (yas/global-mode 1)
 (require 'auto-complete-config)
 (require 'auto-complete+)
-
-;; multi-term 终端
-;; 这货不能粘贴系统剪切版的内容...快捷键也不好用
-;; (require 'multi-term)
-;; (setq multi-term-program "/bin/zsh")
-;; (setq multi-term-buffer-name "shell")
-;; (setq multi-term-dedicated-select-after-open-p t)
+(setq auto-complete-mode t)
 
 ;; 各种 mode
 ;; -------~-------~--~------------------~------------------------~------
@@ -45,7 +36,7 @@
 
 ;; js2-mode
 (require 'javascript-mode)
-(autoload 'javascript-mode "javascript-mode" nil t)
+(autoload 'javascript-mode "js" nil t)
 
 
 ;; mode list
@@ -55,3 +46,15 @@
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
+
+
+
+;; multi-term 终端
+;; 这货不能粘贴系统剪切版的内容...快捷键也不好用
+;; (require 'multi-term)
+;; (setq multi-term-program "/bin/zsh")
+;; (setq multi-term-buffer-name "shell")
+;; (setq multi-term-dedicated-select-after-open-p t)
+
+;; 错误检查
+;; (require 'flymake-settings)
