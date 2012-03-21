@@ -27,6 +27,12 @@
 (require 'auto-complete-config)
 (require 'auto-complete+)
 
+;; multi-term 终端
+;; 这货不能粘贴系统剪切版的内容...快捷键也不好用
+;; (require 'multi-term)
+;; (setq multi-term-program "/bin/zsh")
+;; (setq multi-term-buffer-name "shell")
+;; (setq multi-term-dedicated-select-after-open-p t)
 
 ;; 各种 mode
 ;; -------~-------~--~------------------~------------------------~------
@@ -38,8 +44,8 @@
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
 ;; js2-mode
-(autoload 'js2-mode "js2" nil t)
-(setq js2-basic-offset 2)
+(require 'javascript-mode)
+(autoload 'javascript-mode "javascript-mode" nil t)
 
 
 ;; mode list
@@ -48,4 +54,4 @@
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-(add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))

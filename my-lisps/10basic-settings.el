@@ -18,6 +18,7 @@
 
 ;; cua-mode 设置
 (cua-mode t)
+(cua-selection-mode t)
 
 ;;don't tabify after rectangle commands
 (setq cua-auto-tabify-rectangles nil)

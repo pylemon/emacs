@@ -63,6 +63,7 @@
 ;; -------~-------~--~------------------~------------------------~------
 (global-set-key (kbd "C-x <right>") 'winner-redo)
 (global-set-key (kbd "C-x <left>") 'winner-undo)
+;; (global-set-key (kbd "C-x `") 'delete-other-windows)
 (global-set-key (kbd "C-x 2") 'split-window-horizontally)
 (global-set-key (kbd "C-x 3") 'split-window-vertically)
 (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
@@ -73,15 +74,18 @@
 (global-set-key (kbd "C-x C-x" ) 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)
 
-
 ;; C-c
 ;; -------~-------~--~------------------~------------------------~------
 (global-set-key (kbd "C-c C-w") 'cn-weather)
-
+;; (global-set-key (kbd "C-c s" ) 'multi-term)
+;; (global-set-key (kbd "C-c C-s" ) 'multi-term-dedicated-open)
 
 ;; others
 ;; -------~-------~--~------------------~------------------------~------
-(global-set-key (kbd "<C-SPC>") nil)
+(global-set-key (kbd "C-<SPC>") nil)
+(global-set-key (kbd "C-\\") nil)
+(global-set-key (kbd "C-c C-s" ) 'shell)
+(global-set-key (kbd "<f2>") 'rename-buffer)
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key [mouse-4] 'scroll-down-1)
 (global-set-key [mouse-5] 'scroll-up-1)
