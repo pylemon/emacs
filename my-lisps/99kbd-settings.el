@@ -47,16 +47,18 @@
 
 ;; "M-?"
 ;; -------~-------~--~------------------~------------------------~------
-(global-set-key (kbd "M-<tab>") 'wcy-switch-buffer-forward)
-;; (global-set-key (kbd "M-`") 'wcy-switch-buffer-backward)
-(global-set-key (kbd "M-`") 'yic-kill-current-buffer)
-(global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
-(global-set-key (kbd "M-n") 'display-buffer-name)
-(global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
 (global-set-key (kbd "M-<up>") 'tabbar-backward-group)
 (global-set-key (kbd "M-<down>") 'tabbar-forward-group)
 (global-set-key (kbd "M-<left>") 'tabbar-backward)
 (global-set-key (kbd "M-<right>") 'tabbar-forward)
+(global-set-key (kbd "M-`") 'yic-kill-current-buffer)
+(global-set-key (kbd "M-<tab>") 'wcy-switch-buffer-backward)
+;; (global-set-key (kbd "M-<right>") 'wcy-switch-buffer-forward)
+
+(global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
+(global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "M-p") 'backward-paragraph)
+(global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
 
 
 ;; C-x
@@ -77,15 +79,39 @@
 ;; C-c
 ;; -------~-------~--~------------------~------------------------~------
 (global-set-key (kbd "C-c C-w") 'cn-weather)
-;; (global-set-key (kbd "C-c s" ) 'multi-term)
-;; (global-set-key (kbd "C-c C-s" ) 'multi-term-dedicated-open)
 
 ;; others
 ;; -------~-------~--~------------------~------------------------~------
 (global-set-key (kbd "C-<SPC>") nil)
 (global-set-key (kbd "C-\\") nil)
-(global-set-key (kbd "C-c C-s" ) 'shell)
-(global-set-key (kbd "<f2>") 'rename-buffer)
+
+(global-set-key (kbd "<f2>") '(lambda ()
+				(interactive)
+				(ansi-term "/bin/zsh")
+				(setq ansi-term-color-vector
+				      [unspecified "#000000" "#ce2c51" "#5FFB65" "#FFFD65"
+						   "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
+				))
+(global-set-key (kbd "<f3>") 'rename-buffer)
+(global-set-key (kbd "<f4>") 'save-buffers-kill-terminal)
+
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key [mouse-4] 'scroll-down-1)
 (global-set-key [mouse-5] 'scroll-up-1)
+
+(defun ash-term-hooks ()
+  ;; dabbrev-expand in term
+  (define-key term-raw-escape-map "/"
+    (lambda ()
+      (interactive)
+      (let ((beg (point)))
+        (dabbrev-expand nil)
+        (kill-region beg (point)))
+      (term-send-raw-string (substring-no-properties (current-kill 0)))))
+  ;; yank in term (bound to C-c y)
+  (define-key term-raw-escape-map "y"
+    (lambda ()
+       (interactive)
+       (term-send-raw-string (current-kill 0))))
+  (add-hook 'term-mode-hook 'ash-term-hooks))
+(ash-term-hooks)

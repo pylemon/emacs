@@ -16,14 +16,14 @@
 ;; 所有关于括号的配置
 (require 'all-paren-settings)
 
-;; 自动补全的配置
+;; ;; 自动补全的配置
 (require 'yasnippet)
 (setq yas/root-directory "~/em/lisps/snippets")
 (yas/load-directory yas/root-directory)
 (yas/global-mode 1)
 (require 'auto-complete-config)
-(require 'auto-complete+)
-(setq auto-complete-mode t)
+(ac-config-default)
+
 
 ;; 各种 mode
 ;; -------~-------~--~------------------~------------------------~------
@@ -34,9 +34,9 @@
 ;; lua mode
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 
-;; js2-mode
+;; javascript mode
 (require 'javascript-mode)
-(autoload 'javascript-mode "js" nil t)
+(autoload 'javascript-mode "JavaScript" nil t)
 
 
 ;; mode list
@@ -58,3 +58,10 @@
 
 ;; 错误检查
 ;; (require 'flymake-settings)
+
+
+(autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
+
+(add-hook 'javascript-mode-hook 'javascript-custom-setup)
+(defun javascript-custom-setup ()
+  (moz-minor-mode 1))

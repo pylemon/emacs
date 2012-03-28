@@ -165,7 +165,7 @@
 ;; 高亮 TODO FIXME 等
 (defun highlight-todo ()
   (font-lock-add-keywords nil
-    '(("\\(REVIEW\\|FIXME\\|TODO\\|BUG\\)" 1 font-lock-warning-face t))))
+    '(("\\(#\ REVIEW\\|#\ FIXME\\|#\ TODO\\|#\ BUG\\)" 1 font-lock-warning-face t))))
 (add-hook 'python-mode-hook 'highlight-todo)
 (add-hook 'html-mode-hook 'highlight-todo)
 
