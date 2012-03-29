@@ -11,7 +11,8 @@
 (require 'html-mode-settings)
 
 ;; 自动给你加上括号
-(require 'autopair-settings)
+;; 比较麻烦 经常会画蛇添足 关掉吧 尽量习惯过来
+;; (require 'autopair-settings)
 
 ;; 所有关于括号的配置
 (require 'all-paren-settings)
