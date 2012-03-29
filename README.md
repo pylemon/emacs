@@ -19,35 +19,3 @@
 (mapc 'load (directory-files "~/emacs/my-lisps/" t "\\.el$"))
 ```
 
-
-
-
-
-### My Tool List ###
-
-* 操作系统： Ubuntu11.10
-
-* Shell： zsh(.oh-my-zsh)
-
-* 窗口管理器： Awesome, Gnome-shell, Ubuntu-Unity
-
-* 终端： Tilda, Terminator
-
-* 浏览器： Firefox, Chrome
-
-* IM： Pidgin, WebQQ(Prism)
-
-* 邮件： Thunderbird, Evolution
-
-* 编辑器： Emacs23
-
-* 编程语言： Python, Elisp, JS, Lua
-
-* 版本控制： Git, SVN
-
-* Web框架： Django
-
-* 数据库： MySQL, SQLite
-
-
-
