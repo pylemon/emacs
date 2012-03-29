@@ -50,11 +50,10 @@
 
 
 ;; multi-term 终端
-;; 这货不能粘贴系统剪切版的内容...快捷键也不好用
-;; (require 'multi-term)
-;; (setq multi-term-program "/bin/zsh")
-;; (setq multi-term-buffer-name "shell")
-;; (setq multi-term-dedicated-select-after-open-p t)
+(require 'multi-term)
+(setq multi-term-program "/bin/zsh")
+(setq multi-term-buffer-name "shell")
+(setq multi-term-dedicated-select-after-open-p t)
 
 ;; 错误检查
 ;; (require 'flymake-settings)

@@ -180,3 +180,4 @@
                     (kill-buffer (process-buffer watch-process))))))))
 (add-hook 'gdb-mode-hook 'kill-buffer-when-exit)
 (add-hook 'shell-mode-hook 'kill-buffer-when-exit)
+(add-hook 'term-mode-hook 'kill-buffer-when-exit)

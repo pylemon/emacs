@@ -85,33 +85,17 @@
 (global-set-key (kbd "C-<SPC>") nil)
 (global-set-key (kbd "C-\\") nil)
 
-(global-set-key (kbd "<f2>") '(lambda ()
-				(interactive)
-				(ansi-term "/bin/zsh")
-				(setq ansi-term-color-vector
-				      [unspecified "#000000" "#ce2c51" "#5FFB65" "#FFFD65"
-						   "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
-				))
-(global-set-key (kbd "<f3>") 'rename-buffer)
-(global-set-key (kbd "<f4>") 'save-buffers-kill-terminal)
+(setq ansi-term-color-vector
+      [unspecified "#000000" "#ce2c51" "#5FFB65" "#FFFD65"
+		   "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
+
+(global-set-key (kbd "<f2>") 'multi-term)
+(global-set-key (kbd "<f3>") 'save-buffers-kill-terminal)
+(global-set-key (kbd "<f4>") 'rename-buffer)
+(global-set-key (kbd "C-c C-s") 'multi-term-dedicated-open)
+(add-hook 'term-mode-hook (lambda ()
+   (define-key term-raw-map (kbd "C-y") 'term-paste)))
 
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key [mouse-4] 'scroll-down-1)
 (global-set-key [mouse-5] 'scroll-up-1)
-
-(defun ash-term-hooks ()
-  ;; dabbrev-expand in term
-  (define-key term-raw-escape-map "/"
-    (lambda ()
-      (interactive)
-      (let ((beg (point)))
-        (dabbrev-expand nil)
-        (kill-region beg (point)))
-      (term-send-raw-string (substring-no-properties (current-kill 0)))))
-  ;; yank in term (bound to C-c y)
-  (define-key term-raw-escape-map "y"
-    (lambda ()
-       (interactive)
-       (term-send-raw-string (current-kill 0))))
-  (add-hook 'term-mode-hook 'ash-term-hooks))
-(ash-term-hooks)
