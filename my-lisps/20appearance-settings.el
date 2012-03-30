@@ -39,6 +39,7 @@
 ;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
 (require 'rainbow-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
+(add-hook 'css-mode-hook 'rainbow-mode)
 ;; (add-hook 'xhtml-mode-hook 'rainbow-mode)
 ;; (add-hook 'html-mode-hook 'rainbow-mode)
 ;; (add-hook 'python-mode-hook 'rainbow-mode)
@@ -54,7 +55,9 @@
 ;; (wb-line-number-toggle)
 
 ;; 字体设置
-(set-default-font "微软雅黑Monaco:pixelsize=13")
+(set-default-font "微软雅黑Monaco:pixelsize=12")
+;; (set-default-font "profont 11")
+;; (set-default-font "YaHei Consolas Hybrid:pixelsize=13")
 ;; (set-default-font "DejaVu Sans Mono:pixelsize=13")
 
 ;; tabbar设置
@@ -62,7 +65,7 @@
 (tabbar-mode)
 (define-prefix-command 'lwindow-map)
 (set-face-attribute 'tabbar-default nil
-		    :family "微软雅黑Monaco"
+		    :family "profont"  ;;"微软雅黑Monaco"
 		    :background "#505050"
 		    :foreground "#a0a0a0"
 		    :height 0.9
@@ -117,7 +120,7 @@
 ;; )))
 
 ;; minimap
-(require 'minimap)
+;; (require 'minimap)
 
 ;; 高亮当前行
 (global-hl-line-mode 1)
