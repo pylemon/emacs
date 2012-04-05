@@ -90,8 +90,8 @@
 		   "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
 
 (global-set-key (kbd "<f2>") 'multi-term)
-(global-set-key (kbd "<f3>") 'save-buffers-kill-terminal)
-(global-set-key (kbd "<f4>") 'rename-buffer)
+(global-set-key (kbd "<f3>") 'rename-buffer)
+(global-set-key (kbd "<f4>") 'save-buffers-kill-terminal)
 (global-set-key (kbd "C-c C-s") 'multi-term-dedicated-open)
 (add-hook 'term-mode-hook (lambda ()
    (define-key term-raw-map (kbd "C-y") 'term-paste)))

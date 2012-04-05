@@ -48,8 +48,6 @@
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
 
-
-
 ;; multi-term 终端
 (require 'multi-term)
 (setq multi-term-program "/bin/zsh")
@@ -58,10 +56,3 @@
 
 ;; 错误检查
 ;; (require 'flymake-settings)
-
-
-(autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
-
-(add-hook 'javascript-mode-hook 'javascript-custom-setup)
-(defun javascript-custom-setup ()
-  (moz-minor-mode 1))
