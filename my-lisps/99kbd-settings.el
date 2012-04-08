@@ -71,6 +71,7 @@
 (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
 (global-set-key (kbd "C-x C-k") 'yic-kill-current-buffer)
 (global-set-key (kbd "C-x N") 'linum-mode)
+(global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
 (global-set-key (kbd "C-x f") 'find-file-at-point)
 (global-set-key (kbd "C-x C-j") 'dired-jump)
 (global-set-key (kbd "C-x C-x" ) 'ido-switch-buffer)

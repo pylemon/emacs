@@ -56,3 +56,12 @@
 
 ;; 错误检查
 ;; (require 'flymake-settings)
+
+;; trac-wiki mode #TODO not working
+;; (require 'trac-wiki)
+;; (trac-wiki-define-project "pylemon"
+;; 			  "http://127.0.0.1:8000/trac/" t)
+
+;; using gist in emacs
+(require 'gist)
+(setq gist-view-gist t)
