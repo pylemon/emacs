@@ -16,6 +16,9 @@
 ;; 括号提示
 (show-paren-mode t)
 
+;; 日历设置
+(setq calendar-week-start-day 1)
+
 ;; cua-mode 设置
 (cua-mode t)
 (cua-selection-mode t)
