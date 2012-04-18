@@ -19,6 +19,9 @@
 ;; 日历设置
 (setq calendar-week-start-day 1)
 
+;; 保存书签
+(setq bookmark-save-flag 1)
+
 ;; cua-mode 设置
 (cua-mode t)
 (cua-selection-mode t)

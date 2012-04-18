@@ -65,3 +65,8 @@
 ;; using gist in emacs
 (require 'gist)
 (setq gist-view-gist t)
+
+;; using projectile 可以grep项目,快速定位文件
+(require 'projectile)
+(projectile-global-mode) ;; to enable in all buffers
+(setq projectile-enable-caching t)
