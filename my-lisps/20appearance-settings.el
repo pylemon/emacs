@@ -5,7 +5,10 @@
 ;; 配色方案
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-tangotango)
+(color-theme-zenburn)
+;; (color-theme-tangotango)
+;; (color-theme-chocolate-rain)
+;; (color-theme-molokai)
 ;; (color-theme-arjen)
 ;; (color-theme-julie)
 ;; (color-theme-blackboard)
@@ -124,4 +127,4 @@
 
 ;; 高亮当前行
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "gray21")
+;; (set-face-background 'hl-line "gray21")
