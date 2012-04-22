@@ -13,8 +13,17 @@
 ;; (color-theme-julie)
 ;; (color-theme-blackboard)
 
+
 ;; 全局语法高亮
 (global-font-lock-mode t)
+
+; rst-mode title 背景发白 fixes
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(rst-level-face-base-color "black"))
 
 ;; 不要滚动条
 (customize-set-variable 'scroll-bar-mode nil)
@@ -148,3 +157,4 @@
               dired-texinfo-unclean-extensions))
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 (put 'dired-find-alternate-file 'disabled nil)
+
