@@ -71,9 +71,12 @@
 (projectile-global-mode) ;; to enable in all buffers
 (setq projectile-enable-caching t)
 
+
+
+;; emacs-nav
 (setq dotfiles-dir (file-name-directory
                     (or load-file-name (buffer-file-name))))
-;; emacs-nav
+
 (add-to-list 'load-path
              (expand-file-name "emacs-nav"
                                (expand-file-name "src" dotfiles-dir)))
@@ -82,3 +85,16 @@
 ;;   "Start Nav in the other window, after splitting."
 ;;   (other-window 1))
 ;; (ad-activate 'nav-in-place)
+
+
+
+;; pylint
+(require 'python-pylint)
+(add-hook 'python-mode-hook '(lambda ()
+          (local-set-key (kbd "C-c m l") 'python-pylint)
+))
+
+(autoload 'python-pep8 "python-pep8")
+(autoload 'pep8 "python-pep8")
+
+

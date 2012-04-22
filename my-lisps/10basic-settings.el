@@ -90,7 +90,7 @@
 (setq tab-always-indent 'complete)
 
 ; 在dired中忽略下面文件
-(setq dired-omit-extensions '(".elc" ".pyc" ".project" ".pydevproject" ".svn/"))
+(setq dired-omit-extensions '(".elc" ".pyc" ".project" ".pydevproject" ".svn"))
 
 ; 可以递归的删除目录
 (setq dired-recursive-deletes t)
@@ -137,6 +137,12 @@
 ; 备份设置方法，直接拷贝
 (setq backup-by-copying t)
 
+; 记住密码
+(setq password-cache-expiry nil)
+
+; 远程编辑时只使用 ssh 协议
+(setq tramp-default-method "ssh")
+
 ; 保存时自动删除多余的空格
 ;; (add-hook 'before-save-hook 'whitespace-cleanup)
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -147,6 +153,7 @@
 ;; ido mode
 (require 'ido)
 (ido-mode t)
+(setq ido-enable-flex-matching t)
 
 ;; undo-tree
 (require 'undo-tree)

@@ -128,3 +128,23 @@
 ;; 高亮当前行
 (global-hl-line-mode 1)
 ;; (set-face-background 'hl-line "gray21")
+
+(require 'window-number)
+(window-number-mode)
+(window-number-meta-mode)
+
+(require 'dired-x)
+(setq dired-omit-files 
+      (rx (or (seq bol (? ".") "#")         ;; emacs autosave files 
+              (seq "~" eol)                 ;; backup-files 
+              (seq bol "svn" eol)           ;; svn dirs 
+              (seq ".pyc" eol)
+              )))
+(add-hook 'dired-load-hook
+	  (function (lambda () (load "dired-x"))))
+(setq dired-omit-extensions 
+      (append dired-latex-unclean-extensions 
+              dired-bibtex-unclean-extensions 
+              dired-texinfo-unclean-extensions))
+(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+(put 'dired-find-alternate-file 'disabled nil)
