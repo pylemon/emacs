@@ -92,19 +92,20 @@
 
 ;; (global-set-key (kbd "<f2>") 'multi-term)
 ;;  快速切换到 shell 并 cd 到当前 buffer 所在的目录
-(defun kid-switch-to-shell ()
-  (interactive)
-  (when (null (cdr (window-list)))
-    (split-window-vertically))
-  (let ((file buffer-file-name))
-    (other-window 5)
-    (multi-term)
-    (when file
-      (end-of-buffer)
-      (when (looking-back shell-prompt-pattern)
-        (insert "cd " (file-name-directory file))
-        (call-interactively 'comint-send-input)))))
-(global-set-key (kbd "<f2>") 'kid-switch-to-shell)
+;; (defun kid-switch-to-shell ()
+;;   (interactive)
+;;   (when (null (cdr (window-list)))
+;;     (split-window-vertically))
+;;   (let ((file buffer-file-name))
+;;     (other-window 1)
+;;     (multi-term)
+;;     (when file
+;;       (end-of-buffer)
+;;       (when (looking-back shell-prompt-pattern)
+;;         (insert "cd " (file-name-directory file))
+;;         (call-interactively 'comint-send-input)))))
+;; (global-set-key (kbd "<f2>") 'kid-switch-to-shell)
+(global-set-key (kbd "<f2>") 'multi-term-dedicated-open)
 
 (global-set-key (kbd "<f3>") 'rename-buffer)
 (global-set-key (kbd "<f4>") 'save-buffers-kill-terminal)
