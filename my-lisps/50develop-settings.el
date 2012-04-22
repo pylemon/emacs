@@ -96,5 +96,3 @@
 
 (autoload 'python-pep8 "python-pep8")
 (autoload 'pep8 "python-pep8")
-
-

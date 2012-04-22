@@ -44,7 +44,6 @@
 (setq cn-weather-city "上海")
 (cn-weather)
 
-
 ;; "M-?"
 ;; -------~-------~--~------------------~------------------------~------
 (global-set-key (kbd "M-<up>") 'tabbar-backward-group)
@@ -65,7 +64,6 @@
 ;; -------~-------~--~------------------~------------------------~------
 (global-set-key (kbd "C-x <right>") 'winner-redo)
 (global-set-key (kbd "C-x <left>") 'winner-undo)
-;; (global-set-key (kbd "C-x `") 'delete-other-windows)
 (global-set-key (kbd "C-x 2") 'split-window-horizontally)
 (global-set-key (kbd "C-x 3") 'split-window-vertically)
 (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
@@ -76,6 +74,15 @@
 (global-set-key (kbd "C-x C-j") 'dired-jump)
 (global-set-key (kbd "C-x C-x" ) 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)
+
+(defun window-select-1 () (interactive) (window-number-select 1))
+(defun window-select-2 () (interactive) (window-number-select 2))
+(defun window-select-3 () (interactive) (window-number-select 3))
+(defun window-select-4 () (interactive) (window-number-select 4))
+(global-set-key (kbd "C-c 1" ) 'window-select-1)
+(global-set-key (kbd "C-c 2" ) 'window-select-2)
+(global-set-key (kbd "C-c 3" ) 'window-select-3)
+(global-set-key (kbd "C-c 4" ) 'window-select-4)
 
 ;; C-c
 ;; -------~-------~--~------------------~------------------------~------
@@ -90,29 +97,11 @@
       [unspecified "#000000" "#ce2c51" "#5FFB65" "#FFFD65"
 		   "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
 
-;; (global-set-key (kbd "<f2>") 'multi-term)
-;;  快速切换到 shell 并 cd 到当前 buffer 所在的目录
-;; (defun kid-switch-to-shell ()
-;;   (interactive)
-;;   (when (null (cdr (window-list)))
-;;     (split-window-vertically))
-;;   (let ((file buffer-file-name))
-;;     (other-window 1)
-;;     (multi-term)
-;;     (when file
-;;       (end-of-buffer)
-;;       (when (looking-back shell-prompt-pattern)
-;;         (insert "cd " (file-name-directory file))
-;;         (call-interactively 'comint-send-input)))))
-;; (global-set-key (kbd "<f2>") 'kid-switch-to-shell)
 (global-set-key (kbd "<f2>") 'multi-term-dedicated-open)
-
 (global-set-key (kbd "<f3>") 'rename-buffer)
 (global-set-key (kbd "<f4>") 'save-buffers-kill-terminal)
-(global-set-key (kbd "C-c C-s") 'multi-term-dedicated-open)
 (add-hook 'term-mode-hook (lambda ()
    (define-key term-raw-map (kbd "C-y") 'term-paste)))
-
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key [mouse-4] 'scroll-down-1)
 (global-set-key [mouse-5] 'scroll-up-1)
