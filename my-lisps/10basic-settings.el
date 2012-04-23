@@ -194,3 +194,10 @@
 (add-hook 'gdb-mode-hook 'kill-buffer-when-exit)
 (add-hook 'shell-mode-hook 'kill-buffer-when-exit)
 (add-hook 'term-mode-hook 'kill-buffer-when-exit)
+
+;; grep-find 默认命令
+(setq grep-find-command
+  "find . -path '*/.svn' -prune -o -type f -print | xargs -e grep -I -n -e "
+  ;; 这个与上面的等效 -I 参数可以跳过 二进制文件
+  ;; "find . \\( -path '*\.svn' -o -path '*.pyc' \\) -prune -o -print | xargs -e grep -nH -e "
+)
