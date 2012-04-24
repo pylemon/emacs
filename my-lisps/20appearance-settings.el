@@ -100,36 +100,10 @@
 		    :box '(:line-width 1 :color "#96bf33")
 		    )
 
-
 ;; 高亮光标处单词
 (require 'highlight-symbol)
 (setq highlight-symbol-idle-delay 0.4)
 (highlight-symbol-mode t)
-
-
-
-;; mode line 状态栏内容
-;; (setq-default mode-line-format
-;;               (quote
-;;                ("  ..  "
-;;                 ;; value of 'mode-name'
-;;                 (:propertize "%m" face 'mode-line-mode-name)
-;; 		"  "
-;;                 ;; file path
-;;                 (:propertize (:eval (if (> (length default-directory) 17)
-;;                                         (concat ".." (substring default-directory -20))
-;;                                       default-directory))
-;;                              face 'mode-line-folder-face)
-;;                 ;; file name
-;;                 (:propertize mode-line-buffer-identification face 'mode-line-buffer-name)
-;;                 (:propertize mode-line-modified face 'mode-line-modified-face)
-;;                 "   "
-;;                 ;; line #
-;;                 "Line %l:%c "
-;; 		" %s %-"
-;;                 ;; mode string
-;;                 ;; (:propertize global-mode-string face 'mode-line-mode-string)
-;; )))
 
 ;; minimap
 ;; (require 'minimap)
@@ -138,22 +112,38 @@
 (global-hl-line-mode 1)
 ;; (set-face-background 'hl-line "gray21")
 
+;; 为所有的window 标记号码，使用 C-c 1 切换到 window 1
 (require 'window-number)
 (window-number-mode)
 (window-number-meta-mode)
 
+;; dired-x 过滤不显示的文件， 增强 dired 功能
 (require 'dired-x)
 (setq dired-omit-files 
       (rx (or (seq bol (? ".") "#")         ;; emacs autosave files 
               (seq "~" eol)                 ;; backup-files 
-              (seq bol "svn" eol)           ;; svn dirs 
-              (seq ".pyc" eol)
+              (seq bol ".svn" eol)          ;; svn dirs 
+              (seq bol ".git" eol)          ;; git dirs 
+              (seq ".pyc" eol)              ;; py bin files
+              (seq ".gitignore" eol)        ;; gitignore
+              (seq ".settings" eol)         ;; eclipse settings
+              (seq ".project" eol)          ;; eclipse workspace
+              (seq ".pydevproject" eol)     ;; pydev settings
               )))
-(add-hook 'dired-load-hook
-	  (function (lambda () (load "dired-x"))))
 (setq dired-omit-extensions 
       (append dired-latex-unclean-extensions 
               dired-bibtex-unclean-extensions 
               dired-texinfo-unclean-extensions))
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 (put 'dired-find-alternate-file 'disabled nil)
+
+;; 在 ibuffer 中不显示的 buffer， 可以使用 C-x b 切换
+(setq ibuffer-never-show-predicates
+      (list
+       "^\\*scratch"
+       "^\\*Message"
+       "^\\*Help"
+       "^\\*Directory"              ;; do not use list directory
+       "^\\*Completions\\*$"
+       "^\\*magit-"
+))

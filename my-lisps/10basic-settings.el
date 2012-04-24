@@ -89,9 +89,6 @@
 ;; 先格式化再补全(使用tab优先缩进)
 (setq tab-always-indent 'complete)
 
-; 在dired中忽略下面文件
-(setq dired-omit-extensions '(".elc" ".pyc" ".project" ".pydevproject" ".svn"))
-
 ; 可以递归的删除目录
 (setq dired-recursive-deletes t)
 

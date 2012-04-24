@@ -62,8 +62,6 @@
 
 ;; C-x
 ;; -------~-------~--~------------------~------------------------~------
-(global-set-key (kbd "C-x <right>") 'winner-redo)
-(global-set-key (kbd "C-x <left>") 'winner-undo)
 (global-set-key (kbd "C-x 2") 'split-window-horizontally)
 (global-set-key (kbd "C-x 3") 'split-window-vertically)
 (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
@@ -71,10 +69,17 @@
 (global-set-key (kbd "C-x N") 'linum-mode)
 (global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
 (global-set-key (kbd "C-x f") 'find-file-at-point)
-(global-set-key (kbd "C-x C-j") 'dired-jump)
-(global-set-key (kbd "C-x C-x" ) 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)
+(global-set-key (kbd "C-x C-d" ) 'ido-dired)
+(global-set-key (kbd "C-x C-j") 'dired-jump)
+(global-set-key (kbd "C-x C-x" ) 'ibuffer)
 
+
+;; C-c
+;; -------~-------~--~------------------~------------------------~------
+(global-set-key (kbd "C-c C-w") 'cn-weather)
+(global-set-key (kbd "C-c <right>") 'winner-redo)
+(global-set-key (kbd "C-c <left>") 'winner-undo)
 (defun window-select-1 () (interactive) (window-number-select 1))
 (defun window-select-2 () (interactive) (window-number-select 2))
 (defun window-select-3 () (interactive) (window-number-select 3))
@@ -83,10 +88,6 @@
 (global-set-key (kbd "C-c 2" ) 'window-select-2)
 (global-set-key (kbd "C-c 3" ) 'window-select-3)
 (global-set-key (kbd "C-c 4" ) 'window-select-4)
-
-;; C-c
-;; -------~-------~--~------------------~------------------------~------
-(global-set-key (kbd "C-c C-w") 'cn-weather)
 
 ;; others
 ;; -------~-------~--~------------------~------------------------~------
