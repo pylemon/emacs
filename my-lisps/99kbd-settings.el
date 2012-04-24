@@ -98,9 +98,9 @@
       [unspecified "#000000" "#ce2c51" "#5FFB65" "#FFFD65"
 		   "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
 
-(global-set-key (kbd "<f2>") 'multi-term-dedicated-open)
+(global-set-key (kbd "<f2>") 'nav)
 (global-set-key (kbd "<f3>") 'grep-find)
-(global-set-key (kbd "<f4>") 'save-buffers-kill-terminal)
+(global-set-key (kbd "<f4>") 'multi-term-dedicated-open)
 (add-hook 'term-mode-hook (lambda ()
    (define-key term-raw-map (kbd "C-y") 'term-paste)))
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)

@@ -87,12 +87,39 @@
 ;; (ad-activate 'nav-in-place)
 
 
+;; 需要 apt-get install python-mode
+(require 'python-mode)
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(require 'ipython)
+
+;; anything 补全 ipython 以及 python 代码
+(require 'anything)
+(require 'anything-ipython)
+(when (require 'anything-show-completion nil t)
+   (use-anything-show-completion 'anything-ipython-complete
+                                 '(length initial-pattern)))
+
+;; high-light ipdb breakpoint, C-c C-t to setup breakpoint
+(defun annotate-pdb ()
+  (interactive)
+  (highlight-lines-matching-regexp "import pdb")
+  (highlight-lines-matching-regexp "pdb.set_trace()"))
+(add-hook 'python-mode-hook 'annotate-pdb)
+(defun python-add-breakpoint ()
+  (interactive)
+  (py-newline-and-indent)
+  (insert "import ipdb; ipdb.set_trace()")
+  (highlight-lines-matching-regexp "^[ 	]*import ipdb; ipdb.set_trace()"))
+(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
 
 ;; pylint
 (require 'python-pylint)
 (add-hook 'python-mode-hook '(lambda ()
           (local-set-key (kbd "C-c m l") 'python-pylint)
 ))
-
 (autoload 'python-pep8 "python-pep8")
 (autoload 'pep8 "python-pep8")
+
+;; display a lambda character (λ) when you type lambda
+(require 'lambda-mode)
+(add-hook 'python-mode-hook #'lambda-mode 1)
