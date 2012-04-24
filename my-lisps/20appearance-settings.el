@@ -147,3 +147,16 @@
        "^\\*Completions\\*$"
        "^\\*magit-"
 ))
+
+;; 自动高亮， 超过 110 个字符的行 
+(require 'column-marker)
+(mapc (lambda (hook)
+        ;; (add-hook hook (lambda () (interactive) (column-marker-1 80)))
+	(add-hook hook (lambda () (interactive) (column-marker-1 110)))
+	)
+      '(org-mode-hook
+        emacs-lisp-mode-hook
+        python-mode-hook
+        js2-mode-hook
+        rst-mode-hook
+        text-mode-hook))
