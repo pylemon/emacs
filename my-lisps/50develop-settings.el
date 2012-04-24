@@ -112,6 +112,13 @@
   (highlight-lines-matching-regexp "^[ 	]*import ipdb; ipdb.set_trace()"))
 (define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
 
+;; Comint uses M-up and M-down cycle backwards and forward through input history.
+(require 'comint)
+(define-key comint-mode-map (kbd "M-") 'comint-next-input)
+(define-key comint-mode-map (kbd "M-") 'comint-previous-input)
+(define-key comint-mode-map [down] 'comint-next-matching-input-from-input)
+(define-key comint-mode-map [up] 'comint-previous-matching-input-from-input)
+
 ;; pylint
 (require 'python-pylint)
 (add-hook 'python-mode-hook '(lambda ()
