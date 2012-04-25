@@ -164,6 +164,11 @@
   (interactive)
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
+(add-hook 'python-mode-hook 'remove-dos-eol)
+(add-hook 'javascript-mode-hook 'remove-dos-eol)
+(add-hook 'html-mode-hook 'remove-dos-eol)
+(add-hook 'css-mode-hook 'remove-dos-eol)
+
 
 ;; 在buffer文件名重名时候 不显示 file<2> 带上上级目录
 (require 'uniquify)
