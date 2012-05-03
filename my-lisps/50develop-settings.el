@@ -131,3 +131,9 @@
 (require 'lambda-mode)
 (add-hook 'python-mode-hook #'lambda-mode 1)
 (setq lambda-symbol (string (make-char 'greek-iso8859-7 107)))
+
+
+;;emacs helm instead of anything.el
+(add-to-list 'load-path "/home/liwei/resp/helm")
+(require 'helm-config)
+(helm-mode 1)

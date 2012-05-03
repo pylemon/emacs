@@ -147,6 +147,7 @@
        "^\\*Completions\\*$"
        "^\\*magit-"
 ))
+(setq helm-c-boring-buffer-regexp "^\\*")
 
 ;; 自动高亮， 超过 110 个字符的行 
 (require 'column-marker)

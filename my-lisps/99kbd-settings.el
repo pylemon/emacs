@@ -72,7 +72,10 @@
 (global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-d" ) 'ido-dired)
 (global-set-key (kbd "C-x C-j") 'dired-jump)
-(global-set-key (kbd "C-x C-x" ) 'ibuffer)
+(global-set-key (kbd "C-x C-x" ) 'helm-mini)
+;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-f") 'ido-find-file)
+
 
 
 ;; C-c
