@@ -77,10 +77,10 @@
 (tabbar-mode)
 (define-prefix-command 'lwindow-map)
 (set-face-attribute 'tabbar-default nil
-		    :family "微软雅黑Monaco"
+		    :family "profont" ;;"微软雅黑Monaco"
 		    :background "#505050"
 		    :foreground "#a0a0a0"
-		    :height 0.8
+		    :height 0.9
 		    )
 (set-face-attribute 'tabbar-button nil
 		    :inherit 'tabbar-default
