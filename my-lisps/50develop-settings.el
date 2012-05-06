@@ -110,7 +110,7 @@
   (py-newline-and-indent)
   (insert "import ipdb; ipdb.set_trace()")
   (highlight-lines-matching-regexp "^[ 	]*import ipdb; ipdb.set_trace()"))
-(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+;;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
 
 ;; Comint uses M-up and M-down cycle backwards and forward through input history.
 (require 'comint)
