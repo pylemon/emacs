@@ -75,6 +75,7 @@
 (global-set-key (kbd "C-x C-x" ) 'helm-mini)
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
+(global-set-key (kbd "C-x C-r") 'bookmark-bmenu-list)
 
 
 
@@ -101,9 +102,12 @@
       [unspecified "#000000" "#ce2c51" "#5FFB65" "#FFFD65"
 		   "#0082FF" "#FF2180" "#57DCDB" "#FFFFFF"])
 
-(global-set-key (kbd "<f2>") 'nav)
+
+(global-set-key (kbd "<f1>") 'multi-term-dedicated-open)
+(global-set-key (kbd "<f2>") 'nav-in-place)
 (global-set-key (kbd "<f3>") 'grep-find)
-(global-set-key (kbd "<f4>") 'multi-term-dedicated-open)
+(global-set-key (kbd "<f5>") 'todo-show)
+
 (add-hook 'term-mode-hook (lambda ()
    (define-key term-raw-map (kbd "C-y") 'term-paste)))
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)

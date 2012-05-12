@@ -102,8 +102,8 @@
 ;; high-light ipdb breakpoint, C-c C-t to setup breakpoint
 (defun annotate-pdb ()
   (interactive)
-  (highlight-lines-matching-regexp "import pdb")
-  (highlight-lines-matching-regexp "pdb.set_trace()"))
+  (highlight-lines-matching-regexp "import ipdb")
+  (highlight-lines-matching-regexp "ipdb.set_trace()"))
 (add-hook 'python-mode-hook 'annotate-pdb)
 (defun python-add-breakpoint ()
   (interactive)
