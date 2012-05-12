@@ -17,6 +17,9 @@
 ;; 全局语法高亮
 (global-font-lock-mode t)
 
+;; 增加更丰富的高亮
+(require 'generic-x)
+
 ; rst-mode title 背景发白 fixes
 (custom-set-variables
   ;; custom-set-variables was added by Custom.

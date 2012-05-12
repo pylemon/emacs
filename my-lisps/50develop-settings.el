@@ -137,3 +137,37 @@
 (add-to-list 'load-path "/home/liwei/resp/helm")
 (require 'helm-config)
 (helm-mode 1)
+
+;; show buffer total line number or region line numbers
+(which-function-mode t)
+(defun count-brf-lines (&optional is-fun)
+  "显示当前buffer或region或函数的行数和字符数"
+  (interactive "P")
+  (let (min max)
+    (if is-fun
+        (save-excursion
+          (beginning-of-defun) (setq min (point))
+          (end-of-defun) (setq max (point))
+          (message "当前函数%s内共有%d行, %d个字符" (which-function) (count-lines min max) (- max min)))
+      (if mark-active
+          (progn
+            (setq min (min (point) (mark)))
+            (setq max (max (point) (mark))))
+        (setq min (point-min))
+        (setq max (point-max)))
+      (if (or (= 1 (point-min)) mark-active)
+          (if mark-active
+              (message "当前region内共有%d行, %d个字符" (count-lines min max) (- max min))
+            (message "当前buffer内共有%d行, %d个字符" (count-lines min max) (- max min)))
+        (let ((nmin min) (nmax max))
+          (save-excursion
+            (save-restriction
+              (widen)
+              (setq min (point-min))
+              (setq max (point-max))))
+          (message "narrow下buffer内共有%d行, %d个字符, 非narrow下buffer内共有%d行, %d个字符"
+                   (count-lines nmin nmax) (- nmax nmin) (count-lines min max) (- max min)))))))
+(eal-define-keys-commonly
+ global-map
+ `(("C-x l" count-brf-lines)
+   ("C-x L" (lambda () (interactive) (count-brf-lines t)))))
