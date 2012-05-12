@@ -46,10 +46,10 @@
 (tool-bar-mode -1)
 
 ;; 在状态栏显示日期时间
-(setq display-time-24hr-format t)
+;; (setq display-time-24hr-format t)
 ;; (setq display-time-day-and-date nil)
 ;; (setq display-time-interval 60)
-(display-time-mode t)
+(display-time-mode nil)
 
 ;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
 (require 'rainbow-mode)
