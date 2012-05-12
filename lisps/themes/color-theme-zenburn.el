@@ -501,6 +501,8 @@
      (wl-highlight-summary-refiled-face ((t (:foreground ,zenburn-fg))))
      (wl-highlight-summary-displaying-face ((t (:underline t :weight bold)))))))
 
+     (which-func ((t (:foreground "yellow"))))
+
 (add-to-list 'color-themes '(color-theme-zenburn
                              "Zenburn"
                              "Bozhidar Batsov <bozhidar.batsov@gmail.com"))
