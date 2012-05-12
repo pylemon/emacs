@@ -19,7 +19,7 @@
 
 ;; ;; 自动补全的配置
 (require 'yasnippet)
-(setq yas/root-directory "~/em/lisps/snippets")
+(setq yas/root-directory "~/emacs/lisps/snippets")
 (yas/load-directory yas/root-directory)
 (yas/global-mode 1)
 (require 'auto-complete-config)
