@@ -5,8 +5,8 @@
 ;; 配色方案
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-zenburn)
-;; (color-theme-tangotango)
+;;(color-theme-zenburn)
+(color-theme-tangotango)
 ;; (color-theme-chocolate-rain)
 ;; (color-theme-molokai)
 ;; (color-theme-arjen)
