@@ -40,9 +40,9 @@
 (winner-mode t)
 
 ;; 查询天气
-(require 'cn-weather)
-(setq cn-weather-city "上海")
-(cn-weather)
+;; (require 'cn-weather)
+;; (setq cn-weather-city "上海")
+;; (cn-weather)
 
 ;; "M-?"
 ;; -------~-------~--~------------------~------------------------~------
@@ -81,7 +81,7 @@
 
 ;; C-c
 ;; -------~-------~--~------------------~------------------------~------
-(global-set-key (kbd "C-c C-w") 'cn-weather)
+;; (global-set-key (kbd "C-c C-w") 'cn-weather)
 (global-set-key (kbd "C-c <right>") 'winner-redo)
 (global-set-key (kbd "C-c <left>") 'winner-undo)
 (defun window-select-1 () (interactive) (window-number-select 1))
