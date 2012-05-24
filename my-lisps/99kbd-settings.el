@@ -72,7 +72,8 @@
 (global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-d" ) 'ido-dired)
 (global-set-key (kbd "C-x C-j") 'dired-jump)
-(global-set-key (kbd "C-x C-x" ) 'helm-mini)
+;; (global-set-key (kbd "C-x C-x" ) 'helm-mini)
+(global-set-key (kbd "C-x C-x" ) 'ibuffer)
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
 (global-set-key (kbd "C-x C-r") 'bookmark-bmenu-list)
@@ -88,10 +89,10 @@
 (defun window-select-2 () (interactive) (window-number-select 2))
 (defun window-select-3 () (interactive) (window-number-select 3))
 (defun window-select-4 () (interactive) (window-number-select 4))
-(global-set-key (kbd "C-c 1" ) 'window-select-1)
-(global-set-key (kbd "C-c 2" ) 'window-select-2)
-(global-set-key (kbd "C-c 3" ) 'window-select-3)
-(global-set-key (kbd "C-c 4" ) 'window-select-4)
+(global-set-key (kbd "M-<f1>" ) 'window-select-1)
+(global-set-key (kbd "M-<f2>" ) 'window-select-2)
+(global-set-key (kbd "M-<f3>" ) 'window-select-3)
+(global-set-key (kbd "M-<f4>" ) 'window-select-4)
 
 ;; others
 ;; -------~-------~--~------------------~------------------------~------

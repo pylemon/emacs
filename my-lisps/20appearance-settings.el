@@ -1,3 +1,5 @@
+;; (set-default-font "微软雅黑Monaco:pixelsize=12")
+
 ;; -------~-------~--~------------------~------------------------~------
 ;; APPEARANCE
 ;; -------~-------~--~------------------~------------------------~------
@@ -6,9 +8,9 @@
 (require 'color-theme)
 (color-theme-initialize)
 ;;(color-theme-zenburn)
-(color-theme-tangotango)
+;; (color-theme-tangotango)
 ;; (color-theme-chocolate-rain)
-;; (color-theme-molokai)
+(color-theme-molokai)
 ;; (color-theme-arjen)
 ;; (color-theme-julie)
 ;; (color-theme-blackboard)
@@ -55,6 +57,8 @@
 (require 'rainbow-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
 (add-hook 'css-mode-hook 'rainbow-mode)
+(add-hook 'x-resource-generic-mode-hook 'rainbow-mode)
+
 ;; (add-hook 'xhtml-mode-hook 'rainbow-mode)
 ;; (add-hook 'html-mode-hook 'rainbow-mode)
 ;; (add-hook 'python-mode-hook 'rainbow-mode)
@@ -70,7 +74,7 @@
 ;; (wb-line-number-toggle)
 
 ;; 字体设置
-(set-default-font "微软雅黑Monaco:pixelsize=12")
+;; (set-face-attribute 'default nil :font "微软雅黑Monaco-10") 
 ;; (set-default-font "profont 11")
 ;; (set-default-font "YaHei Consolas Hybrid:pixelsize=13")
 ;; (set-default-font "DejaVu Sans Mono:pixelsize=13")
@@ -133,6 +137,7 @@
               (seq ".project" eol)          ;; eclipse workspace
               (seq ".pydevproject" eol)     ;; pydev settings
               )))
+
 (setq dired-omit-extensions 
       (append dired-latex-unclean-extensions 
               dired-bibtex-unclean-extensions 
@@ -156,11 +161,10 @@
 (require 'column-marker)
 (mapc (lambda (hook)
         ;; (add-hook hook (lambda () (interactive) (column-marker-1 80)))
-	(add-hook hook (lambda () (interactive) (column-marker-1 110)))
-	)
+	(add-hook hook (lambda () (interactive) (column-marker-1 110))))
       '(org-mode-hook
         emacs-lisp-mode-hook
         python-mode-hook
         js2-mode-hook
         rst-mode-hook
-        text-mode-hook))
+	text-mode-hook))
