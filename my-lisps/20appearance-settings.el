@@ -62,14 +62,13 @@
 ;; (add-hook 'python-mode-hook 'rainbow-mode)
 
 ;; linum+ settings
-(require 'linum+)
-(setq linum-format '("%%%dd|"))
-(add-hook 'text-mode-hook 'linum-mode)
-(add-hook 'emacs-lisp-mode-hook 'linum-mode)
-(add-hook 'html-mode-hook 'linum-mode)
-(add-hook 'python-mode-hook 'linum-mode)
-;; (require 'wb-line-number)
-;; (wb-line-number-toggle)
+;; (require 'linum+)
+;; (setq linum-format '("%%%dd|"))
+;; (add-hook 'text-mode-hook 'linum-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'linum-mode)
+;; (add-hook 'html-mode-hook 'linum-mode)
+;; (add-hook 'python-mode-hook 'linum-mode)
+
 
 ;; 字体设置
 ;; (set-face-attribute 'default nil :font "微软雅黑Monaco-10") 

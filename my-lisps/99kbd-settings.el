@@ -39,6 +39,9 @@
 (setq winner-dont-bind-my-keys t)
 (winner-mode t)
 
+
+(require 'wb-line-number)
+
 ;; 查询天气
 ;; (require 'cn-weather)
 ;; (setq cn-weather-city "上海")
@@ -66,13 +69,14 @@
 (global-set-key (kbd "C-x 3") 'split-window-vertically)
 (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
 (global-set-key (kbd "C-x C-k") 'yic-kill-current-buffer)
-(global-set-key (kbd "C-x N") 'linum-mode)
+(global-set-key (kbd "C-x N") 'wb-line-number-toggle)
 (global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
 (global-set-key (kbd "C-x f") 'find-file-at-point)
 (global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-d" ) 'ido-dired)
 (global-set-key (kbd "C-x C-j") 'dired-jump)
 (global-set-key (kbd "C-x C-x" ) 'ibuffer)
+(global-set-key (kbd "C-x f") 'ido-find-file)
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
 (global-set-key (kbd "C-x C-r") 'bookmark-bmenu-list)
 
