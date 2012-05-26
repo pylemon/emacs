@@ -7,14 +7,12 @@
 ;; 配色方案
 (require 'color-theme)
 (color-theme-initialize)
-;;(color-theme-zenburn)
+;; (color-theme-zenburn)
 ;; (color-theme-tangotango)
-;; (color-theme-chocolate-rain)
 (color-theme-molokai)
 ;; (color-theme-arjen)
 ;; (color-theme-julie)
 ;; (color-theme-blackboard)
-
 
 ;; 全局语法高亮
 (global-font-lock-mode t)
@@ -75,9 +73,6 @@
 
 ;; 字体设置
 ;; (set-face-attribute 'default nil :font "微软雅黑Monaco-10") 
-;; (set-default-font "profont 11")
-;; (set-default-font "YaHei Consolas Hybrid:pixelsize=13")
-;; (set-default-font "DejaVu Sans Mono:pixelsize=13")
 
 ;; tabbar设置
 (require 'tabbar)
@@ -116,13 +111,13 @@
 ;; (require 'minimap)
 
 ;; 高亮当前行
-(global-hl-line-mode 1)
+;; (global-hl-line-mode 1)
 ;; (set-face-background 'hl-line "gray21")
 
 ;; 为所有的window 标记号码，使用 C-c 1 切换到 window 1
-(require 'window-number)
-(window-number-mode)
-(window-number-meta-mode)
+;; (require 'window-number)
+;; (window-number-mode)
+;; (window-number-meta-mode)
 
 ;; dired-x 过滤不显示的文件， 增强 dired 功能
 (require 'dired-x)
