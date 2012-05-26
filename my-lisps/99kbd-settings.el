@@ -62,7 +62,6 @@
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
 
-
 ;; C-x
 ;; -------~-------~--~------------------~------------------------~------
 (global-set-key (kbd "C-x 2") 'split-window-horizontally)
@@ -87,6 +86,8 @@
 ;; (global-set-key (kbd "C-c C-w") 'cn-weather)
 (global-set-key (kbd "C-c <right>") 'winner-redo)
 (global-set-key (kbd "C-c <left>") 'winner-undo)
+(global-set-key (kbd "C-c <RET>") 'cua-set-rectangle-mark)
+
 
 ;; others
 ;; -------~-------~--~------------------~------------------------~------
