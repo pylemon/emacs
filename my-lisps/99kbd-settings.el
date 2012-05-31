@@ -34,11 +34,16 @@
   (interactive)
   (kill-buffer (current-buffer)))
 
+(defun reset-default-font ()
+  (interactive)
+(set-default-font "微软雅黑Monaco:pixelsize=12"))
+
 ;; 管理 window
 (windmove-default-keybindings 'meta)
 (setq winner-dont-bind-my-keys t)
 (winner-mode t)
 
+(reset-default-font)
 
 (require 'wb-line-number)
 
@@ -69,6 +74,7 @@
 (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
 (global-set-key (kbd "C-x C-k") 'yic-kill-current-buffer)
 (global-set-key (kbd "C-x N") 'wb-line-number-toggle)
+(global-set-key (kbd "C-x m") 'reset-default-font)
 (global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
 (global-set-key (kbd "C-x f") 'find-file-at-point)
 (global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)

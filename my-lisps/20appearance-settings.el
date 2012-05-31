@@ -1,4 +1,4 @@
-;; (set-default-font "微软雅黑Monaco:pixelsize=12")
+(set-default-font "微软雅黑Monaco:pixelsize=12")
 
 ;; -------~-------~--~------------------~------------------------~------
 ;; APPEARANCE
@@ -29,10 +29,10 @@
  '(rst-level-face-base-color "black"))
 
 ;; 不要滚动条
-;; (customize-set-variable 'scroll-bar-mode nil)
+(customize-set-variable 'scroll-bar-mode nil)
 
 ;; 在fringe上显示一个小箭头指示当前buffer的边界
-;; (setq-default indicate-buffer-boundaries 'left)
+(setq-default indicate-buffer-boundaries 'left)
 
 ;; minibuffer不要自动变化高度
 (setq resize-mini-windows nil)
