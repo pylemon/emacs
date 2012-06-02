@@ -90,6 +90,8 @@
 ;; 需要 apt-get install python-mode
 (require 'python-mode)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . rst-mode))
+
 (require 'ipython)
 
 ;; anything 补全 ipython 以及 python 代码
