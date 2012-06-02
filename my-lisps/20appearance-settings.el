@@ -1,5 +1,3 @@
-(set-default-font "微软雅黑Monaco:pixelsize=12")
-
 ;; -------~-------~--~------------------~------------------------~------
 ;; APPEARANCE
 ;; -------~-------~--~------------------~------------------------~------
@@ -79,26 +77,26 @@
 (define-prefix-command 'lwindow-map)
 (set-face-attribute 'tabbar-default nil
 		    :family "profont" ;;"微软雅黑Monaco"
-		    :background "#505050"
+		    :background "#111111"
 		    :foreground "#a0a0a0"
 		    :height 0.9
 		    )
 (set-face-attribute 'tabbar-button nil
 		    :inherit 'tabbar-default
-		    :box '(:line-width 1 :color "#505050")
+		    :box '(:line-width 1 :color "#111111")
 		    )
 (set-face-attribute 'tabbar-selected nil
 		    :inherit 'tabbar-default
-		    :background "#505050"
-		    :foreground "#96bf33"
-		    :overline "#505050"
+		    :background "#111111"
+		    :foreground "#1793d1"
+		    :overline "#111111"
 		    :underline nil
-		    :box '(:line-width 1 :color "#96bf33")
+		    :box '(:line-width 1 :color "#1793d1")
 		    )
 (set-face-attribute 'tabbar-unselected nil
 		    :inherit 'tabbar-default
-		    :overline "#505050"
-		    :box '(:line-width 1 :color "#96bf33")
+		    :overline "#111111"
+		    :box '(:line-width 1 :color "#1793d1")
 		    )
 
 ;; 高亮光标处单词
