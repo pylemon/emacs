@@ -47,6 +47,20 @@
 
 (require 'wb-line-number)
 
+(defun switch-to-other-buffer ()
+    "切换到最近访问的buffer"    
+    (interactive)
+    (switch-to-buffer (other-buffer)))
+
+(defun goto-paren ()
+  "跳到匹配的括号"
+  (interactive)
+  (cond ( (looking-at "[ t]*[['\"({]") (forward-sexp) (backward-char))
+	( (or (looking-at "[]'\")}]") (looking-back "[]'\")}][ t]*"))
+   (if (< (point) (point-max)) (forward-char)) (backward-sexp))
+(t (message "找不到匹配的括号"))))
+
+
 ;; 查询天气
 ;; (require 'cn-weather)
 ;; (setq cn-weather-city "上海")
@@ -66,6 +80,8 @@
 (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
+(global-set-key (kbd "M-]") 'goto-paren)
+(global-set-key (kbd "M-[") 'goto-paren)
 
 ;; C-x
 ;; -------~-------~--~------------------~------------------------~------
@@ -93,7 +109,7 @@
 (global-set-key (kbd "C-c <right>") 'winner-redo)
 (global-set-key (kbd "C-c <left>") 'winner-undo)
 (global-set-key (kbd "C-c <RET>") 'cua-set-rectangle-mark)
-
+(global-set-key (kbd "C-c o") 'switch-to-other-buffer)
 
 ;; others
 ;; -------~-------~--~------------------~------------------------~------

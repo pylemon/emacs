@@ -137,6 +137,9 @@
 ; 记住密码
 (setq password-cache-expiry nil)
 
+;; 用户编辑文件, 或者编辑远程主机文件 
+(require 'tramp) 
+;; (setq tramp-default-method "sudo")
 ; 远程编辑时只使用 ssh 协议
 (setq tramp-default-method "ssh")
 
