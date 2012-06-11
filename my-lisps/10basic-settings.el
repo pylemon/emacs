@@ -44,8 +44,9 @@
 ;;在minibuffer里启用自动补全函数和变量
 (icomplete-mode 1)
 
+;; 不兼容 emacs24
 ;; 启用部分补全功能，如输入M-x q r r相当于M-x query-replace-regexp
-(partial-completion-mode t)
+;; (partial-completion-mode t)
 
 ;;当鼠标移动的时候自动转换frame，window或者minibuffer
 (setq mouse-autoselect-window t)
@@ -217,8 +218,4 @@
 				  'fullboth)))))
 
 (global-set-key [f11] 'toggle-fullscreen)
-
-    ; Make new frames fullscreen by default. Note: this hook doesn't do
-    ; anything to the initial frame if it's in your .emacs, since that file is
-    ; read _after_ the initial frame is created.
 (add-hook 'after-make-frame-functions 'toggle-fullscreen)

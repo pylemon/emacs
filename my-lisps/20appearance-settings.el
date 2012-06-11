@@ -69,7 +69,8 @@
 
 
 ;; 字体设置
-;; (set-face-attribute 'default nil :font "微软雅黑Monaco-10") 
+(set-default-font "微软雅黑Monaco:pixelsize=12")
+;; (set-face-attribute 'default nil :font "微软雅黑Monaco-9")
 
 ;; tabbar设置
 (require 'tabbar)
@@ -108,7 +109,7 @@
 ;; (require 'minimap)
 
 ;; 高亮当前行
-;; (global-hl-line-mode 1)
+(global-hl-line-mode 1)
 ;; (set-face-background 'hl-line "gray21")
 
 ;; 为所有的window 标记号码，使用 C-c 1 切换到 window 1

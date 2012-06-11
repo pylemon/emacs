@@ -43,7 +43,7 @@
 (setq winner-dont-bind-my-keys t)
 (winner-mode t)
 
-(reset-default-font)
+;; (reset-default-font)
 
 (require 'wb-line-number)
 
