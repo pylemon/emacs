@@ -11,8 +11,7 @@
 (require 'html-mode-settings)
 
 ;; 自动给你加上括号
-;; 比较麻烦 经常会画蛇添足 关掉吧 尽量习惯过来
-;; (require 'autopair-settings)
+(require 'autopair-settings)
 
 ;; 所有关于括号的配置
 (require 'all-paren-settings)
@@ -63,28 +62,18 @@
 
 ;; multi-term 终端
 (require 'multi-term)
-(setq multi-term-program "/bin/zsh")
+(setq multi-term-program "fish")
 (setq multi-term-buffer-name "shell")
 (setq multi-term-dedicated-select-after-open-p t)
-
-;; 错误检查
-;; (require 'flymake-settings)
-
-;; trac-wiki mode #TODO not working
-;; (require 'trac-wiki)
-;; (trac-wiki-define-project "pylemon"
-;; 			  "http://127.0.0.1:8000/trac/" t)
 
 ;; using gist in emacs
 (require 'gist)
 (setq gist-view-gist t)
 
 ;; using projectile 可以grep项目,快速定位文件
-(require 'projectile)
-(projectile-global-mode) ;; to enable in all buffers
-(setq projectile-enable-caching t)
-
-
+;; (require 'projectile)
+;; (projectile-global-mode) ;; to enable in all buffers
+;; (setq projectile-enable-caching t)
 
 ;; emacs-nav
 (setq dotfiles-dir (file-name-directory
@@ -101,15 +90,16 @@
 
 
 ;; 需要 apt-get install python-mode
-(require 'python-mode)
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+;; (require 'python-mode)
+;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . rst-mode))
 
-(require 'ipython)
+;; (require 'ipython)
 
 ;; anything 补全 ipython 以及 python 代码
 (require 'anything)
-(require 'anything-ipython)
+;; (require 'anything-ipython)
 (when (require 'anything-show-completion nil t)
    (use-anything-show-completion 'anything-ipython-complete
                                  '(length initial-pattern)))
@@ -125,14 +115,14 @@
   (py-newline-and-indent)
   (insert "import ipdb; ipdb.set_trace()")
   (highlight-lines-matching-regexp "^[ 	]*import ipdb; ipdb.set_trace()"))
-;;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+(define-key python-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
 
 ;; Comint uses M-up and M-down cycle backwards and forward through input history.
-(require 'comint)
-(define-key comint-mode-map (kbd "M-") 'comint-next-input)
-(define-key comint-mode-map (kbd "M-") 'comint-previous-input)
-(define-key comint-mode-map [down] 'comint-next-matching-input-from-input)
-(define-key comint-mode-map [up] 'comint-previous-matching-input-from-input)
+;; (require 'comint)
+;; (define-key comint-mode-map (kbd "M-") 'comint-next-input)
+;; (define-key comint-mode-map (kbd "M-") 'comint-previous-input)
+;; (define-key comint-mode-map [down] 'comint-next-matching-input-from-input)
+;; (define-key comint-mode-map [up] 'comint-previous-matching-input-from-input)
 
 ;; pylint
 (require 'python-pylint)
@@ -147,9 +137,11 @@
 (add-hook 'python-mode-hook #'lambda-mode 1)
 (setq lambda-symbol (string (make-char 'greek-iso8859-7 107)))
 
-
 ;;emacs helm instead of anything.el
-(add-to-list 'load-path "/home/liwei/resp/helm")
-(require 'helm-config)
-(helm-mode 1)
-(which-function-mode t)
+;; (add-to-list 'load-path "/home/liwei/resp/helm")
+;; (require 'helm-config)
+;; (helm-mode 1)
+
+;; 错误检查
+;; (require 'flymake-settings)
+

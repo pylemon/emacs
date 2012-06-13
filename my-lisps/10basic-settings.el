@@ -48,6 +48,9 @@
 ;; 启用部分补全功能，如输入M-x q r r相当于M-x query-replace-regexp
 ;; (partial-completion-mode t)
 
+;; 显示光标处于哪个 function
+(which-function-mode t)
+
 ;;当鼠标移动的时候自动转换frame，window或者minibuffer
 (setq mouse-autoselect-window t)
 
