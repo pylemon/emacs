@@ -51,6 +51,9 @@
 (require 'javascript-mode)
 (autoload 'javascript-mode "JavaScript" nil t)
 
+;; (require 'po-mode+)
+;; (autoload 'po-mode "po-mode+"
+;;   "Major mode for translators to edit PO files" t)
 
 ;; mode list
 ;; -------~-------~--~------------------~------------------------~------
@@ -62,7 +65,7 @@
 
 ;; multi-term 终端
 (require 'multi-term)
-(setq multi-term-program "fish")
+(setq multi-term-program "bash")
 (setq multi-term-buffer-name "shell")
 (setq multi-term-dedicated-select-after-open-p t)
 
@@ -105,17 +108,17 @@
                                  '(length initial-pattern)))
 
 ;; high-light ipdb breakpoint, C-c C-t to setup breakpoint
-(defun annotate-pdb ()
-  (interactive)
-  (highlight-lines-matching-regexp "import ipdb")
-  (highlight-lines-matching-regexp "ipdb.set_trace()"))
-(add-hook 'python-mode-hook 'annotate-pdb)
-(defun python-add-breakpoint ()
-  (interactive)
-  (py-newline-and-indent)
-  (insert "import ipdb; ipdb.set_trace()")
-  (highlight-lines-matching-regexp "^[ 	]*import ipdb; ipdb.set_trace()"))
-(define-key python-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+;(defun annotate-pdb ()
+;  (interactive)
+;  (highlight-lines-matching-regexp "import ipdb")
+;  (highlight-lines-matching-regexp "ipdb.set_trace()"))
+;(add-hook 'python-mode-hook 'annotate-pdb)
+;(defun python-add-breakpoint ()
+;  (interactive)
+;  (py-newline-and-indent)
+;  (insert "import ipdb; ipdb.set_trace()")
+;  (highlight-lines-matching-regexp "^[ 	]*import ipdb; ipdb.set_trace()"))
+;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
 
 ;; Comint uses M-up and M-down cycle backwards and forward through input history.
 ;; (require 'comint)
