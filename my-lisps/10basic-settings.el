@@ -9,18 +9,17 @@
 (setq user-mail-address "leeway185@gmail.com")
 (setq user-full-name    "pylemon")
 
-;; 离行首或行尾10行时向下
-(require 'smooth-scrolling)
-(setq smooth-scroll-margin 10)
-
 ;; 括号提示
 (show-paren-mode t)
 
 ;; 日历设置
-(setq calendar-week-start-day 1)
+(require 'calendar)
+(setq calendar-week-start-day t)
 
 ;; 保存书签
-(setq bookmark-save-flag 1)
+(require 'bookmark)
+(setq bookmark-default-file "~/emacs/bookmarks"
+      bookmark-save-flag 1)
 
 ;; cua-mode 设置
 (cua-mode t)
@@ -61,7 +60,7 @@
 (setq mouse-yank-at-point t)
 
 ; 一行的宽度最大80 使用 C-q 切行
-(setq default-fill-column 90)
+;; (setq fill-column 80)
 
 ; 与其他程序共享剪切版
 (setq x-select-enable-clipboard t)
@@ -73,7 +72,7 @@
 (setq-default case-fold-search t)
 
 ;; Emacs找不到合适的模式时，缺省使用text-mode
-(setq default-major-mode 'text-mode)
+(setq major-mode 'text-mode)
 
 ;; 没有提示音,也不闪屏
 (setq ring-bell-function 'ignore)
@@ -143,16 +142,13 @@
 
 ;; 用户编辑文件, 或者编辑远程主机文件 
 (require 'tramp) 
-;; (setq tramp-default-method "sudo")
-; 远程编辑时只使用 ssh 协议
+
+;; 远程编辑时只使用 ssh 协议
 (setq tramp-default-method "ssh")
 
 ; 保存时自动删除多余的空格
 ;; (add-hook 'before-save-hook 'whitespace-cleanup)
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; subversion
-(require 'psvn)
 
 ;; ido mode
 (require 'ido)
@@ -211,6 +207,7 @@
   ;; "find . \\( -path '*\.svn' -o -path '*.pyc' \\) -prune -o -print | xargs -e grep -nH -e "
 )
 
+;; 切换到全屏模式
 (defun toggle-fullscreen (&optional f)
   (interactive)
   (let ((current-value (frame-parameter nil 'fullscreen)))
@@ -222,3 +219,8 @@
 
 (global-set-key [f11] 'toggle-fullscreen)
 (add-hook 'after-make-frame-functions 'toggle-fullscreen)
+
+;; 离行首或行尾10行时向下
+(require 'smooth-scrolling)
+(setq smooth-scroll-margin 10)
+

@@ -3,14 +3,14 @@
 ;; -------~-------~--~------------------~------------------------~------
 
 ;; 配色方案
-(require 'color-theme)
-(color-theme-initialize)
+;; (require 'color-theme)
+;; (color-theme-initialize)
 ;; (color-theme-zenburn)
 ;; (color-theme-tangotango)
-(color-theme-molokai)
+;; (color-theme-molokai)
+(require 'tomorrow-night-theme)
 ;; (color-theme-arjen)
-;; (color-theme-julie)
-;; (color-theme-blackboard)
+
 
 ;; 全局语法高亮
 (global-font-lock-mode t)

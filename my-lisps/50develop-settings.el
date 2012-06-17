@@ -4,6 +4,9 @@
 
 (require 'eval-after-load)
 
+;; subversion
+(require 'psvn)
+
 ;; 所有关于lisp方面的配置
 (require 'all-lisp-settings)
 
