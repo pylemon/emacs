@@ -1,0 +1,615 @@
+* basic settings
+** load lisp files
+   Load downloaded lisp files in ~/org/emacs/lisps
+   #+begin_src emacs-lisp
+   (add-to-list 'load-path "~/org/emacs/lisps")
+   #+end_src
+
+** basic needs
+   these are basic settings that every one needs, do not often change this area
+   - use y/n to confirm
+     #+begin_src emacs-lisp
+     (fset 'yes-or-no-p 'y-or-n-p)
+     #+end_src
+
+   - always end a file with a newline
+     #+begin_src emacs-lisp
+     (setq require-final-newline t)
+     #+end_src
+
+   - delete the selected region when something is typed or with DEL
+     #+begin_src emacs-lisp
+     (delete-selection-mode t)
+     #+end_src
+
+   - use middle mouse key to yank
+     #+begin_src emacs-lisp
+     (setq mouse-yank-at-point t)
+     #+end_src
+
+   - use the x clipboard
+     #+begin_src emacs-lisp
+     (setq x-select-enable-clipboard t)
+     #+end_src
+
+   - do not notice there are process running when killing a buffer
+     #+begin_src emacs-lisp
+     (delq 'process-kill-buffer-query-function kill-buffer-query-functions)
+     #+end_src
+
+   - enable show which function is the cursor in
+     #+begin_src emacs-lisp
+     (which-function-mode t)
+     #+end_src
+
+   - enable show paren mode
+     #+begin_src emacs-lisp
+     (show-paren-mode t)
+     #+end_src
+
+   - enable case fold search
+     #+begin_src emacs-lisp
+     (setq-default case-fold-search t)
+     #+end_src
+
+   - do not ring bell
+     #+begin_src emacs-lisp
+     (setq ring-bell-function 'ignore)
+     #+end_src
+
+   - hide password input
+     #+begin_src emacs-lisp
+     (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
+     #+end_src
+
+   - mouse avoidance cursor
+     #+begin_src emacs-lisp
+     (mouse-avoidance-mode 'animate)
+     #+end_src
+
+   - kill do not save duplicate things
+     #+begin_src emacs-lisp
+     (setq kill-do-not-save-duplicates t)
+     #+end_src
+
+   - do not auto save
+     #+begin_src emacs-lisp
+     (setq auto-save-mode nil)
+     #+end_src
+
+   - cache password
+     #+begin_src emacs-lisp
+     (setq password-cache-expiry nil)
+     #+end_src
+
+** font-lock settings
+   #+begin_src emacs-lisp
+   (require 'generic-x)
+   (global-font-lock-mode t)   
+   #+end_src
+
+** smooth-scrolling
+   #+begin_src emacs-lisp
+   (require 'smooth-scrolling)
+   (setq smooth-scroll-margin 10)
+   #+end_src
+
+** dired settings
+   - recursive delete folder
+     #+begin_src emacs-lisp
+     (setq dired-recursive-deletes t)
+     #+end_src
+
+   - recursive copy folder
+     #+begin_src emacs-lisp
+     (setq dired-recursive-copies t)
+     #+end_src
+
+** indent settings
+   - aways using 4 space to indent
+     #+begin_src emacs-lisp
+     (setq tab-width 4)
+     #+end_src
+
+   - never use tab to indent
+     #+begin_src emacs-lisp
+     (setq indent-tabs-mode nil)
+     #+end_src
+
+   - indent anywhere in a line, indent first then complete
+     #+begin_src emacs-lisp
+     (setq tab-always-indent 'complete)
+     #+end_src
+
+** backup settings
+   - no backup files
+     #+begin_src emacs-lisp
+     (setq make-backup-files nil)
+     #+end_src
+
+   - no autosave file like #filename#
+     #+begin_src emacs-lisp
+     (setq auto-save-default nil)
+     #+end_src
+
+   - set backup directory
+     #+begin_src emacs-lisp
+     (setq backup-directory-alist '((" " . "~/backup/")))
+     #+end_src
+
+   - backup file use copying
+     #+begin_src emacs-lisp
+     (setq backup-by-copying t)
+     #+end_src
+
+   - kept one version
+     #+begin_src emacs-lisp
+     (setq kept-new-versions 1)
+     #+end_src
+
+   - automatic delete old backup files
+     #+begin_src emacs-lisp
+     (setq delete-old-versions t)
+     #+end_src
+
+** tramp settings
+   remote edit files with tramp, aways use ssh potocal
+   #+begin_src emacs-lisp
+   (require 'tramp)
+   (setq tramp-default-method "ssh")
+   #+end_src
+
+** bookmark settings
+   #+begin_src emacs-lisp
+   (require 'bookmark)
+   (setq bookmark-default-file "~/org/emacs/bookmarks"
+   bookmark-save-flag 1)
+   #+end_src
+
+** cua settings
+   cua mode if for select text in a retangle area to start it with C-Return
+   #+begin_src emacs-lisp
+   (cua-mode t)
+   (cua-selection-mode t)
+   (setq cua-auto-tabify-rectangles nil)
+   (setq cua-keep-region-after-copy t)
+   #+end_src
+
+** ido settings
+   #+begin_src emacs-lisp
+   (require 'ido)
+   (ido-mode t)
+   (setq ido-enable-flex-matching t)
+   #+end_src
+
+** undo-tree
+   #+begin_src emacs-lisp
+   (require 'undo-tree)
+   (global-undo-tree-mode)
+   (defadvice undo-tree-visualizer-mode (after undo-tree-face activate)
+   (buffer-face-mode))
+   #+end_src
+
+* appearance settings
+** color theme
+   - color theme tomorrow night
+     #+begin_src emacs-lisp
+     (require 'tomorrow-night-theme)
+     #+end_src
+   - other color themes
+     #+begin_src
+     (require 'color-theme)
+     (color-theme-initialize)
+     (color-theme-molokai)
+     ;; (color-theme-zenburn)
+     ;; (color-theme-tangotango)
+     ;; (color-theme-arjen)
+     #+end_src
+** remove-dos-eol ^M
+   #+begin_src emacs-lisp
+   (defun remove-dos-eol ()
+   "Do not show ^M in files containing mixed UNIX and DOS line endings."
+   (interactive)
+   (setq buffer-display-table (make-display-table))
+   (aset buffer-display-table ?\^M []))
+   (add-hook 'python-mode-hook 'remove-dos-eol)
+   (add-hook 'javascript-mode-hook 'remove-dos-eol)
+   (add-hook 'html-mode-hook 'remove-dos-eol)
+   (add-hook 'css-mode-hook 'remove-dos-eo)
+   #+end_src
+
+** uniquify buffer name
+   #+begin_src emacs-lisp
+   (require 'uniquify)
+   (setq uniquify-buffer-name-style 'forward)
+   (setq uniquify-separator "/")
+   (setq uniquify-after-kill-buffer-p t)
+   (setq uniquify-ignore-buffers-re "^\\*")
+   #+end_src
+
+** highlight TODO FIXME
+   #+begin_src emacs-lisp
+   (defun highlight-todo ()
+   (font-lock-add-keywords nil
+   '(("\\(#\ REVIEW\\|#\ FIXME\\|#\ TODO\\|#\ BUG\\)" 1 font-lock-warning-face t))))
+   (add-hook 'python-mode-hook 'highlight-todo)
+   (add-hook 'html-mode-hook 'highlight-todo)
+   #+end_src
+
+** full screen switch
+   #+begin_src emacs-lisp
+   (defun toggle-fullscreen (&optional f)
+   (interactive)
+   (let ((current-value (frame-parameter nil 'fullscreen)))
+   (set-frame-parameter nil 'fullscreen
+   (if (equal 'fullboth current-value)
+   (if (boundp 'old-fullscreen) old-fullscreen nil)
+   (progn (setq old-fullscreen current-value)
+   'fullboth)))))
+   (global-set-key [f11] 'toggle-fullscreen)
+   (add-hook 'after-make-frame-functions 'toggle-fullscreen)
+   #+end_src
+
+** others
+   #+begin_src emacs-lisp
+   ; rst-mode title 背景发白 fixes
+   (custom-set-variables
+   '(rst-level-face-base-color "black"))
+
+   ;; 不要滚动条
+   (customize-set-variable 'scroll-bar-mode nil)
+
+   ;; 在fringe上显示一个小箭头指示当前buffer的边界
+   (setq-default indicate-buffer-boundaries 'left)
+
+   ;; minibuffer不要自动变化高度
+   (setq resize-mini-windows nil)
+
+   ; 初始化页面
+   (setq inhibit-startup-message t)
+   (setq initial-scratch-message "")
+
+   ; 不要menu-bar和tool-bar
+   (menu-bar-mode -1)
+   (tool-bar-mode -1)
+
+   ;; 在状态栏显示日期时间
+   ;; (setq display-time-24hr-format t)
+   ;; (setq display-time-day-and-date nil)
+   ;; (setq display-time-interval 60)
+   (display-time-mode nil)
+
+   ;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
+   (require 'rainbow-mode)
+   (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
+   (add-hook 'css-mode-hook 'rainbow-mode)
+   (add-hook 'x-resource-generic-mode-hook 'rainbow-mode)
+
+   ;; (add-hook 'xhtml-mode-hook 'rainbow-mode)
+   ;; (add-hook 'html-mode-hook 'rainbow-mode)
+   ;; (add-hook 'python-mode-hook 'rainbow-mode)
+
+   ;; linum+ settings
+   (require 'linum+)
+   (setq linum-format '("%%%dd|"))
+   (add-hook 'text-mode-hook 'linum-mode)
+   (add-hook 'emacs-lisp-mode-hook 'linum-mode)
+   (add-hook 'html-mode-hook 'linum-mode)
+   (add-hook 'python-mode-hook 'linum-mode)
+
+   ;; 字体设置
+   (set-default-font "微软雅黑Monaco:pixelsize=12")
+
+   ;; tabbar设置
+   (require 'tabbar)
+   (tabbar-mode)
+   (define-prefix-command 'lwindow-map)
+   (set-face-attribute 'tabbar-default nil
+   :family "profont" ;;"微软雅黑Monaco"
+   :background "#111111"
+   :foreground "#a0a0a0"
+   :height 0.9
+   )
+   (set-face-attribute 'tabbar-button nil
+   :inherit 'tabbar-default
+   :box '(:line-width 1 :color "#111111")
+   )
+   (set-face-attribute 'tabbar-selected nil
+   :inherit 'tabbar-default
+   :background "#111111"
+   :foreground "#1793d1"
+   :overline "#111111"
+   :underline nil
+   :box '(:line-width 1 :color "#1793d1")
+   )
+   (set-face-attribute 'tabbar-unselected nil
+   :inherit 'tabbar-default
+   :overline "#111111"
+   :box '(:line-width 1 :color "#1793d1")
+   )
+
+   ;; 高亮光标处单词
+   (require 'highlight-symbol)
+   (setq highlight-symbol-idle-delay 0.4)
+   (highlight-symbol-mode t)
+
+   ;; minimap
+   ;; (require 'minimap)
+
+   ;; 高亮当前行
+   (global-hl-line-mode 1)
+   ;; (set-face-background 'hl-line "gray21")
+
+   ;; dired-x 过滤不显示的文件， 增强 dired 功能
+   (require 'dired-x)
+   (setq dired-omit-files
+   (rx (or (seq bol (? ".") "#")         ;; emacs autosave files
+   (seq "~" eol)                 ;; backup-files
+   (seq bol ".svn" eol)          ;; svn dirs
+   (seq bol ".git" eol)          ;; git dirs
+   (seq ".pyc" eol)              ;; py bin files
+   (seq ".gitignore" eol)        ;; gitignore
+   (seq ".settings" eol)         ;; eclipse settings
+   (seq ".project" eol)          ;; eclipse workspace
+   (seq ".pydevproject" eol)     ;; pydev settings
+   )))
+
+   (setq dired-omit-extensions
+   (append dired-latex-unclean-extensions
+   dired-bibtex-unclean-extensions
+   dired-texinfo-unclean-extensions))
+   (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+   (put 'dired-find-alternate-file 'disabled nil)
+
+   ;; 在 ibuffer 中不显示的 buffer， 可以使用 C-x b 切换
+   (setq ibuffer-never-show-predicates
+   (list
+   "^\\*scratch"
+   "^\\*Message"
+   "^\\*Help"
+   "^\\*Directory"              ;; do not use list directory
+   "^\\*Completions\\*$"
+   "^\\*magit-"
+   ))
+   (setq helm-c-boring-buffer-regexp "^\\*")
+
+   ;; 自动高亮， 超过 110 个字符的行
+   (require 'column-marker)
+   (mapc (lambda (hook)
+   ;; (add-hook hook (lambda () (interactive) (column-marker-1 80)))
+   (add-hook hook (lambda () (interactive) (column-marker-1 110))))
+   '(org-mode-hook
+   emacs-lisp-mode-hook
+   python-mode-hook
+   js2-mode-hook
+   rst-mode-hook
+	text-mode-hook))
+   #+end_src
+
+* programming settings
+** auto kill shell gdb buffer when exits
+   #+begin_src emacs-lisp
+   (defun kill-buffer-when-exit ()
+   "Close assotiated buffer when a process exited"
+   (let ((current-process (ignore-errors (get-buffer-process (current-buffer)))))
+   (when current-process
+   (set-process-sentinel current-process
+   (lambda (watch-process change-state)
+   (when (string-match "//(finished//|exited//)" change-state)
+   (kill-buffer (process-buffer watch-process))))))))
+   (add-hook 'gdb-mode-hook 'kill-buffer-when-exit)
+   (add-hook 'shell-mode-hook 'kill-buffer-when-exit)
+   (add-hook 'term-mode-hook 'kill-buffer-when-exit)
+   #+end_src
+
+** grep find command
+   #+begin_src emacs-lisp
+   (setq grep-find-command
+   "find . -path '*/.svn' -prune -o -type f -print | xargs -e grep -I -n -e ")
+   #+end_src
+
+** others
+   #+begin_src emacs-lisp
+   (require 'eval-after-load)
+
+   ;; subversion
+   (require 'psvn)
+
+   ;; 所有关于lisp方面的配置
+   (require 'all-lisp-settings)
+
+   ;; html配置
+   (require 'html-mode-settings)
+
+   ;; 自动给你加上括号
+   (require 'autopair-settings)
+
+   ;; 所有关于括号的配置
+   (require 'all-paren-settings)
+
+   ;; ;; 自动补全的配置
+   (require 'yasnippet)
+   (setq yas/root-directory "~/emacs/lisps/snippets")
+   (yas/load-directory yas/root-directory)
+   (yas/global-mode 1)
+   (require 'auto-complete-config)
+   (ac-config-default)
+
+   (defface ac-yasnippet-candidate-face
+   '((t (:background "sandybrown" :foreground "black")))
+   "Face for yasnippet candidate.")
+   (defface ac-yasnippet-selection-face
+   '((t (:background "coral3" :foreground "white")))
+   "Face for the yasnippet selected candidate.")
+   (defvar ac-source-yasnippet
+   '((candidates . ac-yasnippet-candidate)
+   (action . yas/expand)
+   (candidate-face . ac-yasnippet-candidate-face)
+   (selection-face . ac-yasnippet-selection-face))
+   "Source for Yasnippet.")
+
+   ;; 各种 mode
+   ;; -------~-------~--~------------------~------------------------~------
+
+   ;; markdown mode
+   (require 'markdown-mode)
+
+   ;; lua mode
+   (require 'lua-mode)
+   (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+
+   ;; javascript mode
+   (require 'javascript-mode)
+   (autoload 'javascript-mode "JavaScript" nil t)
+
+   ;; mode list
+   ;; -------~-------~--~------------------~------------------------~------
+   (add-to-list 'auto-mode-alist '("\\.mkd$" . markdown-mode))
+   (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+   (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+   (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+   (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
+
+   ;; using gist in emacs
+   (require 'gist)
+   (setq gist-view-gist t)
+
+   ;; emacs-nav
+   (setq dotfiles-dir (file-name-directory
+   (or load-file-name (buffer-file-name))))
+
+   (add-to-list 'load-path
+   (expand-file-name "emacs-nav"
+   (expand-file-name "src" dotfiles-dir)))
+   (require 'nav)
+
+   (add-to-list 'auto-mode-alist '("\\.txt\\'" . rst-mode))
+
+   ;; anything 补全 ipython 以及 python 代码
+   (require 'anything)
+   ;; (require 'anything-ipython)
+   (when (require 'anything-show-completion nil t)
+   (use-anything-show-completion 'anything-ipython-complete
+   '(length initial-pattern)))
+
+   ;; display a lambda character (λ) when you type lambda
+   (require 'lambda-mode)
+   (add-hook 'py-mode-hook #'lambda-mode 1)
+   (setq lambda-symbol (string (make-char 'greek-iso8859-7 107)))
+
+   #+end_src
+* keybindings
+** others
+   #+begin_src emacs-lisp
+   ;; 平滑滚动
+   (require 'smooth-scroll)
+
+   ;; 切换 buffer 向前向后
+   (require 'wcy-swbuff)
+   (setq wcy-switch-buffer-active-buffer-face  'highlight)
+   (setq wcy-switch-buffer-inactive-buffer-face  'secondary-selection )
+
+   ; 在 minibuffer 中显示当前 buffer 的文件路径
+   (defun display-buffer-name ()
+   (interactive)
+   (message (buffer-file-name (current-buffer)))
+   )
+
+   ; 使用 M-; 时，如果没有区域被选中且光标不在行尾，直接注释掉当前行
+   (defun qiang-comment-dwim-line (&optional arg)
+   (interactive "*P")
+   (comment-normalize-vars)
+   (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+   (comment-or-uncomment-region
+   (line-beginning-position)
+   (line-end-position))
+   (comment-dwim arg))
+   )
+
+   ;; M-w 复制到剪切板和 kill-ring 'clickboard-kill-ring-save
+
+   ; 立即关闭当前buffer
+   (defun yic-kill-current-buffer ()
+   (interactive)
+   (kill-buffer (current-buffer)))
+
+   (defun reset-default-font ()
+   (interactive)
+   (set-default-font "微软雅黑Monaco:pixelsize=12"))
+
+   ;; 管理 window
+   (windmove-default-keybindings 'meta)
+   (setq winner-dont-bind-my-keys t)
+   (winner-mode t)
+
+   ;; (reset-default-font)
+
+   (require 'wb-line-number)
+
+   (defun switch-to-other-buffer ()
+   "切换到最近访问的buffer"    
+   (interactive)
+   (switch-to-buffer (other-buffer)))
+
+   (defun goto-paren ()
+   "跳到匹配的括号"
+   (interactive)
+   (cond ( (looking-at "[ t]*[['\"({]") (forward-sexp) (backward-char))
+   ( (or (looking-at "[]'\")}]") (looking-back "[]'\")}][ t]*"))
+   (if (< (point) (point-max)) (forward-char)) (backward-sexp))
+   (t (message "找不到匹配的括号"))))
+
+   ;; "M-?"
+   ;; -------~-------~--~------------------~------------------------~------
+   (global-set-key (kbd "s-<up>") 'tabbar-backward-group)
+   (global-set-key (kbd "s-<down>") 'tabbar-forward-group)
+   (global-set-key (kbd "s-<left>") 'tabbar-backward)
+   (global-set-key (kbd "s-<right>") 'tabbar-forward)
+   (global-set-key (kbd "M-`") 'yic-kill-current-buffer)
+   (global-set-key (kbd "M-<tab>") 'wcy-switch-buffer-backward)
+
+   (global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
+   (global-set-key (kbd "M-n") 'forward-paragraph)
+   (global-set-key (kbd "M-p") 'backward-paragraph)
+   (global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
+   (global-set-key (kbd "M-]") 'goto-paren)
+   (global-set-key (kbd "M-[") 'goto-paren)
+
+   ;; C-x
+   ;; -------~-------~--~------------------~------------------------~------
+   (global-set-key (kbd "C-x 2") 'split-window-horizontally)
+   (global-set-key (kbd "C-x 3") 'split-window-vertically)
+   (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
+   (global-set-key (kbd "C-x C-k") 'yic-kill-current-buffer)
+   (global-set-key (kbd "C-x N") 'wb-line-number-toggle)
+   (global-set-key (kbd "C-x m") 'reset-default-font)
+   (global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
+   (global-set-key (kbd "C-x f") 'find-file-at-point)
+   (global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)
+   (global-set-key (kbd "C-x C-d" ) 'ido-dired)
+   (global-set-key (kbd "C-x C-j") 'dired-jump)
+   (global-set-key (kbd "C-x C-x" ) 'ibuffer)
+   (global-set-key (kbd "C-x f") 'ido-find-file)
+   (global-set-key (kbd "C-x C-f") 'ido-find-file)
+   (global-set-key (kbd "C-x C-r") 'bookmark-bmenu-list)
+
+   ;; C-c
+   ;; -------~-------~--~------------------~------------------------~------
+   (global-set-key (kbd "C-c <right>") 'winner-redo)
+   (global-set-key (kbd "C-c <left>") 'winner-undo)
+   (global-set-key (kbd "C-c <RET>") 'cua-set-rectangle-mark)
+   (global-set-key (kbd "C-c o") 'switch-to-other-buffer)
+
+   ;; others
+   ;; -------~-------~--~------------------~------------------------~------
+   (global-set-key (kbd "C-<SPC>") nil)
+   (global-set-key (kbd "C-\\") nil)
+
+   (global-set-key (kbd "<f2>") 'nav-in-place)
+   (global-set-key (kbd "<f3>") 'grep-find)
+   (global-set-key (kbd "<f5>") 'todo-show)
+
+   (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
+   (global-set-key [mouse-4] 'scroll-down-1)
+   (global-set-key [mouse-5] 'scroll-up-1)
+   #+end_src
