@@ -1,0 +1,3 @@
+#!/usr/bin/zsh
+emacs -L /home/liwei/org/emacs/lisps/ -batch -f batch-byte-compile emacs-config.el
+mv emacs-config.elc  /home/liwei/.emacs
