@@ -1,0 +1,19 @@
+* Using org-mode to manage emacs configure files
+
+** clone the repo to your machine
+   #+begin_src shell
+   $ git clone git://github.com/pylemon/emacs.git   
+   #+end_src
+
+** run the compile script
+   the compile script will complile the el file into elc file, and it
+   will overwrite the ~/.emacs file, so please backup your ~/.emacs
+   file before do this. this can make the emacs daemon running much
+   more faster!
+   #+begin_src shell
+   $ ./compile
+   #+end_src
+
+** notice
+   - all the third-part libs are in *lisps* folder
+   - all the configuration are in *emacs-config.org* file
