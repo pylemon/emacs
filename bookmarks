@@ -2,9 +2,9 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("emacs appearance"
- (filename . "~/emacs/my-lisps/20appearance-settings.el")
- (front-context-string . ";; -------~-----")
+(("emacs-config.org"
+ (filename . "~/org/emacs/emacs-config.org")
+ (front-context-string . "* basic settings")
  (rear-context-string)
  (position . 1))
 ("exam info"
@@ -27,21 +27,6 @@
  (front-context-string . "EXAMER_STATUS = ")
  (rear-context-string . " = 60 #考生状态刷新时间\n")
  (position . 150))
-("django paginator"
- (filename . "~/work/virtualenvs/dev-env/Lib/site-packages/django/core/paginator.py")
- (front-context-string . "class Paginator(")
- (rear-context-string . "age):\n    pass\n\n")
- (position . 151))
-("emacs keybindings"
- (filename . "~/emacs/my-lisps/99kbd-settings.el")
- (front-context-string . "\n\n\n;; C-c\n;; ---")
- (rear-context-string . "'bookmark-jump)\n")
- (position . 2624))
-("django note"
- (filename . "~/Notes/docs/django.rst")
- (front-context-string . "=============\n D")
- (rear-context-string)
- (position . 1))
 ("thread models"
  (filename . "~/work/src/project/exam/models.py")
  (front-context-string . "class Thread(mod")

@@ -328,9 +328,6 @@
    (setq highlight-symbol-idle-delay 0.4)
    (highlight-symbol-mode t)
 
-   ;; minimap
-   ;; (require 'minimap)
-
    ;; 高亮当前行
    (global-hl-line-mode 1)
    ;; (set-face-background 'hl-line "gray21")
@@ -371,14 +368,13 @@
    ;; 自动高亮， 超过 110 个字符的行
    (require 'column-marker)
    (mapc (lambda (hook)
-   ;; (add-hook hook (lambda () (interactive) (column-marker-1 80)))
    (add-hook hook (lambda () (interactive) (column-marker-1 110))))
    '(org-mode-hook
    emacs-lisp-mode-hook
    python-mode-hook
    js2-mode-hook
    rst-mode-hook
-	text-mode-hook))
+   text-mode-hook))
    #+end_src
 
 * programming settings
@@ -422,7 +418,7 @@
    ;; 所有关于括号的配置
    (require 'all-paren-settings)
 
-   ;; ;; 自动补全的配置
+   ;; 自动补全的配置
    (require 'yasnippet)
    (setq yas/root-directory "~/emacs/lisps/snippets")
    (yas/load-directory yas/root-directory)
@@ -482,7 +478,6 @@
 
    ;; anything 补全 ipython 以及 python 代码
    (require 'anything)
-   ;; (require 'anything-ipython)
    (when (require 'anything-show-completion nil t)
    (use-anything-show-completion 'anything-ipython-complete
    '(length initial-pattern)))
@@ -520,8 +515,6 @@
    (line-end-position))
    (comment-dwim arg))
    )
-
-   ;; M-w 复制到剪切板和 kill-ring 'clickboard-kill-ring-save
 
    ; 立即关闭当前buffer
    (defun yic-kill-current-buffer ()
