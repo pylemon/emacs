@@ -39,7 +39,7 @@
 
    - enable show which function is the cursor in
      #+begin_src emacs-lisp
-     (which-function-mode t)
+     (which-function-mode nil)
      #+end_src
 
    - enable show paren mode
