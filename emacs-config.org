@@ -200,6 +200,20 @@
      ;; (color-theme-tangotango)
      ;; (color-theme-arjen)
      #+end_src
+** no menubar toolbar
+   #+begin_src emacs-lisp
+   (menu-bar-mode -1)
+   (tool-bar-mode -1)
+   #+end_src
+** no start up message
+   #+begin_src emacs-lisp
+   (setq inhibit-startup-message t)
+   (setq initial-scratch-message "")
+   #+end_src
+** minibuffer no resize
+   #+begin_src emacs-lisp
+   (setq resize-mini-windows nil)
+   #+end_src
 ** reset default font
    #+begin_src emacs-lisp
    (defun reset-default-font ()
@@ -218,7 +232,6 @@
    (add-hook 'html-mode-hook 'remove-dos-eol)
    (add-hook 'css-mode-hook 'remove-dos-eo)
    #+end_src
-
 ** uniquify buffer name
    #+begin_src emacs-lisp
    (require 'uniquify)
@@ -227,7 +240,6 @@
    (setq uniquify-after-kill-buffer-p t)
    (setq uniquify-ignore-buffers-re "^\\*")
    #+end_src
-
 ** highlight TODO FIXME
    #+begin_src emacs-lisp
    (defun highlight-todo ()
@@ -236,7 +248,6 @@
    (add-hook 'python-mode-hook 'highlight-todo)
    (add-hook 'html-mode-hook 'highlight-todo)
    #+end_src
-
 ** full screen switch
    #+begin_src emacs-lisp
    (defun toggle-fullscreen (&optional f)
@@ -250,58 +261,34 @@
    (global-set-key [f11] 'toggle-fullscreen)
    (add-hook 'after-make-frame-functions 'toggle-fullscreen)
    #+end_src
-
-** others
+** no scroll-bar
    #+begin_src emacs-lisp
-   ; rst-mode title 背景发白 fixes
-   (custom-set-variables
-   '(rst-level-face-base-color "black"))
-
-   ;; 不要滚动条
    (customize-set-variable 'scroll-bar-mode nil)
-
-   ;; 在fringe上显示一个小箭头指示当前buffer的边界
+   #+end_src
+** show edge in buffer
+   #+begin_src emacs-lisp
    (setq-default indicate-buffer-boundaries 'left)
-
-   ;; minibuffer不要自动变化高度
-   (setq resize-mini-windows nil)
-
-   ; 初始化页面
-   (setq inhibit-startup-message t)
-   (setq initial-scratch-message "")
-
-   ; 不要menu-bar和tool-bar
-   (menu-bar-mode -1)
-   (tool-bar-mode -1)
-
-   ;; 在状态栏显示日期时间
-   ;; (setq display-time-24hr-format t)
-   ;; (setq display-time-day-and-date nil)
-   ;; (setq display-time-interval 60)
+   #+end_src
+** mode line display time
+   #+begin_src emacs-lisp
    (display-time-mode nil)
+   #+end_src
 
-   ;; 用对应的颜色显示你的颜色字符串, i.e. red blue #96bf33
-   (require 'rainbow-mode)
-   (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
-   (add-hook 'css-mode-hook 'rainbow-mode)
-   (add-hook 'x-resource-generic-mode-hook 'rainbow-mode)
-
-   ;; (add-hook 'xhtml-mode-hook 'rainbow-mode)
-   ;; (add-hook 'html-mode-hook 'rainbow-mode)
-   ;; (add-hook 'python-mode-hook 'rainbow-mode)
-
-   ;; linum+ settings
+** linum+ show line numbers
+   #+begin_src emacs-lisp
    (require 'linum+)
    (setq linum-format '("%%%dd|"))
    (add-hook 'text-mode-hook 'linum-mode)
    (add-hook 'emacs-lisp-mode-hook 'linum-mode)
    (add-hook 'html-mode-hook 'linum-mode)
    (add-hook 'python-mode-hook 'linum-mode)
-
-   ;; 字体设置
+   #+end_src
+** font settings
+   #+begin_src emacs-lisp
    (set-default-font "微软雅黑Monaco:pixelsize=12")
-
-   ;; tabbar设置
+   #+end_src
+** tabbar settings
+   #+begin_src emacs-lisp
    (require 'tabbar)
    (tabbar-mode)
    (define-prefix-command 'lwindow-map)
@@ -309,39 +296,45 @@
    :family "profont" ;;"微软雅黑Monaco"
    :background "#111111"
    :foreground "#a0a0a0"
-   :height 0.9
-   )
+   :height 0.9)
    (set-face-attribute 'tabbar-button nil
    :inherit 'tabbar-default
-   :box '(:line-width 1 :color "#111111")
-   )
+   :box '(:line-width 1 :color "#111111"))
    (set-face-attribute 'tabbar-selected nil
    :inherit 'tabbar-default
    :background "#111111"
    :foreground "#1793d1"
    :overline "#111111"
    :underline nil
-   :box '(:line-width 1 :color "#1793d1")
-   )
+   :box '(:line-width 1 :color "#1793d1"))
    (set-face-attribute 'tabbar-unselected nil
    :inherit 'tabbar-default
    :overline "#111111"
-   :box '(:line-width 1 :color "#1793d1")
-   )
-
-   ;; 高亮光标处单词
+   :box '(:line-width 1 :color "#1793d1"))
+   #+end_src
+** rainbow mode settings
+   #+begin_src emacs-lisp
+   (require 'rainbow-mode)
+   (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
+   (add-hook 'css-mode-hook 'rainbow-mode)
+   (add-hook 'x-resource-generic-mode-hook 'rainbow-mode)
+   #+end_src
+** highlight symbol like eclipse
+   #+begin_src emacs-lisp
    (require 'highlight-symbol)
    (setq highlight-symbol-idle-delay 0.4)
    (highlight-symbol-mode t)
-
-   ;; 高亮当前行
+   #+end_src
+** highlight current line
+   #+begin_src emacs-lisp
    (global-hl-line-mode 1)
-   ;; (set-face-background 'hl-line "gray21")
-
-   ;; dired-x 过滤不显示的文件， 增强 dired 功能
+   #+end_src
+* programming settings
+** dired hide some files
+   #+begin_src emacs-lisp
    (require 'dired-x)
    (setq dired-omit-files
-   (rx (or (seq bol (? ".") "#")         ;; emacs autosave files
+   (rx (or (seq bol (? ".") "#")
    (seq "~" eol)                 ;; backup-files
    (seq bol ".svn" eol)          ;; svn dirs
    (seq bol ".git" eol)          ;; git dirs
@@ -349,29 +342,27 @@
    (seq ".gitignore" eol)        ;; gitignore
    (seq ".settings" eol)         ;; eclipse settings
    (seq ".project" eol)          ;; eclipse workspace
-   (seq ".pydevproject" eol)     ;; pydev settings
-   )))
-
+   (seq ".pydevproject" eol))))
    (setq dired-omit-extensions
    (append dired-latex-unclean-extensions
    dired-bibtex-unclean-extensions
    dired-texinfo-unclean-extensions))
    (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
    (put 'dired-find-alternate-file 'disabled nil)
-
-   ;; 在 ibuffer 中不显示的 buffer， 可以使用 C-x b 切换
+   #+end_src
+** ibuffer never show predicates
+   #+begin_src emacs-lisp
    (setq ibuffer-never-show-predicates
    (list
    "^\\*scratch"
    "^\\*Message"
    "^\\*Help"
-   "^\\*Directory"              ;; do not use list directory
+   "^\\*Directory"
    "^\\*Completions\\*$"
-   "^\\*magit-"
-   ))
-   (setq helm-c-boring-buffer-regexp "^\\*")
-
-   ;; 自动高亮， 超过 110 个字符的行
+   "^\\*magit-"))
+   #+end_src
+** highlight column more than 110
+   #+begin_src emacs-lisp
    (require 'column-marker)
    (mapc (lambda (hook)
    (add-hook hook (lambda () (interactive) (column-marker-1 110))))
@@ -382,8 +373,6 @@
    rst-mode-hook
    text-mode-hook))
    #+end_src
-
-* programming settings
 ** auto kill shell gdb buffer when exits
    #+begin_src emacs-lisp
    (defun kill-buffer-when-exit ()
@@ -545,7 +534,6 @@
     (global-set-key (kbd "M-n") 'forward-paragraph)
     (global-set-key (kbd "M-p") 'backward-paragraph)
     #+end_scr
-
 ** s-?
   - [s-up], [s-down], [s-left], [s-right] tabbar settings
     #+begin_src emacs-lisp
@@ -567,13 +555,17 @@
   - [C-x 2], [C-x 3] split window
     #+begin_src emacs-lisp
     (global-set-key (kbd "C-x 2") 'split-window-horizontally)
-    (global-set-key (kbd "C-x 3") 'split-window-vertically)     
+    (global-set-key (kbd "C-x 3") 'split-window-vertically)
+    #+end_src
+
+  - [C-x k], [C-x C-k] kill buffer
+    #+begin_src emacs-lisp
+    (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
+    (global-set-key (kbd "C-x C-k") 'yic-kill-current-buffer)
     #+end_src
 
 ** others
    #+begin_src emacs-lisp
-   (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
-   (global-set-key (kbd "C-x C-k") 'yic-kill-current-buffer)
    (global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
    (global-set-key (kbd "C-x f") 'find-file-at-point)
    (global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)
