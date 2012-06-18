@@ -218,7 +218,7 @@
    #+begin_src emacs-lisp
    (defun reset-default-font ()
    (interactive)
-   (set-default-font "微软雅黑Monaco:pixelsize=12"))
+   (set-frame-font "微软雅黑Monaco:pixelsize=12"))
    #+end_src
 ** remove-dos-eol ^M
    #+begin_src emacs-lisp
@@ -285,7 +285,7 @@
    #+end_src
 ** font settings
    #+begin_src emacs-lisp
-   (set-default-font "微软雅黑Monaco:pixelsize=12")
+   (set-frame-font "微软雅黑Monaco:pixelsize=12")
    #+end_src
 ** tabbar settings
    #+begin_src emacs-lisp
@@ -533,7 +533,7 @@
     #+begin_src emacs-lisp
     (global-set-key (kbd "M-n") 'forward-paragraph)
     (global-set-key (kbd "M-p") 'backward-paragraph)
-    #+end_scr
+    #+end_src
 ** s-?
   - [s-up], [s-down], [s-left], [s-right] tabbar settings
     #+begin_src emacs-lisp
