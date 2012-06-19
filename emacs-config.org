@@ -220,6 +220,11 @@
    (interactive)
    (set-frame-font "微软雅黑Monaco:pixelsize=12"))
    #+end_src
+** fixes rst mode title white
+   #+begin_src emacs-lisp
+   (custom-set-variables
+   '(rst-level-face-base-color "black"))
+   #+end_src
 ** remove-dos-eol ^M
    #+begin_src emacs-lisp
    (defun remove-dos-eol ()
@@ -486,6 +491,14 @@
     (global-set-key [mouse-4] 'scroll-down-1)
     (global-set-key [mouse-5] 'scroll-up-1)
     #+end_src
+** s-?
+  - [s-up], [s-down], [s-left], [s-right] tabbar settings
+    #+begin_src emacs-lisp
+    (global-set-key (kbd "s-<up>") 'tabbar-backward-group)
+    (global-set-key (kbd "s-<down>") 'tabbar-forward-group)
+    (global-set-key (kbd "s-<left>") 'tabbar-backward)
+    (global-set-key (kbd "s-<right>") 'tabbar-forward)
+    #+end_src
 ** M-?
   - [M-<tab>] wcy switch buffer, exclude notice buffer
     #+begin_src emacs-lisp
@@ -494,6 +507,7 @@
     (setq wcy-switch-buffer-inactive-buffer-face  'secondary-selection )
     (global-set-key (kbd "M-<tab>") 'wcy-switch-buffer-backward)
     #+end_src
+
   - [M-;] better comment, comment out or uncomment anywhere in line
     #+begin_src emacs-lisp
     (defun qiang-comment-dwim-line (&optional arg)
@@ -506,6 +520,7 @@
     (comment-dwim arg)))
     (global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
     #+end_src
+
   - [M-`] kill current buffer directly
     #+begin_src emacs-lisp
     (defun yic-kill-current-buffer ()
@@ -513,6 +528,7 @@
     (kill-buffer (current-buffer)))
     (global-set-key (kbd "M-`") 'yic-kill-current-buffer)
     #+end_src
+
   - [M-[], [M-]] go paren
     #+begin_src emacs-lisp
     (defun goto-paren ()
@@ -522,26 +538,21 @@
     ( (or (looking-at "[]'\")}]") (looking-back "[]'\")}][ t]*"))
     (if (< (point) (point-max)) (forward-char)) (backward-sexp))
     (t (message "找不到匹配的括号"))))
-    (global-set-key (kbd "M-]") 'goto-paren)
-    (global-set-key (kbd "M-[") 'goto-paren)
+    (global-set-key (kbd "M-[") 'backward-sexp)
+    (global-set-key (kbd "M-]") 'forward-sexp)
     #+end_src
+
   - [M-w] copy to clipboard
     #+begin_src emacs-lisp
     (global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
     #+end_src
+
   - [M-p], [M-n] go paragraph
     #+begin_src emacs-lisp
     (global-set-key (kbd "M-n") 'forward-paragraph)
     (global-set-key (kbd "M-p") 'backward-paragraph)
     #+end_src
-** s-?
-  - [s-up], [s-down], [s-left], [s-right] tabbar settings
-    #+begin_src emacs-lisp
-    (global-set-key (kbd "s-<up>") 'tabbar-backward-group)
-    (global-set-key (kbd "s-<down>") 'tabbar-forward-group)
-    (global-set-key (kbd "s-<left>") 'tabbar-backward)
-    (global-set-key (kbd "s-<right>") 'tabbar-forward)
-    #+end_src
+
 ** C-c ?
   - [C-c o] switch to recent edit buffer
     #+begin_src emacs-lisp
