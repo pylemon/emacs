@@ -3,7 +3,6 @@
    Load downloaded lisp files in ~/org/emacs/lisps
    #+begin_src emacs-lisp
    (add-to-list 'load-path "~/org/emacs/lisps")
-   ;;(add-to-list 'load-path "/usr/share/emacs/site-lisp/howm/")
    #+end_src
 
 ** basic needs
@@ -394,7 +393,7 @@
 
    ;; 自动补全的配置
    (require 'yasnippet)
-   (setq yas/root-directory "~/emacs/lisps/snippets")
+   (setq yas/root-directory "~/org/emacs/lisps/snippets")
    (yas/load-directory yas/root-directory)
    (yas/global-mode 1)
    (require 'auto-complete-config)
