@@ -371,7 +371,7 @@
 ** howm mode
    #+begin_src emacs-lisp
    (require 'howm)
-   #+end_src** 
+   #+end_src**
 ** others
    #+begin_src emacs-lisp
    (require 'eval-after-load)
@@ -386,7 +386,7 @@
    (require 'html-mode-settings)
 
    ;; 自动给你加上括号
-   (require 'autopair-settings)
+   ;;(require 'autopair-settings)
 
    ;; 所有关于括号的配置
    (require 'all-paren-settings)
@@ -517,6 +517,14 @@
     (global-set-key (kbd "M-p") 'backward-paragraph)
     #+end_src
 
+** C-?
+  - [C-'][C-M-'] wrap-it quote words directly
+    #+begin_src
+    (require 'wrap-it)
+    (global-set-key (kbd "C-'") 'wrap-word-quote)
+    (global-set-key (kbd "C-M-'") 'wrap-word)
+    #+end_src
+
 ** C-c ?
   - [C-c o] switch to recent edit buffer
     #+begin_src emacs-lisp
@@ -526,6 +534,7 @@
     (switch-to-buffer (other-buffer)))
     (global-set-key (kbd "C-c o") 'switch-to-other-buffer)
     #+end_src
+
 ** C-x ?
   - [C-x 2], [C-x 3] split window
     #+begin_src emacs-lisp
