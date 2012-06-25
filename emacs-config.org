@@ -3,7 +3,7 @@
    Load downloaded lisp files in ~/org/emacs/lisps
    #+begin_src emacs-lisp
    (add-to-list 'load-path "~/org/emacs/lisps")
-   (add-to-list 'load-path "/usr/share/emacs/site-lisp/howm/")
+   ;;(add-to-list 'load-path "/usr/share/emacs/site-lisp/howm/")
    #+end_src
 
 ** basic needs
@@ -68,11 +68,6 @@
      (setq kill-do-not-save-duplicates t)
      #+end_src
 
-   - do not auto save
-     #+begin_src emacs-lisp
-     (setq auto-save-mode nil)
-     #+end_src
-
    - cache password
      #+begin_src emacs-lisp
      (setq password-cache-expiry nil)
@@ -89,17 +84,6 @@
    (require 'smooth-scrolling)
    (setq smooth-scroll-margin 10)
    #+end_src
-
-** dired settings
-   - recursive delete folder
-     #+begin_src emacs-lisp
-     (setq dired-recursive-deletes t)
-     #+end_src
-
-   - recursive copy folder
-     #+begin_src emacs-lisp
-     (setq dired-recursive-copies t)
-     #+end_src
 
 ** indent settings
    - aways using 4 space to indent
@@ -167,8 +151,6 @@
    #+begin_src emacs-lisp
    (cua-mode t)
    (cua-selection-mode t)
-   (setq cua-auto-tabify-rectangles nil)
-   (setq cua-keep-region-after-copy t)
    #+end_src
 
 ** ido settings
@@ -253,19 +235,6 @@
    '(("\\(#\ REVIEW\\|#\ FIXME\\|#\ TODO\\|#\ BUG\\)" 1 font-lock-warning-face t))))
    (add-hook 'python-mode-hook 'highlight-todo)
    (add-hook 'html-mode-hook 'highlight-todo)
-   #+end_src
-** full screen switch
-   #+begin_src emacs-lisp
-   (defun toggle-fullscreen (&optional f)
-   (interactive)
-   (let ((current-value (frame-parameter nil 'fullscreen)))
-   (set-frame-parameter nil 'fullscreen
-   (if (equal 'fullboth current-value)
-   (if (boundp 'old-fullscreen) old-fullscreen nil)
-   (progn (setq old-fullscreen current-value)
-   'fullboth)))))
-   (global-set-key [f11] 'toggle-fullscreen)
-   (add-hook 'after-make-frame-functions 'toggle-fullscreen)
    #+end_src
 ** no scroll-bar
    #+begin_src emacs-lisp
@@ -466,21 +435,12 @@
    (setq gist-view-gist t)
 
    ;; emacs-nav
-   (setq dotfiles-dir (file-name-directory
-   (or load-file-name (buffer-file-name))))
-
-   (add-to-list 'load-path
-   (expand-file-name "emacs-nav"
-   (expand-file-name "src" dotfiles-dir)))
    (require 'nav)
 
    (add-to-list 'auto-mode-alist '("\\.txt\\'" . rst-mode))
 
    ;; anything 补全 ipython 以及 python 代码
    (require 'anything)
-   (when (require 'anything-show-completion nil t)
-   (use-anything-show-completion 'anything-ipython-complete
-   '(length initial-pattern)))
 
    ;; display a lambda character (λ) when you type lambda
    (require 'lambda-mode)

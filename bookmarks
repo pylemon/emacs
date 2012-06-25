@@ -2,11 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("emacs-config.org"
+(("!emacs-config.org"
  (filename . "~/org/emacs/emacs-config.org")
  (front-context-string . "* basic settings")
  (rear-context-string)
  (position . 1))
+("emacs-config.org"
+ (filename . "~/org/emacs/emacs-config.org")
+ (front-context-string . "* basic settings")
+ (rear-context-string)
+ (position . 1)
+ (annotation . ""))
 ("exam info"
  (filename . "~/work/src/project/exam_admin/views.py")
  (front-context-string . "def exam_info(re")
