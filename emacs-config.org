@@ -3,6 +3,7 @@
    Load downloaded lisp files in ~/org/emacs/lisps
    #+begin_src emacs-lisp
    (add-to-list 'load-path "~/org/emacs/lisps")
+   (add-to-list 'load-path "/usr/share/emacs/site-lisp/howm/")
    #+end_src
 
 ** basic needs
@@ -399,6 +400,10 @@
    "find . -path '*/.svn' -prune -o -type f -print | xargs -e grep -I -n -e ")
    #+end_src
 
+** howm mode
+   #+begin_src emacs-lisp
+   (require 'howm)
+   #+end_src** 
 ** others
    #+begin_src emacs-lisp
    (require 'eval-after-load)
