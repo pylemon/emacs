@@ -1,8 +1,8 @@
 * basic settings
 ** load lisp files
-   Load downloaded lisp files in ~/org/emacs/lisps
+   Load downloaded lisp files in ~/emacs/lisps/
    #+begin_src emacs-lisp
-   (add-to-list 'load-path "~/org/emacs/lisps")
+   (add-to-list 'load-path "~/emacs/lisps/")
    #+end_src
 
 ** basic needs
@@ -78,12 +78,6 @@
    (global-font-lock-mode t)
    #+end_src
 
-** smooth-scrolling
-   #+begin_src emacs-lisp
-   (require 'smooth-scrolling)
-   (setq smooth-scroll-margin 10)
-   #+end_src
-
 ** indent settings
    - aways using 4 space to indent
      #+begin_src emacs-lisp
@@ -141,7 +135,7 @@
 ** bookmark settings
    #+begin_src emacs-lisp
    (require 'bookmark)
-   (setq bookmark-default-file "~/org/emacs/bookmarks"
+   (setq bookmark-default-file "~/emacs/bookmarks"
    bookmark-save-flag 1)
    #+end_src
 
@@ -159,19 +153,11 @@
    (setq ido-enable-flex-matching t)
    #+end_src
 
-** undo-tree
-   #+begin_src emacs-lisp
-   (require 'undo-tree)
-   (global-undo-tree-mode)
-   (defadvice undo-tree-visualizer-mode (after undo-tree-face activate)
-   (buffer-face-mode))
-   #+end_src
-
 * appearance settings
 ** color theme
    - color theme tomorrow night
      #+begin_src emacs-lisp
-     (require 'tomorrow-night-theme)
+     ;;(require 'tomorrow-night-theme)
      #+end_src
    - other color themes
      #+begin_src
@@ -207,16 +193,16 @@
    (custom-set-variables
    '(rst-level-face-base-color "black"))
    #+end_src
-** remove-dos-eol ^M
+** remove-dos-eo ^M
    #+begin_src emacs-lisp
-   (defun remove-dos-eol ()
+   (defun remove-dos-eo ()
    "Do not show ^M in files containing mixed UNIX and DOS line endings."
    (interactive)
    (setq buffer-display-table (make-display-table))
    (aset buffer-display-table ?\^M []))
-   (add-hook 'python-mode-hook 'remove-dos-eol)
-   (add-hook 'javascript-mode-hook 'remove-dos-eol)
-   (add-hook 'html-mode-hook 'remove-dos-eol)
+   (add-hook 'python-mode-hook 'remove-dos-eo)
+   (add-hook 'javascript-mode-hook 'remove-dos-eo)
+   (add-hook 'html-mode-hook 'remove-dos-eo)
    (add-hook 'css-mode-hook 'remove-dos-eo)
    #+end_src
 ** uniquify buffer name
@@ -368,10 +354,12 @@
    "find . -path '*/.svn' -prune -o -type f -print | xargs -e grep -I -n -e ")
    #+end_src
 
-** howm mode
+** o-blog mode
    #+begin_src emacs-lisp
-   (require 'howm)
+   (require 'htmlize)
+   (require 'o-blog)
    #+end_src**
+
 ** others
    #+begin_src emacs-lisp
    (require 'eval-after-load)
@@ -393,7 +381,7 @@
 
    ;; 自动补全的配置
    (require 'yasnippet)
-   (setq yas/root-directory "~/org/emacs/lisps/snippets")
+   (setq yas/root-directory "~/emacs/lisps/snippets")
    (yas/load-directory yas/root-directory)
    (yas/global-mode 1)
    (require 'auto-complete-config)

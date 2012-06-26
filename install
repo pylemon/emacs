@@ -1,5 +1,5 @@
 #!/usr/bin/zsh
-cp -f dotemacs /home/liwei/.emacs
+cat dotemacs > /home/liwei/.emacs
 killall emacs && emacs --daemon
-emacs -L /home/liwei/org/emacs/lisps/ -batch -f batch-byte-compile emacs-config.el
-mv emacs-config.elc  /home/liwei/.emacs
+#emacs -L /home/liwei/org/emacs/lisps/ -batch -f batch-byte-compile emacs-config.el
+#mv emacs-config.elc  /home/liwei/.emacs

@@ -6,4 +6,4 @@
 (require 'org-install)
 (require 'org)
 ;; load neatly organized org file!
-(org-babel-load-file "~/org/emacs/emacs-config.org")
+(org-babel-load-file "~/emacs/emacs-config.org")

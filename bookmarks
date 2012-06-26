@@ -2,8 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("!emacs-config.org"
- (filename . "~/org/emacs/emacs-config.org")
+(("sample.org"
+ (filename . "~/.emacs.d/o-blog/example/sample.org")
+ (front-context-string . "#+TITLE: o-blog\n")
+ (rear-context-string)
+ (position . 1))
+("!emacs-config.org"
+ (filename . "~/emacs/emacs-config.org")
  (front-context-string . "* basic settings")
  (rear-context-string)
  (position . 1))
