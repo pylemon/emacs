@@ -157,13 +157,13 @@
 ** color theme
    - color theme tomorrow night
      #+begin_src emacs-lisp
-     ;;(require 'tomorrow-night-theme)
+     (require 'tomorrow-night-theme)
      #+end_src
    - other color themes
      #+begin_src
      (require 'color-theme)
      (color-theme-initialize)
-     (color-theme-molokai)
+     ;; (color-theme-molokai)
      ;; (color-theme-zenburn)
      ;; (color-theme-tangotango)
      ;; (color-theme-arjen)
@@ -380,13 +380,14 @@
    (require 'all-paren-settings)
 
    ;; 自动补全的配置
+   (require 'auto-complete)
+   (add-to-list 'ac-dictionary-directories "~/emacs/auto-complete/ac-dict")
+   (global-auto-complete-mode t)
+
    (require 'yasnippet)
-   (setq yas/root-directory "~/emacs/lisps/snippets")
+   (setq yas/root-directory "~/emacs/snippets")
    (yas/load-directory yas/root-directory)
    (yas/global-mode 1)
-   (require 'auto-complete-config)
-   (ac-config-default)
-
    (defface ac-yasnippet-candidate-face
    '((t (:background "sandybrown" :foreground "black")))
    "Face for yasnippet candidate.")
@@ -433,6 +434,22 @@
    (require 'lambda-mode)
    (add-hook 'py-mode-hook #'lambda-mode 1)
    (setq lambda-symbol (string (make-char 'greek-iso8859-7 107)))
+
+   ;; python settings
+   (autoload 'python-mode "python-mode" "Python Mode." t)
+   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+   (add-to-list 'interpreter-mode-alist '("python" . python-mode))
+   (require 'python-mode)
+   (add-hook 'python-mode-hook
+      (lambda ()
+	(set-variable 'py-indent-offset 4)
+	;(set-variable 'py-smart-indentation nil)
+	(set-variable 'indent-tabs-mode nil)
+	(define-key py-mode-map (kbd "RET") 'newline-and-indent)
+	;(define-key py-mode-map [tab] 'yas/expand)
+	;(setq yas/after-exit-snippet-hook 'indent-according-to-mode)
+	(smart-operator-mode-on)
+   ))
    #+end_src
 
 * keybindings
