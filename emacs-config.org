@@ -538,7 +538,7 @@
 
 ** C-?
   - [C-'][C-M-'] wrap-it quote words directly
-    #+begin_src
+    #+begin_src emacs-lisp
     (require 'wrap-it)
     (global-set-key (kbd "C-'") 'wrap-word-quote)
     (global-set-key (kbd "C-M-'") 'wrap-word)
