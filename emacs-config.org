@@ -180,7 +180,7 @@
    #+end_src
 ** minibuffer no resize
    #+begin_src emacs-lisp
-   (setq resize-mini-windows nil)
+   ;; (setq resize-mini-windows nil)
    #+end_src
 ** reset default font
    #+begin_src emacs-lisp
@@ -571,10 +571,10 @@
    #+begin_src emacs-lisp
    (global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
    (global-set-key (kbd "C-x f") 'find-file-at-point)
-   (global-set-key (kbd "C-x C-b" ) 'ido-switch-buffer)
+   (global-set-key (kbd "C-x C-b" ) 'ibuffer)
    (global-set-key (kbd "C-x C-d" ) 'ido-dired)
    (global-set-key (kbd "C-x C-j") 'dired-jump)
-   (global-set-key (kbd "C-x C-x" ) 'ibuffer)
+   (global-set-key (kbd "C-x C-x" ) 'ido-switch-buffer)
    (global-set-key (kbd "C-x f") 'ido-find-file)
    (global-set-key (kbd "C-x C-f") 'ido-find-file)
    (global-set-key (kbd "C-x C-r") 'bookmark-bmenu-list)
