@@ -1,7 +1,0 @@
-这里定义的都是html-mode下的snippet
-为了方便输入默认定义如下
-
-div	为全部属性可以选择
-div` 	为带class属性的标签
-div``	为带id属性的标签
-div```	为带class和id的标签
