@@ -310,6 +310,14 @@
    (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
    (put 'dired-find-alternate-file 'disabled nil)
    #+end_src
+** magit
+   #+begin_src emacs-lisp
+   (require 'magit)
+   (define-prefix-command 'ctl-,-map)
+   (global-set-key (kbd "C-,") 'ctl-,-map)
+   (define-key ctl-,-map (kbd "gst") 'magit-status)
+   #+end_src
+
 ** ibuffer never show predicates
    #+begin_src emacs-lisp
    (setq ibuffer-never-show-predicates
@@ -329,7 +337,7 @@
    '(org-mode-hook
    emacs-lisp-mode-hook
    python-mode-hook
-   js2-mode-hook
+   javascript-mode-hook
    rst-mode-hook
    text-mode-hook))
    #+end_src
@@ -384,9 +392,6 @@
    ;; 所有关于lisp方面的配置
    (require 'all-lisp-settings)
 
-   ;; html配置
-   (require 'html-mode-settings)
-
    ;; 自动给你加上括号
    ;;(require 'autopair-settings)
 
@@ -431,6 +436,7 @@
    (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
    (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
    (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
+   (add-to-list 'auto-mode-alist '("\\.inc$" . html-mode))
 
    ;; using gist in emacs
    (require 'gist)
