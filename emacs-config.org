@@ -313,9 +313,6 @@
 ** magit
    #+begin_src emacs-lisp
    (require 'magit)
-   (define-prefix-command 'ctl-,-map)
-   (global-set-key (kbd "C-,") 'ctl-,-map)
-   (define-key ctl-,-map (kbd "gst") 'magit-status)
    #+end_src
 
 ** ibuffer never show predicates
@@ -571,6 +568,8 @@
     #+begin_src emacs-lisp
     (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
     (global-set-key (kbd "C-x C-k") 'yic-kill-current-buffer)
+    (global-set-key (kbd "C-x g") 'magit-status)
+    (global-set-key (kbd "C-x C-g") 'magit-status)
     #+end_src
 
 ** others
