@@ -1,157 +1,74 @@
 * basic settings
-** load lisp files
-   Load downloaded lisp files in ~/emacs/lisps/
-   #+begin_src emacs-lisp
-   (add-to-list 'load-path "~/emacs/lisps/")
-   #+end_src
+** load path settings
+   emacs load path
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/emacs/lisps/")
+#+end_src
 
-** basic needs
-   these are basic settings that every one needs, do not often change this area
-   - use y/n to confirm
-     #+begin_src emacs-lisp
-     (fset 'yes-or-no-p 'y-or-n-p)
-     #+end_src
-
-   - always end a file with a newline
-     #+begin_src emacs-lisp
-     (setq require-final-newline t)
-     #+end_src
-
-   - delete the selected region when something is typed or with DEL
-     #+begin_src emacs-lisp
-     (delete-selection-mode t)
-     #+end_src
-
-   - use middle mouse key to yank
-     #+begin_src emacs-lisp
-     (setq mouse-yank-at-point t)
-     #+end_src
-
-   - use the x clipboard
-     #+begin_src emacs-lisp
-     (setq x-select-enable-clipboard t)
-     #+end_src
-
-   - do not notice there are process running when killing a buffer
-     #+begin_src emacs-lisp
-     (delq 'process-kill-buffer-query-function kill-buffer-query-functions)
-     #+end_src
-
-   - enable show paren mode
-     #+begin_src emacs-lisp
-     (show-paren-mode t)
-     #+end_src
-
-   - enable case fold search
-     #+begin_src emacs-lisp
-     (setq-default case-fold-search t)
-     #+end_src
-
-   - do not ring bell
-     #+begin_src emacs-lisp
-     (setq ring-bell-function 'ignore)
-     #+end_src
-
-   - hide password input
-     #+begin_src emacs-lisp
-     (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
-     #+end_src
-
-   - mouse avoidance cursor
-     #+begin_src emacs-lisp
-     (mouse-avoidance-mode 'animate)
-     #+end_src
-
-   - kill do not save duplicate things
-     #+begin_src emacs-lisp
-     (setq kill-do-not-save-duplicates t)
-     #+end_src
-
-   - cache password
-     #+begin_src emacs-lisp
-     (setq password-cache-expiry nil)
-     #+end_src
-
-** font-lock settings
-   #+begin_src emacs-lisp
-   (require 'generic-x)
-   (global-font-lock-mode t)
-   #+end_src
-
-** indent settings
-   - aways using 4 space to indent
-     #+begin_src emacs-lisp
-     (setq tab-width 4)
-     #+end_src
-
-   - never use tab to indent
-     #+begin_src emacs-lisp
-     (setq indent-tabs-mode nil)
-     #+end_src
-
-   - indent anywhere in a line, indent first then complete
-     #+begin_src emacs-lisp
-     (setq tab-always-indent 'complete)
-     #+end_src
-
-** backup settings
-   - no backup files
-     #+begin_src emacs-lisp
-     (setq make-backup-files nil)
-     #+end_src
-
-   - no autosave file like #filename#
-     #+begin_src emacs-lisp
-     (setq auto-save-default nil)
-     #+end_src
-
-   - set backup directory
-     #+begin_src emacs-lisp
-     (setq backup-directory-alist '((" " . "~/backup/")))
-     #+end_src
-
-   - backup file use copying
-     #+begin_src emacs-lisp
-     (setq backup-by-copying t)
-     #+end_src
-
-   - kept one version
-     #+begin_src emacs-lisp
-     (setq kept-new-versions 1)
-     #+end_src
-
-   - automatic delete old backup files
-     #+begin_src emacs-lisp
-     (setq delete-old-versions t)
-     #+end_src
-
-** tramp settings
-   remote edit files with tramp, aways use ssh potocal
-   #+begin_src emacs-lisp
-   (require 'tramp)
-   (setq tramp-default-method "ssh")
-   #+end_src
-
-** bookmark settings
-   #+begin_src emacs-lisp
-   (require 'bookmark)
-   (setq bookmark-default-file "~/emacs/bookmarks"
-   bookmark-save-flag 1)
-   #+end_src
-
-** cua settings
-   cua mode if for select text in a retangle area to start it with C-Return
-   #+begin_src emacs-lisp
-   (cua-mode t)
-   (cua-selection-mode t)
-   #+end_src
-
-** ido settings
-   #+begin_src emacs-lisp
-   (require 'ido)
-   (ido-mode t)
-   (setq ido-enable-flex-matching t)
-   #+end_src
+** basic settings
+   basic usage settings.
+#+begin_src emacs-lisp
+;; use y/n to confirm
+(fset 'yes-or-no-p 'y-or-n-p)
+;; always end a file with a newline
+(setq require-final-newline t)
+;; delete the selected region when something is typed or with DEL
+(delete-selection-mode t)
+;; use middle mouse key to yank
+(setq mouse-yank-at-point t)
+;; use the x clipboard
+(setq x-select-enable-clipboard t)
+;; do not notice there are process running when killing a buffer
+(delq 'process-kill-buffer-query-function kill-buffer-query-functions)
+;; enable show paren mode
+(show-paren-mode t)
+;; enable case fold search
+(setq-default case-fold-search t)
+;; do not ring bell
+(setq ring-bell-function 'ignore)
+;; hide password input
+(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
+;; mouse avoidance cursor
+(mouse-avoidance-mode 'animate)
+;; kill do not save duplicate things
+(setq kill-do-not-save-duplicates t)
+;; cache password
+(setq password-cache-expiry nil)
+;; font lock, syntax highlighting
+(require 'generic-x)
+(global-font-lock-mode t)
+;; aways using 4 space to indent
+(setq tab-width 4)
+;; never use tab to indent
+(setq-default indent-tabs-mode nil)
+;; indent anywhere in a line, indent first then complete
+(setq tab-always-indent 'complete)
+;; no backup files
+(setq make-backup-files nil)
+;; no autosave file like #filename#
+(setq auto-save-default nil)
+;; set backup directory
+(setq backup-directory-alist '((" " . "~/backup/")))
+;; backup file use copying
+(setq backup-by-copying t)
+;; kept one version
+(setq kept-new-versions 1)
+;; automatic delete old backup files
+(setq delete-old-versions t)
+;; remote edit files with tramp, aways use ssh potocal
+(require 'tramp)
+(setq tramp-default-method "ssh")
+;; bookmark settings
+(require 'bookmark)
+(setq bookmark-default-file "~/emacs/bookmarks" bookmark-save-flag 1)
+;; cua-mode for select text in a retangle area. start it with C-Return
+(cua-mode t)
+(cua-selection-mode t)
+;; ido-mode
+(require 'ido)
+(ido-mode t)
+(setq ido-enable-flex-matching t)
+#+end_src
 
 * appearance settings
 ** color theme
@@ -177,10 +94,6 @@
    #+begin_src emacs-lisp
    (setq inhibit-startup-message t)
    (setq initial-scratch-message "")
-   #+end_src
-** minibuffer no resize
-   #+begin_src emacs-lisp
-   ;; (setq resize-mini-windows nil)
    #+end_src
 ** reset default font
    #+begin_src emacs-lisp
@@ -313,8 +226,19 @@
 ** magit
    #+begin_src emacs-lisp
    (require 'magit)
+   (require 'git-blame)
    #+end_src
 
+** pydoc lookup
+   #+begin_src emacs-lisp
+   (setq browse-url-browser-function 'browse-url-generic
+          browse-url-generic-program "chromium-browser")
+   (autoload 'pylookup-lookup "pylookup")
+   (autoload 'pylookup-update "pylookup")
+   (setq pylookup-program "~/emacs/pylookup.py")
+   (setq pylookup-db-file "~/emacs/pylookup.db")
+   (global-set-key "\C-ch" 'pylookup-lookup)
+   #+end_src
 ** ibuffer never show predicates
    #+begin_src emacs-lisp
    (setq ibuffer-never-show-predicates
@@ -326,11 +250,11 @@
    "^\\*Completions\\*$"
    "^\\*magit-"))
    #+end_src
-** highlight column more than 110
+** highlight column more than 80
    #+begin_src emacs-lisp
    (require 'column-marker)
    (mapc (lambda (hook)
-   (add-hook hook (lambda () (interactive) (column-marker-1 110))))
+   (add-hook hook (lambda () (interactive) (column-marker-1 80))))
    '(org-mode-hook
    emacs-lisp-mode-hook
    python-mode-hook
@@ -358,12 +282,6 @@
    (setq grep-find-command
    "find . -path '*/.svn' -prune -o -type f -print | xargs -e grep -I -n -e ")
    #+end_src
-
-** o-blog mode
-   #+begin_src emacs-lisp
-   (require 'htmlize)
-   (require 'o-blog)
-   #+end_src**
 
 ** evernote mode
    #+begin_src emacs-lisp
@@ -446,11 +364,10 @@
 
    ;; anything 补全 ipython 以及 python 代码
    (require 'anything)
-
-   ;; display a lambda character (λ) when you type lambda
-   (require 'lambda-mode)
-   (add-hook 'py-mode-hook #'lambda-mode 1)
-   (setq lambda-symbol (string (make-char 'greek-iso8859-7 107)))
+   (require 'anything-ipython)
+   (when (require 'anything-show-completion nil t)
+   (use-anything-show-completion 'anything-ipython-complete
+                                 '(length initial-pattern)))
 
    ;; python settings
    (autoload 'python-mode "python-mode" "Python Mode." t)
@@ -460,19 +377,21 @@
    (add-hook 'python-mode-hook
       (lambda ()
 	(set-variable 'py-indent-offset 4)
-	(set-variable 'py-smart-indentation nil)
 	(set-variable 'indent-tabs-mode nil)
-	(define-key py-mode-map (kbd "RET") 'newline-and-indent)
 	(define-key py-mode-map [tab] 'yas/expand)
 	(setq yas/after-exit-snippet-hook 'indent-according-to-mode)
-	(smart-operator-mode-on)
    ))
-   (require 'highlight-indentation)
-   (add-hook 'python-mode-hook 'highlight-indentation)
-   (set-face-background 'highlight-indentation-face "#282a2e")
-   (set-face-background 'highlight-indentation-current-column-face "#282a2e")
    #+end_src
 
+** pep8
+   #+begin_src emacs-lisp
+   (require 'python-pep8)
+   #+end_src
+
+** po-mode
+   #+begin_src emacs-lisp
+   (require 'po-mode)
+   #+end_src
 * keybindings
 ** mouse
   - [mouse-4], [mouse-5] scroll up down slowly
@@ -495,7 +414,7 @@
     (require 'wcy-swbuff)
     (setq wcy-switch-buffer-active-buffer-face  'highlight)
     (setq wcy-switch-buffer-inactive-buffer-face  'secondary-selection )
-    (global-set-key (kbd "M-<tab>") 'wcy-switch-buffer-backward)
+    ;; (global-set-key (kbd "M-<tab>") 'wcy-switch-buffer-backward)
     #+end_src
 
   - [M-;] better comment, comment out or uncomment anywhere in line
@@ -573,7 +492,7 @@
     (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
     (global-set-key (kbd "C-x C-k") 'yic-kill-current-buffer)
     (global-set-key (kbd "C-x g") 'magit-status)
-    (global-set-key (kbd "C-x C-g") 'magit-status)
+    (global-set-key (kbd "C-x p") 'pep8)
     #+end_src
 
 ** others
