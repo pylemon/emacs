@@ -346,21 +346,12 @@
    (require 'javascript-mode)
    (autoload 'javascript-mode "JavaScript" nil t)
 
-   (add-to-list 'auto-mode-alist '("\\.mkd$" . markdown-mode))
-   (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-   (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
-   (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-   (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
-   (add-to-list 'auto-mode-alist '("\\.inc$" . html-mode))
-
    ;; using gist in emacs
    (require 'gist)
    (setq gist-view-gist t)
 
    ;; emacs-nav
    (require 'nav)
-
-   (add-to-list 'auto-mode-alist '("\\.txt\\'" . rst-mode))
 
    ;; anything 补全 ipython 以及 python 代码
    (require 'anything)
@@ -371,7 +362,7 @@
 
    ;; python settings
    (autoload 'python-mode "python-mode" "Python Mode." t)
-   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+
    (add-to-list 'interpreter-mode-alist '("python" . python-mode))
    (require 'python-mode)
    (add-hook 'python-mode-hook
@@ -384,13 +375,30 @@
    #+end_src
 
 ** pep8
+
    #+begin_src emacs-lisp
    (require 'python-pep8)
    #+end_src
 
 ** po-mode
+
    #+begin_src emacs-lisp
    (require 'po-mode)
+   #+end_src
+
+** auto-mode alist
+
+   #+begin_src emacs-lisp
+   ;; auto-mode-alist
+   (add-to-list 'auto-mode-alist '("\\.mkd$" . markdown-mode))
+   (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+   (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+   (add-to-list 'auto-mode-alist '("\\.txt\\'" . rst-mode))
+   (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+   (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
+   (add-to-list 'auto-mode-alist '("\\.inc$" . html-mode))
+   (add-to-list 'auto-mode-alist '("\\.po$" . po-mode))
+   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))   
    #+end_src
 * keybindings
 ** mouse
