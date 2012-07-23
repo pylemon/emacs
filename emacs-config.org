@@ -9,6 +9,8 @@
 ** basic settings
    basic usage settings.
 #+begin_src emacs-lisp
+;; start emacs-server
+(server-start)
 ;; use y/n to confirm
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; do not end a file with a newline, and trailing-whitespace when save file
@@ -188,6 +190,25 @@
    :inherit 'tabbar-default
    :overline "#111111"
    :box '(:line-width 1 :color "#1793d1"))
+   (defun tabbar-buffer-groups ()
+          "tabbar group"
+   (list
+   (cond
+    ((memq major-mode '(shell-mode dired-mode))
+     "shell"
+     )
+    ((memq major-mode '(c-mode c++-mode))
+     "cc"
+     )
+    ((string-equal "*" (substring (buffer-name) 0 1))
+     "emacs"
+     )
+    (t
+     "other"
+     )
+    )))
+    (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+
    #+end_src
 ** rainbow mode settings
    #+begin_src emacs-lisp
@@ -465,6 +486,10 @@
 ** s-?
   - [s-up], [s-down], [s-left], [s-right] tabbar settings
     #+begin_src emacs-lisp
+    (global-set-key (kbd "C-<") 'tabbar-backward)
+    (global-set-key (kbd "C->") 'tabbar-forward)
+    (global-set-key (kbd "C-M-<") 'tabbar-backward-group)
+    (global-set-key (kbd "C-M->") 'tabbar-forward-group)
     (global-set-key (kbd "s-<up>") 'tabbar-backward-group)
     (global-set-key (kbd "s-<down>") 'tabbar-forward-group)
     (global-set-key (kbd "s-<left>") 'tabbar-backward)
