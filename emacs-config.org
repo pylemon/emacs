@@ -11,8 +11,9 @@
 #+begin_src emacs-lisp
 ;; use y/n to confirm
 (fset 'yes-or-no-p 'y-or-n-p)
-;; always end a file with a newline
-(setq require-final-newline t)
+;; do not end a file with a newline, and trailing-whitespace when save file
+(setq require-final-newline nil)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; delete the selected region when something is typed or with DEL
 (delete-selection-mode t)
 ;; use middle mouse key to yank
@@ -303,7 +304,7 @@
 ** others
    #+begin_src emacs-lisp
    (require 'eval-after-load)
-   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
    ;; subversion
    (require 'psvn)
 

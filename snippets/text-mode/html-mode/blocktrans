@@ -1,6 +1,1 @@
-# -*- coding: utf-8 -*-
-# key: blocktrans
-# name: blocktrans
-# contributor: pylemon
-# --
 {% blocktrans %}${}{% endblocktrans %}
