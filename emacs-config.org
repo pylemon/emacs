@@ -3,6 +3,7 @@
    emacs load path
 #+begin_src emacs-lisp
 (add-to-list 'load-path "~/emacs/lisps/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/pymacs")
 #+end_src
 
 ** basic settings
@@ -67,7 +68,9 @@
 ;; ido-mode
 (require 'ido)
 (ido-mode t)
+(ido-everywhere t)
 (setq ido-enable-flex-matching t)
+(setq ido-auto-merge-work-directories-length -1)
 #+end_src
 
 * appearance settings
@@ -300,7 +303,7 @@
 ** others
    #+begin_src emacs-lisp
    (require 'eval-after-load)
-
+   (add-hook 'before-save-hook 'delete-trailing-whitespace)
    ;; subversion
    (require 'psvn)
 
@@ -308,7 +311,17 @@
    (require 'all-lisp-settings)
 
    ;; 自动给你加上括号
-   ;;(require 'autopair-settings)
+   (autoload 'autopair-global-mode "autopair" nil t)
+   (autopair-global-mode)
+   (add-hook 'python-mode-hook
+             '(lambda ()
+              (push '(?' . ?')
+                    (getf autopair-extra-pairs :code))
+              (setq autopair-handle-action-fns
+                    (list 'autopair-default-handle-action
+                          'autopair-python-triple-quote-action))))
+   (add-hook 'lisp-mode-hook '(lambda () (setq autopair-dont-activate t)))
+   (add-hook 'js-mode-hook '(lambda () (setq autopair-dont-activate t)))
 
    ;; 所有关于括号的配置
    (require 'all-paren-settings)
@@ -352,13 +365,46 @@
 
    ;; emacs-nav
    (require 'nav)
+   ;; pymacs
+   (autoload 'pymacs-apply "pymacs")
+   (autoload 'pymacs-call "pymacs")
+   (autoload 'pymacs-eval "pymacs" nil t)
+   (autoload 'pymacs-exec "pymacs" nil t)
+   (autoload 'pymacs-load "pymacs" nil t)
+   (require 'pymacs)
+   (pymacs-load "ropemacs" "rope-")
+
+   (setq ropemacs-codeassist-maxfixes 3)
+   (setq ropemacs-guess-project t)
+   (setq ropemacs-enable-autoimport t)
+
+   (require 'pycomplete)
+   (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
+   (autoload 'python-mode "python-mode" "Python editing mode." t)
+   (setq interpreter-mode-alist(cons '("python" . python-mode)
+                              interpreter-mode-alist))
+
 
    ;; anything 补全 ipython 以及 python 代码
    (require 'anything)
+   (require 'anything-match-plugin)
+   ;;(require 'anything-config)
+   (setq ipython-completion-command-string "print(';'.join(get_ipython().Completer.complete('%s')[1])) #PYTHON-MODE SILENT\n")
    (require 'anything-ipython)
+   (add-hook 'python-mode-hook #'(lambda ()
+				 (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
+   (add-hook 'ipython-shell-hook #'(lambda ()
+				 (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
+
+   ;; If you want to use anything-show-completion.el,(facultative)
+   ;; <http://www.emacswiki.org/cgi-bin/emacs/anything-show-completion.el>
+   ;; add these lines:
+
    (when (require 'anything-show-completion nil t)
    (use-anything-show-completion 'anything-ipython-complete
-                                 '(length initial-pattern)))
+				 '(length initial-pattern)))
+   (define-key py-mode-map (kbd "C-c M")
+               'anything-ipython-import-modules-from-buffer)
 
    ;; python settings
    (autoload 'python-mode "python-mode" "Python Mode." t)
@@ -386,6 +432,13 @@
    (require 'po-mode)
    #+end_src
 
+** lambda-mode
+   #+begin_src emacs-lisp
+   (require 'lambda-mode)
+   (setq lambda-symbol (string (make-char 'greek-iso8859-7 107)))
+   (add-hook 'python-mode-hook 'lambda-mode 1)
+   (add-hook 'emacs-lisp-mode-hook 'lambda-mode 1)
+   #+end_src
 ** auto-mode alist
 
    #+begin_src emacs-lisp
@@ -398,7 +451,7 @@
    (add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
    (add-to-list 'auto-mode-alist '("\\.inc$" . html-mode))
    (add-to-list 'auto-mode-alist '("\\.po$" . po-mode))
-   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))   
+   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
    #+end_src
 * keybindings
 ** mouse
@@ -468,6 +521,7 @@
     #+begin_src emacs-lisp
     (global-set-key (kbd "M-n") 'forward-paragraph)
     (global-set-key (kbd "M-p") 'backward-paragraph)
+    (global-set-key (kbd "M-/") 'hippie-expand)
     #+end_src
 
 ** C-?
@@ -486,6 +540,8 @@
     (interactive)
     (switch-to-buffer (other-buffer)))
     (global-set-key (kbd "C-c o") 'switch-to-other-buffer)
+    (global-set-key (kbd "C-c r") 'revert-buffer)
+    (global-set-key (kbd "C-c q") 'join-line)
     #+end_src
 
 ** C-x ?
@@ -497,14 +553,17 @@
 
   - [C-x k], [C-x C-k] kill buffer
     #+begin_src emacs-lisp
+    (require 'idomenu)
     (global-set-key (kbd "C-x k") 'yic-kill-current-buffer)
     (global-set-key (kbd "C-x C-k") 'yic-kill-current-buffer)
     (global-set-key (kbd "C-x g") 'magit-status)
     (global-set-key (kbd "C-x p") 'pep8)
+    (global-set-key (kbd "C-x C-i") 'idomenu)
     #+end_src
 
 ** others
    #+begin_src emacs-lisp
+   (global-set-key (kbd "C-M-h") 'backward-kill-word)
    (global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
    (global-set-key (kbd "C-x f") 'find-file-at-point)
    (global-set-key (kbd "C-x C-b" ) 'ibuffer)
