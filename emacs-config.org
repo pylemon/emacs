@@ -348,28 +348,6 @@
    ;; 所有关于括号的配置
    (require 'all-paren-settings)
 
-   ;; 自动补全的配置
-   (require 'auto-complete)
-   (add-to-list 'ac-dictionary-directories "~/emacs/auto-complete/ac-dict")
-   (global-auto-complete-mode t)
-
-   (require 'yasnippet)
-   (setq yas/root-directory "~/emacs/snippets")
-   (yas/load-directory yas/root-directory)
-   (yas/global-mode 1)
-   (defface ac-yasnippet-candidate-face
-   '((t (:background "sandybrown" :foreground "black")))
-   "Face for yasnippet candidate.")
-   (defface ac-yasnippet-selection-face
-   '((t (:background "coral3" :foreground "white")))
-   "Face for the yasnippet selected candidate.")
-   (defvar ac-source-yasnippet
-   '((candidates . ac-yasnippet-candidate)
-   (action . yas/expand)
-   (candidate-face . ac-yasnippet-candidate-face)
-   (selection-face . ac-yasnippet-selection-face))
-   "Source for Yasnippet.")
-
    ;; markdown mode
    (require 'markdown-mode)
 
@@ -427,6 +405,9 @@
 				 '(length initial-pattern)))
    (define-key py-mode-map (kbd "C-c M")
                'anything-ipython-import-modules-from-buffer)
+
+   ;; yasnippet settings
+   (require 'yasnippet-settings)
 
    ;; python settings
    (autoload 'python-mode "python-mode" "Python Mode." t)
