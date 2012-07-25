@@ -21,6 +21,7 @@
 (require 'wrap-it)
 (require 'python-pep8)
 (require 'yasnippet-settings)
+(require 'tramp)
 
 
 ;; basic settings
@@ -179,8 +180,6 @@
 (global-set-key (kbd "<f5>") 'todo-show)
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key (kbd "C-\\") nil)
-
-
 
 
 (provide 'my-emacs-config)
