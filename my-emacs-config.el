@@ -54,7 +54,7 @@
 ;; init message and scratch message
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
-;; no tabbar toolbar
+;; no menubar toolbar
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 ;; no scrollbar
@@ -63,10 +63,17 @@
 (setq-default indicate-buffer-boundaries 'left)
 ;; tabbar settings
 (tabbar-mode)
+(setq tabbar-separator '(1.6))
+(tabbar-mwheel-mode -1)
+(dolist (btn '(tabbar-buffer-home-button
+               tabbar-scroll-left-button
+               tabbar-scroll-right-button))
+  (set btn (cons (cons " " nil)
+                 (cons " " nil))))
 (set-face-attribute 'tabbar-default nil
-		    :family "profont"
+		    :family "profont" ;;"微软雅黑Monaco"
 		    :background "#111111"
-		    :foreground "#a0a0a0"
+		    :foreground "#cccccc"
 		    :height 0.9)
 (set-face-attribute 'tabbar-button nil
 		    :inherit 'tabbar-default
@@ -75,19 +82,23 @@
 		    :inherit 'tabbar-default
 		    :background "#111111"
 		    :foreground "#1793d1"
-		    :overline "#111111"
+		    :overline nil
 		    :underline nil
-:box '(:line-width 1 :color "#1793d1"))
+		    :box '(:line-width 1 :color "#111111"))
 (set-face-attribute 'tabbar-unselected nil
 		    :inherit 'tabbar-default
-		    :overline "#111111"
-		    :box '(:line-width 1 :color "#1793d1"))
+		    :overline nil
+		    :underline nil
+		    :box '(:line-width 1 :color "#111111"))
+(set-face-attribute 'tabbar-separator nil
+		    :height 1.0)
 (defun tabbar-buffer-groups () "tabbar group"
   (list (cond ((memq major-mode '(shell-mode dired-mode)) "shell")
 	      ((memq major-mode '(c-mode c++-mode)) "cc")
 	      ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
 	      (t "other"))))
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+
 ;; uniquify buffer names
 (setq uniquify-buffer-name-style 'forward)
 (setq uniquify-separator "/")
@@ -103,6 +114,15 @@
 (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
 (add-hook 'css-mode-hook 'rainbow-mode)
 (add-hook 'x-resource-generic-mode-hook 'rainbow-mode)
+;; remove-dos-eo
+(defun remove-dos-eo ()
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
+(add-hook 'python-mode-hook 'remove-dos-eo)
+(add-hook 'javascript-mode-hook 'remove-dos-eo)
+(add-hook 'html-mode-hook 'remove-dos-eo)
+(add-hook 'css-mode-hook 'remove-dos-eo)
 
 
 ;; programming
