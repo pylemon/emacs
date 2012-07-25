@@ -2,9 +2,9 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("!emacs-config.org"
- (filename . "~/emacs/emacs-config.org")
- (front-context-string . "* basic settings")
+(("!emacs-config"
+ (filename . "~/emacs/my-emacs-config.el")
+ (front-context-string . ";; emacs load-pa")
  (rear-context-string)
  (position . 1))
 ("exam info"

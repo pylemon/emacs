@@ -1,7 +1,5 @@
 ;; -*- Emacs-Lisp -*-
 
-;; Time-stamp: <2010-04-26 10:22:22 Monday by ahei>
-
 (require 'auto-complete)
 (require 'yasnippet)
 
@@ -14,11 +12,11 @@
 
 (setq ac-auto-start 2)
 (setq ac-dwim t)
+
 (define-globalized-minor-mode real-global-auto-complete-mode
   auto-complete-mode (lambda ()
-                       (if (not (minibufferp (current-buffer)))
-                           (auto-complete-mode 1))
-                       ))
+		       (if (not (minibufferp (current-buffer)))
+			   (auto-complete-mode 1))))
 (real-global-auto-complete-mode t)
 
 (define-key ac-completing-map "\M-n" 'ac-next)

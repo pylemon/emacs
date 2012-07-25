@@ -1,16 +1,13 @@
-;;; Complete symbols at point using Pymacs.
 ;;; See pycomplete.py for the Python side of things and a short description
 ;;; of what to expect.
 
-(require 'pymacs)
-(require 'python-mode)
 
-(pymacs-load "pycomplete")
+(require 'python-mode)
 
 (defconst pycomplete-version "$Revision: 100 $"
   "`pycomplete' version number.")
 
-(defconst py-identifier 
+(defconst py-identifier
   "[A-Za-z_][A-Za-z_0-9]*"
   "Regular expression matching a python identifier.")
 
@@ -18,42 +15,42 @@
 ;;; regular expressions regarding import statetment
 ;;; based on Python Grammar
 
-(defconst py-dotted-name-re 
+(defconst py-dotted-name-re
   (concat py-identifier "\\([.]" py-identifier "\\)*")
   "Regular expression matching a dotted_name production.")
 
-(defconst py-dotted-as-name-re 
+(defconst py-dotted-as-name-re
   (concat py-dotted-name-re "\\(\\s +as\\s +" py-identifier "\\)*")
   "Regular expression matching a dotted_as_name production.")
 
-(defconst py-dotted-as-names-re 
-  (concat py-dotted-as-name-re 
+(defconst py-dotted-as-names-re
+  (concat py-dotted-as-name-re
           "\\(\\s *,\\s *"  py-dotted-as-name-re "\\)*")
   "Regular expression matching a dotted_as_names production.")
 
-(defconst py-import-as-name-re 
+(defconst py-import-as-name-re
   (concat py-identifier "\\(\\s +as\\s +" py-identifier "\\)*" )
   "Regular expression matching a import_as_name production.")
 
-(defconst py-import-as-names-re 
-  (concat py-import-as-name-re "\\(\\s *,\\s *" py-import-as-name-re "\\)*" 
+(defconst py-import-as-names-re
+  (concat py-import-as-name-re "\\(\\s *,\\s *" py-import-as-name-re "\\)*"
           "\\s *[,]?" )
   "Regular expression matching a import_as_names production.")
 
-(defconst py-import-name-re 
+(defconst py-import-name-re
   (concat "^\\s *\\<import\\>\\s +" py-dotted-as-names-re)
   "Regular expression matching a import_name production.")
 
-(defconst py-import-from-re 
+(defconst py-import-from-re
   (concat "^\\s *\\<from\\>\\s +" "\\([.]*" py-dotted-name-re "\\|[.]+\\)\\s +"
           "\\<import\\>\\s +" "\\([*]\\|(\\s *" py-import-as-names-re "[^)]*)"
           "\\|" py-import-as-names-re "\\)")
   "Regular expression matching a import_from production.")
 
 (defconst py-imports-re
-  (concat "\\(" 
+  (concat "\\("
           (mapconcat 'identity
-                     (list py-import-name-re 
+                     (list py-import-name-re
                            py-import-from-re)
                      "\\|")
           "\\)")
@@ -89,11 +86,11 @@
 (defun py-complete ()
   "show possible completions for current statement"
   (interactive)
-  (let ((pymacs-forget-mutability t))
-    (if (and (eolp) (not (bolp)) 
+  (let
+    (if (and (eolp) (not (bolp))
              (not (char-before-blank))
              (not (blank-linep)))
-        (insert (pycomplete-pycomplete 
+        (insert (pycomplete-pycomplete
                  (py-symbol-near-point)
                  (buffer-file-name)
                  (py-find-global-imports)))
@@ -109,9 +106,9 @@
         (if (looking-at py-imports-re)
             ;; import statement found
             (progn
-              (setq imports 
+              (setq imports
                     (append imports (list (buffer-substring
-                                           (match-beginning 0) 
+                                           (match-beginning 0)
                                            (match-end 0)))))
               (forward-line 1)
               ;; handle continuation backslashes
@@ -125,7 +122,7 @@
                     (setq end (- (point) 1))
                   (setq end (point)))
                 (setcar (last imports)
-                        (concat (car (last imports)) " " 
+                        (concat (car (last imports)) " "
                                 (buffer-substring begin end)))
                 (forward-line 1)))
           (forward-line)))
@@ -150,7 +147,7 @@
 (defun py-complete-help (string)
   "get help on a python expression"
   (interactive "sHelp: ")
-  (let ((help-string 
+  (let ((help-string
          (pycomplete-pyhelp string (buffer-file-name) (py-find-global-imports))))
     (if (and help-string (> (length help-string) 300))
         (with-output-to-temp-buffer "*Python Help*"
@@ -175,10 +172,10 @@
 
 
 (defun py-complete-signature-show nil
-  (require 'thingatpt) 
+  (require 'thingatpt)
   (let ((sym (thing-at-point 'python-dotexpr)))
     (if sym
-        (progn 
+        (progn
           (py-complete-show (py-complete-signature sym))))))
 
 
