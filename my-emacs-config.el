@@ -99,6 +99,37 @@
 	      (t "other"))))
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
 
+(defun my-tabbar-buffer-help-on-tab (tab)
+  "Return the help string shown when mouse is onto TAB."
+  (if tabbar--buffer-show-groups
+      (let* ((tabset (tabbar-tab-tabset tab))
+             (tab (tabbar-selected-tab tabset)))
+        (format "mouse-1: switch to buffer %S in group [%s]"
+                (buffer-name (tabbar-tab-value tab)) tabset))
+    (format "\
+mouse-1: switch to buffer %S\n\
+mouse-2: kill this buffer\n\
+mouse-3: delete other windows"
+            (buffer-name (tabbar-tab-value tab)))))
+
+(defun my-tabbar-buffer-select-tab (event tab)
+  "On mouse EVENT, select TAB."
+  (let ((mouse-button (event-basic-type event))
+        (buffer (tabbar-tab-value tab)))
+    (cond
+     ((eq mouse-button 'mouse-2)
+      (with-current-buffer buffer
+        (kill-buffer)))
+     ((eq mouse-button 'mouse-3)
+      (delete-other-windows))
+     (t
+      (switch-to-buffer buffer)))
+    ;; Don't show groups.
+    (tabbar-buffer-show-groups nil)))
+
+(setq tabbar-help-on-tab-function 'my-tabbar-buffer-help-on-tab)
+(setq tabbar-select-tab-function 'my-tabbar-buffer-select-tab)
+
 ;; uniquify buffer names
 (setq uniquify-buffer-name-style 'forward)
 (setq uniquify-separator "/")
@@ -134,6 +165,7 @@
 (add-hook 'emacs-lisp-mode-hook 'lambda-mode 1)
 ;; auto-mode alist
 (add-to-list 'auto-mode-alist '("\\.po$" . po-mode))
+(add-to-list 'auto-mode-alist '("\\.inc$" . html-mode))
 
 
 ;; keybindings

@@ -13,8 +13,8 @@
 (deftheme tomorrow-night
   "A Pastel Coloured Theme")
 
-(let ((background "#1d1f21")
-      (current-line "#282a2e")
+(let ((background "#111111")
+      (current-line "#111111")
       (selection "#373b41")
       (foreground "#c5c8c6")
       (comment "#969896")
