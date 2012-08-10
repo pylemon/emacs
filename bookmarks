@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("!emacs-config"
+(("!rc.lua"
+ (filename . "~/.config/awesome/rc.lua")
+ (front-context-string . "require(\"awful\")")
+ (rear-context-string)
+ (position . 1))
+("!emacs-config"
  (filename . "~/emacs/my-emacs-config.el")
  (front-context-string . ";; emacs load-pa")
  (rear-context-string)

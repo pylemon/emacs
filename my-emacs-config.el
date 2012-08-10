@@ -28,7 +28,8 @@
 ;; use y/n to confirm
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; trailling whitespace when save
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'c-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+(add-hook 'python-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 ;; use middle mouse key to yank
 (setq mouse-yank-at-point t)
 ;; use the x clipboard
@@ -154,6 +155,7 @@ mouse-3: delete other windows"
 (add-hook 'javascript-mode-hook 'remove-dos-eo)
 (add-hook 'html-mode-hook 'remove-dos-eo)
 (add-hook 'css-mode-hook 'remove-dos-eo)
+(add-hook 'diff-mode-hook 'remove-dos-eo)
 
 
 ;; programming
@@ -167,11 +169,24 @@ mouse-3: delete other windows"
 (add-to-list 'auto-mode-alist '("\\.po$" . po-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . html-mode))
 
+;; ack-grep settings
+(setq ack-executable (executable-find "ack-grep"))
+(autoload 'ack-same "full-ack" nil t)
+(autoload 'ack "full-ack" nil t)
+(autoload 'ack-find-same-file "full-ack" nil t)
+(autoload 'ack-find-file "full-ack" nil t)
+
+;; sawfish config
+(require 'sawfish)
+(setq auto-mode-alist (cons '("\\.sawfishrc$"  . sawfish-mode) auto-mode-alist)
+      auto-mode-alist (cons '("\\.jl$"         . sawfish-mode) auto-mode-alist)
+      auto-mode-alist (cons '("\\.sawfish/rc$" . sawfish-mode) auto-mode-alist))
+
 
 ;; keybindings
 ;; tabbar-moving
-(global-set-key (kbd "s-<up>") 'tabbar-backward-group)
-(global-set-key (kbd "s-<down>") 'tabbar-forward-group)
+;; (global-set-key (kbd "s-<up>") 'tabbar-backward-group)
+;; (global-set-key (kbd "s-<down>") 'tabbar-forward-group)
 (global-set-key (kbd "s-<left>") 'tabbar-backward)
 (global-set-key (kbd "s-<right>") 'tabbar-forward)
 
@@ -205,9 +220,9 @@ mouse-3: delete other windows"
   (interactive)
   (switch-to-buffer (other-buffer)))
 (global-set-key (kbd "C-c o") 'switch-to-other-buffer)
-
 (global-set-key (kbd "C-c r") 'revert-buffer)
 (global-set-key (kbd "C-c q") 'join-line)
+(global-set-key (kbd "C-c a") 'ack)
 
 (global-set-key (kbd "C-x 2") 'split-window-horizontally)
 (global-set-key (kbd "C-x 3") 'split-window-vertically)
@@ -229,7 +244,7 @@ mouse-3: delete other windows"
 
 (global-set-key (kbd "<f2>") 'nav-in-place)
 (global-set-key (kbd "<f3>") 'grep-find)
-(global-set-key (kbd "<f5>") 'todo-show)
+(global-set-key (kbd "<f10>") 'todo-show)
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key (kbd "C-\\") nil)
 
