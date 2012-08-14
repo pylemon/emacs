@@ -176,6 +176,31 @@ mouse-3: delete other windows"
 (autoload 'ack-find-same-file "full-ack" nil t)
 (autoload 'ack-find-file "full-ack" nil t)
 
+;; org mode settings
+(require 'org-install)
+(require 'org-mobile)
+
+;; mobileorg settings but not working perfect
+;; Set to the location of your Org files on your local system
+(setq org-directory "/home/liwei/org")
+;; Set to the name of the file where new notes will be stored
+(setq org-mobile-inbox-for-pull "/home/liwei/org/flagged.org")
+;; Set to <your Dropbox root directory>/MobileOrg.
+(setq org-mobile-directory "/home/liwei/Ubuntu One/MobileOrg")
+
+;; PDFs visited in Org-mode are opened in Evince (and other file extensions are handled according to the defaults)
+(add-hook 'org-mode-hook
+      '(lambda ()
+         (setq org-file-apps
+           '((auto-mode . emacs)
+             ("\\.mm\\'" . default)
+             ("\\.x?html?\\'" . default)
+             ("\\.pdf\\'" . "evince %s")
+	     ("\\.rmvb\\'" . "mplayer %s")
+	     ("\\.png\\'" . "feh %s")
+))))
+
+
 ;; sawfish config
 (require 'sawfish)
 (setq auto-mode-alist (cons '("\\.sawfishrc$"  . sawfish-mode) auto-mode-alist)
@@ -247,6 +272,5 @@ mouse-3: delete other windows"
 (global-set-key (kbd "<f10>") 'todo-show)
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key (kbd "C-\\") nil)
-
 
 (provide 'my-emacs-config)

@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("!rc.lua"
+(("org-capture-last-stored"
+ (filename . "~/.notes")
+ (front-context-string . "** TODO \n  [2012")
+ (rear-context-string . "t][{5/6} Test]]\n")
+ (position . 244))
+("!rc.lua"
  (filename . "~/.config/awesome/rc.lua")
  (front-context-string . "require(\"awful\")")
  (rear-context-string)
