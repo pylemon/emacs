@@ -247,7 +247,6 @@ mouse-3: delete other windows"
 (global-set-key (kbd "C-c o") 'switch-to-other-buffer)
 (global-set-key (kbd "C-c r") 'revert-buffer)
 (global-set-key (kbd "C-c q") 'join-line)
-(global-set-key (kbd "C-c a") 'ack)
 
 (global-set-key (kbd "C-x 2") 'split-window-horizontally)
 (global-set-key (kbd "C-x 3") 'split-window-vertically)
