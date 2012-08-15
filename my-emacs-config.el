@@ -168,6 +168,7 @@ mouse-3: delete other windows"
 ;; auto-mode alist
 (add-to-list 'auto-mode-alist '("\\.po$" . po-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.md$" . gfm-mode))
 
 ;; ack-grep settings
 (setq ack-executable (executable-find "ack-grep"))
@@ -259,7 +260,7 @@ mouse-3: delete other windows"
 (setq ido-enable-flex-matching t)
 (setq ido-auto-merge-work-directories-length -1)
 (global-set-key (kbd "C-x C-x" ) 'ido-switch-buffer)
-(global-set-key (kbd "C-x f") 'ido-find-file)
+(global-set-key (kbd "C-x f") 'ack-find-file)
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
 (global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
 (global-set-key (kbd "C-x C-d" ) 'ido-dired)
