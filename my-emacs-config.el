@@ -48,10 +48,11 @@
 (cua-mode t)
 (cua-selection-mode t)
 
-
 ;; look and feel
 ;; show time on mode-line
 (display-time-mode nil)
+;; show column number in modeline
+(setq column-number-mode t)
 ;; init message and scratch message
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
