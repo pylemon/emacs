@@ -43,7 +43,7 @@
 ;; no autosave file like #filename#
 (setq auto-save-default nil)
 ;; bookmark settings
-(setq bookmark-default-file "~/emacs/bookmarks" bookmark-save-flag 1)
+(setq bookmark-default-file "~/YUNIO/software_configs/bookmarks" bookmark-save-flag 1)
 ;; cua-mode for select text in a retangle area. start it with C-Return
 (cua-mode t)
 (cua-selection-mode t)
