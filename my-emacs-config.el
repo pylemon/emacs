@@ -22,14 +22,11 @@
 (require 'yasnippet-settings)
 (require 'tramp)
 (require 'textmate)
+(require 'weibo)
 
-(textmate-mode)
 ;; basic settings
 ;; use y/n to confirm
 (fset 'yes-or-no-p 'y-or-n-p)
-;; trailling whitespace when save
-(add-hook 'c-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
-(add-hook 'python-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 ;; use middle mouse key to yank
 (setq mouse-yank-at-point t)
 ;; use the x clipboard
@@ -217,7 +214,6 @@ mouse-3: delete other windows"
  'kill-region
  'backward-kill-word)
 
-
 ;; 更加强大的 dired-x
 ;; Load Dired X when Dired is loaded.
 (add-hook 'dired-load-hook '(lambda () (require 'dired-x)))
@@ -227,6 +223,11 @@ mouse-3: delete other windows"
 
 
 ;; programming
+;; trailling whitespace when save
+(add-hook 'c-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+(add-hook 'python-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+;; enable textmate mode
+(textmate-mode)
 ;; autocomplete in orgmode
 (define-key ac-complete-mode-map [tab] 'ac-expand)
 ;; github gist settings
