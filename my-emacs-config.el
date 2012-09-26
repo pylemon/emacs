@@ -21,8 +21,9 @@
 (require 'python-pep8)
 (require 'yasnippet-settings)
 (require 'tramp)
+(require 'textmate)
 
-
+(textmate-mode)
 ;; basic settings
 ;; use y/n to confirm
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -32,7 +33,8 @@
 ;; use middle mouse key to yank
 (setq mouse-yank-at-point t)
 ;; use the x clipboard
-(setq x-select-enable-clipboard t)
+;; 2012-04-22 in GNU Emacs 24.0.93.1, that var is set to t now.
+;; (setq x-select-enable-clipboard t)
 ;; enable show paren mode
 (show-paren-mode t)
 ;; rst-mode colortheme bugfix
@@ -46,11 +48,11 @@
 ;; cua-mode for select text in a retangle area. start it with C-Return
 (cua-mode t)
 (cua-selection-mode t)
-
+(setq list-colors-sort 'hsv)
 
 ;; look and feel
 ;; show filename and path at Frame Title
-(setq frame-title-format "%n%F/%b")
+(setq frame-title-format "%f")
 ;; show time on mode-line
 (display-time-mode nil)
 ;; show column number in modeline
@@ -97,9 +99,11 @@
 (set-face-attribute 'tabbar-separator nil
 		    :height 1.0)
 (defun tabbar-buffer-groups () "tabbar group"
-  (list (cond ((memq major-mode '(shell-mode dired-mode)) "shell")
-	      ((memq major-mode '(c-mode c++-mode)) "cc")
-	      ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
+  (list (cond ((string-equal "*scratch*" (buffer-name)) "emacs")
+	      ((string-equal "*Messages*" (buffer-name)) "emacs")
+	      ;; ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
+	      ;; ((memq major-mode '(c-mode c++-mode)) "cc")
+	      ;; ((memq major-mode '(shell-mode dired-mode)) "shell")
 	      (t "other"))))
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
 
@@ -159,11 +163,75 @@ mouse-3: delete other windows"
 (add-hook 'html-mode-hook 'remove-dos-eo)
 (add-hook 'css-mode-hook 'remove-dos-eo)
 (add-hook 'diff-mode-hook 'remove-dos-eo)
+;;
+;; 进入 incremental search mode 之后，有些命令可以根据光标所在位置补全要查找内容，
+;; 例如 C-w 可以补全一个词。但是如果按多了 C-w 就不能回退了，而且不能精确定位，
+;; 下面的键绑定重新定义了一些常用的光标移动命令，根据光标移动，自动补齐查找内容，
+;; 例如 C-f 自动补齐光标处的一个字符。
+;; (define-key isearch-mode-map (kbd "C-e") 'isearch-move-point)
+;; (define-key isearch-mode-map (kbd "C-a") 'isearch-move-point)
+;; (define-key isearch-mode-map (kbd "M-e") 'isearch-move-point)
+;; (define-key isearch-mode-map (kbd "M-a") 'isearch-move-point)
+;; (define-key isearch-mode-map (kbd "C-M-e") 'isearch-move-point)
+;; (define-key isearch-mode-map (kbd "C-M-a") 'isearch-move-point)
+(define-key isearch-mode-map (kbd "C-f") 'isearch-move-point)
+(define-key isearch-mode-map (kbd "C-b") 'isearch-move-point)
+;; (define-key isearch-mode-map (kbd "M-f") 'isearch-move-point)
+;; (define-key isearch-mode-map (kbd "M-b") 'isearch-move-point)
+;; (define-key isearch-mode-map (kbd "C-M-f") 'isearch-move-point)
+;; (define-key isearch-mode-map (kbd "C-M-b") 'isearch-move-point)
+(defun isearch-move-point ()
+  (interactive)
+  (when isearch-success
+    (save-excursion
+      (let ((overriding-terminal-local-map nil)
+            (old-point (or isearch-other-end (point))))
+        (call-interactively (key-binding (this-command-keys)))
+        (setq isearch-string (buffer-substring-no-properties  old-point
+                                                              (point))
+              isearch-message
+              (mapconcat 'isearch-text-char-description
+                         isearch-string "")
+              ;; Don't move cursor in reverse search.
+              isearch-forward (cond
+                               ((< old-point (point)) t)
+                               ((> old-point (point)) nil)
+                               ((= old-point (point)) isearch-forward))
+              )))
+    (isearch-search-and-update)))
+
+;; 一个 macro ， 可以方便的定义这种双重绑定，也就是，在 mark-active 时运行 一个函数，否则运行另一个函数。
+(defmacro wcy-define-2bind-transient-mode (funname cmd-mark-active
+                                                   cmd-mark-no-active)
+  `(defun ,funname ()
+     (interactive)
+     (if mark-active
+         (call-interactively ,cmd-mark-active)
+       (call-interactively ,cmd-mark-no-active))))
+
+;; 和 bash 中的类似的快键，不用再按 backspace 了。
+(global-set-key  (kbd "C-w") 'wcy-backward-kill-word-or-kill-region)
+(wcy-define-2bind-transient-mode
+ wcy-backward-kill-word-or-kill-region
+ 'kill-region
+ 'backward-kill-word)
+
+
+;; 更加强大的 dired-x
+;; Load Dired X when Dired is loaded.
+(add-hook 'dired-load-hook '(lambda () (require 'dired-x)))
+;; Enable toggling of uninteresting files.
+(setq dired-omit-files-p t)
+
 
 
 ;; programming
+;; autocomplete in orgmode
+(define-key ac-complete-mode-map [tab] 'ac-expand)
 ;; github gist settings
 (setq gist-view-gist t)
+;; electric-pair-mode
+(electric-pair-mode)
 ;; lambda mode settings
 (setq lambda-symbol (string (make-char 'greek-iso8859-7 107)))
 (add-hook 'python-mode-hook 'lambda-mode 1)
@@ -172,25 +240,19 @@ mouse-3: delete other windows"
 (add-to-list 'auto-mode-alist '("\\.po$" . po-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.md$" . gfm-mode))
-
+;; auto insert template when create a new file
+;; (define-auto-insert 'python-mode  "~/emacs/snippets/templates/python.tpl" )
+;; 上面这个方法不知道怎么定义光标的位置
+(define-auto-insert 'python-mode '(nil "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\n"))
+(define-auto-insert 'sh-mode '(nil "#!/bin/bash\n\n"))
+(add-hook 'find-file-hooks 'auto-insert)
+(setq auto-insert-query nil)
 ;; ack-grep settings
 (setq ack-executable (executable-find "ack-grep"))
 (autoload 'ack-same "full-ack" nil t)
 (autoload 'ack "full-ack" nil t)
 (autoload 'ack-find-same-file "full-ack" nil t)
 (autoload 'ack-find-file "full-ack" nil t)
-
-;; org mode settings
-(require 'org-install)
-(require 'org-mobile)
-
-;; mobileorg settings but not working perfect
-;; Set to the location of your Org files on your local system
-(setq org-directory "/home/liwei/org")
-;; Set to the name of the file where new notes will be stored
-(setq org-mobile-inbox-for-pull "/home/liwei/org/flagged.org")
-;; Set to <your Dropbox root directory>/MobileOrg.
-(setq org-mobile-directory "/home/liwei/Ubuntu One/MobileOrg")
 
 ;; PDFs visited in Org-mode are opened in Evince (and other file extensions are handled according to the defaults)
 (add-hook 'org-mode-hook
@@ -205,13 +267,6 @@ mouse-3: delete other windows"
 ))))
 
 
-;; sawfish config
-(require 'sawfish)
-(setq auto-mode-alist (cons '("\\.sawfishrc$"  . sawfish-mode) auto-mode-alist)
-      auto-mode-alist (cons '("\\.jl$"         . sawfish-mode) auto-mode-alist)
-      auto-mode-alist (cons '("\\.sawfish/rc$" . sawfish-mode) auto-mode-alist))
-
-
 ;; keybindings
 ;; tabbar-moving
 ;; (global-set-key (kbd "s-<up>") 'tabbar-backward-group)
@@ -224,17 +279,6 @@ mouse-3: delete other windows"
   (interactive)
   (kill-buffer (current-buffer)))
 (global-set-key (kbd "M-`") 'yic-kill-current-buffer)
-
-;; comment or uncomment region
-(defun qiang-comment-dwim-line (&optional arg)
-  (interactive "*P")
-  (comment-normalize-vars)
-  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
-      (comment-or-uncomment-region
-       (line-beginning-position)
-       (line-end-position))
-    (comment-dwim arg)))
-(global-set-key (kbd "M-;") 'qiang-comment-dwim-line)
 
 ;; copy to clipboard
 (global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
@@ -275,5 +319,21 @@ mouse-3: delete other windows"
 (global-set-key (kbd "<f10>") 'todo-show)
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key (kbd "C-\\") nil)
+
+;; (global-set-key  [A-return] 'textmate-next-line)
+;; (global-set-key  (kbd "A-M-t") 'textmate-clear-cache)
+;; (global-set-key  (kbd "A-M-]") 'align)
+;; (global-set-key  (kbd "A-M-[") 'indent-according-to-mode)
+;; (global-set-key  (kbd "A-]")  'textmate-shift-right)
+;; (global-set-key  (kbd "A-[") 'textmate-shift-left)
+(global-set-key  (kbd "M-;") 'comment-or-uncomment-region-or-line)
+;; (global-set-key  (kbd "A-L") 'textmate-select-line)
+;; (global-set-key  (kbd "A-t") 'textmate-goto-file)
+;; (global-set-key  (kbd "A-T") 'textmate-goto-symbol)
+(global-set-key  (kbd "M-<up>") 'textmate-column-up)
+(global-set-key  (kbd "M-<down>") 'textmate-column-down)
+(global-set-key  (kbd "M-S-<up>") 'textmate-column-up-with-select)
+(global-set-key  (kbd "M-S-<down>") 'textmate-column-down-with-select)
+
 
 (provide 'my-emacs-config)
