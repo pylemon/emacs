@@ -101,6 +101,7 @@
 (defun tabbar-buffer-groups () "tabbar group"
   (list (cond ((string-equal "*scratch*" (buffer-name)) "emacs")
 	      ((string-equal "*Messages*" (buffer-name)) "emacs")
+	      ((string-equal "*Bookmark List*" (buffer-name)) "emacs")
 	      ;; ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
 	      ;; ((memq major-mode '(c-mode c++-mode)) "cc")
 	      ;; ((memq major-mode '(shell-mode dired-mode)) "shell")
