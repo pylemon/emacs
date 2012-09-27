@@ -45,7 +45,12 @@
 ;; cua-mode for select text in a retangle area. start it with C-Return
 (cua-mode t)
 (cua-selection-mode t)
+;; 给list-colors-display的颜色排序
 (setq list-colors-sort 'hsv)
+;; 设定默认的浏览器为 google-chrome
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
+
 
 ;; look and feel
 ;; show filename and path at Frame Title
