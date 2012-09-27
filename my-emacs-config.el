@@ -276,6 +276,9 @@ mouse-3: delete other windows"
 (global-set-key (kbd "s-<left>") 'tabbar-backward)
 (global-set-key (kbd "s-<right>") 'tabbar-forward)
 
+;; weibo
+(global-set-key (kbd "<f12>") 'weibo-timeline)
+
 ;; kill current buffer
 (defun yic-kill-current-buffer ()
   (interactive)
