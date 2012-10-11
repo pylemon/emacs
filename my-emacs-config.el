@@ -1,5 +1,6 @@
 ;; emacs load-path and requirements
 (add-to-list 'load-path "~/emacs/lisps/")
+(require 'tomorrow-night-theme)
 (require 'bookmark)
 (require 'tabbar)
 (require 'uniquify)
