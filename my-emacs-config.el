@@ -325,8 +325,9 @@ mouse-3: delete other windows"
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x p") 'pep8)
 
-(global-set-key (kbd "<f2>") 'nav-in-place)
-(global-set-key (kbd "<f3>") 'grep-find)
+;; (global-set-key (kbd "<f2>") 'nav-in-place)
+;; f3 is for marcos
+;; (global-set-key (kbd "<f3>") 'grep-find)
 (global-set-key (kbd "<f10>") 'todo-show)
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key (kbd "C-\\") nil)
