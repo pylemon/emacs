@@ -23,6 +23,8 @@
 (require 'yasnippet-settings)
 (require 'tramp)
 (require 'textmate)
+(require 'iy-go-to-char)
+(require 'key-chord)
 (require 'weibo)
 
 ;; basic settings
@@ -317,7 +319,7 @@ mouse-3: delete other windows"
 (ido-everywhere t)
 (setq ido-enable-flex-matching t)
 (setq ido-auto-merge-work-directories-length -1)
-(global-set-key (kbd "C-x C-x" ) 'ido-switch-buffer)
+;; (global-set-key (kbd "C-x C-x" ) 'ido-switch-buffer)
 (global-set-key (kbd "C-x f") 'ack-find-file)
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
 (global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
@@ -347,5 +349,12 @@ mouse-3: delete other windows"
 (global-set-key  (kbd "M-S-<up>") 'textmate-column-up-with-select)
 (global-set-key  (kbd "M-S-<down>") 'textmate-column-down-with-select)
 
+;; key-chord define keys
+(key-chord-mode 1)
+(key-chord-define-global "fj" 'iy-go-to-char)
+(key-chord-define-global "fd" 'iy-go-to-char-backward)
+
+;; add semicolon to the end of line
+(key-chord-define javascript-mode-map ";;" "\C-e;")
 
 (provide 'my-emacs-config)
