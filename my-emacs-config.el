@@ -48,12 +48,13 @@
 ;; cua-mode for select text in a retangle area. start it with C-Return
 (cua-mode t)
 (cua-selection-mode t)
-;; 给list-colors-display的颜色排序
+;; sort list-colors-display output colors
 (setq list-colors-sort 'hsv)
-;; 设定默认的浏览器为 google-chrome
+;; make default browser is google-chrome
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
-
+;; set M-f and M-b subword forward
+(global-subword-mode 1)
 
 ;; look and feel
 ;; show filename and path at Frame Title
@@ -169,11 +170,8 @@ mouse-3: delete other windows"
 (add-hook 'html-mode-hook 'remove-dos-eo)
 (add-hook 'css-mode-hook 'remove-dos-eo)
 (add-hook 'diff-mode-hook 'remove-dos-eo)
-;;
-;; 进入 incremental search mode 之后，有些命令可以根据光标所在位置补全要查找内容，
-;; 例如 C-w 可以补全一个词。但是如果按多了 C-w 就不能回退了，而且不能精确定位，
-;; 下面的键绑定重新定义了一些常用的光标移动命令，根据光标移动，自动补齐查找内容，
-;; 例如 C-f 自动补齐光标处的一个字符。
+
+;; make `incremental search mode` more powerful
 ;; (define-key isearch-mode-map (kbd "C-e") 'isearch-move-point)
 ;; (define-key isearch-mode-map (kbd "C-a") 'isearch-move-point)
 ;; (define-key isearch-mode-map (kbd "M-e") 'isearch-move-point)
@@ -227,7 +225,6 @@ mouse-3: delete other windows"
 (add-hook 'dired-load-hook '(lambda () (require 'dired-x)))
 ;; Enable toggling of uninteresting files.
 (setq dired-omit-files-p t)
-
 
 
 ;; programming
@@ -351,7 +348,7 @@ mouse-3: delete other windows"
 
 ;; key-chord define keys
 (key-chord-mode 1)
-(key-chord-define-global "fg" 'iy-go-to-char)
+(key-chord-define-global "ff" 'iy-go-to-char)
 (key-chord-define-global "fd" 'iy-go-to-char-backward)
 
 ;; add semicolon to the end of line
@@ -363,11 +360,12 @@ mouse-3: delete other windows"
 (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
 
 (require 'mark-more-like-this)
-(global-set-key (kbd "C-<") 'mark-previous-like-this)
-(global-set-key (kbd "C->") 'mark-next-like-this)
+;; (global-set-key (kbd "C-<") 'mark-previous-like-this)
+;; (global-set-key (kbd "C->") 'mark-next-like-this)
 (global-set-key (kbd "C-M-m") 'mark-more-like-this) ; like the other two, but takes an argument (negative is previous)
 (global-set-key (kbd "C-*") 'mark-all-like-this)
 
+;; sgml `html` mode 中， 同时修改开始和标签
 (add-hook 'sgml-mode-hook
           (lambda ()
             (require 'rename-sgml-tag)
