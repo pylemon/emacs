@@ -363,6 +363,17 @@ mouse-3: delete other windows"
 (global-set-key  (kbd "M-<down>") 'textmate-column-down)
 (global-set-key  (kbd "M-S-<up>") 'textmate-column-up-with-select)
 (global-set-key  (kbd "M-S-<down>") 'textmate-column-down-with-select)
+;; make cursor movement keys under right hand's home-row.
+;; was tab-to-tab-stop
+;; (global-set-key (kbd "M-i") 'previous-line)
+;; was mark-paragraph
+(global-set-key (kbd "M-h") 'backward-char)
+;; was indent-new-comment-line
+(global-set-key (kbd "M-j") 'next-line)
+;; was kill-sentence
+(global-set-key (kbd "M-k") 'previous-line)
+;; was downcase-word
+(global-set-key (kbd "M-l") 'forward-char)
 
 ;; key-chord define keys
 (key-chord-mode 1)
