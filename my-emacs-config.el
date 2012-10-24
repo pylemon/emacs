@@ -26,6 +26,7 @@
 (require 'iy-go-to-char)
 (require 'key-chord)
 (require 'weibo)
+(require 'dired-x)
 
 ;; basic settings
 ;; use y/n to confirm
@@ -44,7 +45,7 @@
 ;; no autosave file like #filename#
 (setq auto-save-default nil)
 ;; bookmark settings
-(setq bookmark-default-file "~/Yunio/software_configs/bookmarks" bookmark-save-flag 1)
+(setq bookmark-default-file "~/Dropbox/software_configs/bookmarks" bookmark-save-flag 1)
 ;; cua-mode for select text in a retangle area. start it with C-Return
 (cua-mode t)
 (cua-selection-mode t)
@@ -220,20 +221,29 @@ mouse-3: delete other windows"
  'kill-region
  'backward-kill-word)
 
-;; 更加强大的 dired-x
-;; Load Dired X when Dired is loaded.
-(add-hook 'dired-load-hook '(lambda () (require 'dired-x)))
-;; Enable toggling of uninteresting files.
-(setq dired-omit-files-p t)
+;; dired-x omit settings
+(setq dired-omit-files
+      (rx (or (seq bol (? ".") "#")         ;; emacs autosave files
+              (seq bol "." (not (any "."))) ;; dot-files
+              (seq "~" eol)                 ;; backup-files
+              (seq bol "CVS" eol)           ;; CVS dirs
+              )))
+(setq dired-omit-extensions
+      (append dired-latex-unclean-extensions
+              dired-bibtex-unclean-extensions
+              dired-texinfo-unclean-extensions))
+(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 ;; always uses one dired buffer
 (add-hook 'dired-mode-hook
  (lambda ()
   (define-key dired-mode-map (kbd "<return>")
     'dired-find-alternate-file) ; was dired-advertised-find-file
-  (define-key dired-mode-map (kbd "^")
+  (define-key dired-mode-map (kbd "<backspace>")
     (lambda () (interactive) (find-alternate-file "..")))
   ; was dired-up-directory
  ))
+
+
 
 ;; programming
 ;; trailling whitespace when save
