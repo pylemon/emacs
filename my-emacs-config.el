@@ -225,7 +225,15 @@ mouse-3: delete other windows"
 (add-hook 'dired-load-hook '(lambda () (require 'dired-x)))
 ;; Enable toggling of uninteresting files.
 (setq dired-omit-files-p t)
-
+;; always uses one dired buffer
+(add-hook 'dired-mode-hook
+ (lambda ()
+  (define-key dired-mode-map (kbd "<return>")
+    'dired-find-alternate-file) ; was dired-advertised-find-file
+  (define-key dired-mode-map (kbd "^")
+    (lambda () (interactive) (find-alternate-file "..")))
+  ; was dired-up-directory
+ ))
 
 ;; programming
 ;; trailling whitespace when save
@@ -348,7 +356,7 @@ mouse-3: delete other windows"
 
 ;; key-chord define keys
 (key-chord-mode 1)
-(key-chord-define-global "ff" 'iy-go-to-char)
+(key-chord-define-global "jk" 'iy-go-to-char)
 (key-chord-define-global "fd" 'iy-go-to-char-backward)
 
 ;; add semicolon to the end of line
