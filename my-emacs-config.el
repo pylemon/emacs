@@ -249,6 +249,12 @@ mouse-3: delete other windows"
 ;; trailling whitespace when save
 (add-hook 'c-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 (add-hook 'python-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+;; highlight ipdb line in python-mode
+(defun annotate-pdb ()
+  (interactive)
+  (highlight-lines-matching-regexp "import ipdb")
+  (highlight-lines-matching-regexp "ipdb.set_trace()"))
+(add-hook 'python-mode-hook 'annotate-pdb)
 ;; enable textmate mode
 (textmate-mode)
 ;; autocomplete in orgmode
