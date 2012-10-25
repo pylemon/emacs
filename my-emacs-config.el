@@ -1,5 +1,6 @@
 ;; emacs load-path and requirements
 (add-to-list 'load-path "~/emacs/site-lisp/")
+(add-to-list 'load-path "~/emacs/site-lisp/mark-multiple/")
 (require 'tomorrow-night-theme)
 (require 'bookmark)
 (require 'tabbar)
@@ -30,6 +31,9 @@
 (require 'key-chord)
 (require 'weibo)
 (require 'dired-x)
+(require 'pylookup)
+(require 'inline-string-rectangle)
+(require 'mark-more-like-this)
 
 ;; basic settings
 ;; use y/n to confirm
@@ -251,7 +255,6 @@ mouse-3: delete other windows"
 ;; programming
 
 ;; pylookup for get document in python
-(require 'pylookup)
 ;; set executable file and db file
 (setq pylookup-program "~/emacs/pylookup.py")
 (setq pylookup-db-file "~/emacs/pylookup.db")
@@ -262,7 +265,6 @@ mouse-3: delete other windows"
   "Lookup SEARCH-TERM in the Python HTML indexes." t)
 (autoload 'pylookup-update "pylookup"
   "Run pylookup-update and create the database at `pylookup-db-file'." t)
-(global-set-key "\C-ch" 'pylookup-lookup)
 
 ;; trailling whitespace when save
 (add-hook 'c-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
@@ -325,8 +327,8 @@ mouse-3: delete other windows"
 
 ;; keybindings
 ;; tabbar-moving
-;; (global-set-key (kbd "s-<up>") 'tabbar-backward-group)
-;; (global-set-key (kbd "s-<down>") 'tabbar-forward-group)
+(global-set-key (kbd "s-<up>") 'tabbar-backward-group)
+(global-set-key (kbd "s-<down>") 'tabbar-forward-group)
 (global-set-key (kbd "s-<left>") 'tabbar-backward)
 (global-set-key (kbd "s-<right>") 'tabbar-forward)
 
@@ -354,6 +356,7 @@ mouse-3: delete other windows"
 (global-set-key (kbd "C-c o") 'switch-to-other-buffer)
 (global-set-key (kbd "C-c r") 'revert-buffer)
 (global-set-key (kbd "C-c q") 'join-line)
+(global-set-key (kbd "C-c h") 'pylookup-lookup)
 
 (global-set-key (kbd "C-x 2") 'split-window-horizontally)
 (global-set-key (kbd "C-x 3") 'split-window-vertically)
@@ -365,7 +368,6 @@ mouse-3: delete other windows"
 (ido-everywhere t)
 (setq ido-enable-flex-matching t)
 (setq ido-auto-merge-work-directories-length -1)
-;; (global-set-key (kbd "C-x C-x" ) 'ido-switch-buffer)
 (global-set-key (kbd "C-x f") 'ack-find-file)
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
 (global-set-key (kbd "C-x n f") 'ido-find-file-other-frame)
@@ -373,30 +375,15 @@ mouse-3: delete other windows"
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x p") 'pep8)
 
-;; (global-set-key (kbd "<f2>") 'nav-in-place)
-;; f3 is for marcos
-;; (global-set-key (kbd "<f3>") 'grep-find)
 (global-set-key (kbd "<f10>") 'todo-show)
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key (kbd "C-\\") nil)
-
-;; (global-set-key  [A-return] 'textmate-next-line)
-;; (global-set-key  (kbd "A-M-t") 'textmate-clear-cache)
-;; (global-set-key  (kbd "A-M-]") 'align)
-;; (global-set-key  (kbd "A-M-[") 'indent-according-to-mode)
-;; (global-set-key  (kbd "A-]")  'textmate-shift-right)
-;; (global-set-key  (kbd "A-[") 'textmate-shift-left)
 (global-set-key  (kbd "M-;") 'comment-or-uncomment-region-or-line)
-;; (global-set-key  (kbd "A-L") 'textmate-select-line)
-;; (global-set-key  (kbd "A-t") 'textmate-goto-file)
-;; (global-set-key  (kbd "A-T") 'textmate-goto-symbol)
 (global-set-key  (kbd "M-<up>") 'textmate-column-up)
 (global-set-key  (kbd "M-<down>") 'textmate-column-down)
 (global-set-key  (kbd "M-S-<up>") 'textmate-column-up-with-select)
 (global-set-key  (kbd "M-S-<down>") 'textmate-column-down-with-select)
 ;; make cursor movement keys under right hand's home-row.
-;; was tab-to-tab-stop
-;; (global-set-key (kbd "M-i") 'previous-line)
 ;; was mark-paragraph
 (global-set-key (kbd "M-h") 'backward-char)
 ;; was indent-new-comment-line
@@ -415,14 +402,11 @@ mouse-3: delete other windows"
 (key-chord-define javascript-mode-map ";;" "\C-e;")
 
 ;; mark-multiple
-(add-to-list 'load-path "/home/liwei/emacs/site-lisp/mark-multiple/")
-(require 'inline-string-rectangle)
 (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
-
-(require 'mark-more-like-this)
-;; (global-set-key (kbd "C-<") 'mark-previous-like-this)
-;; (global-set-key (kbd "C->") 'mark-next-like-this)
-(global-set-key (kbd "C-M-m") 'mark-more-like-this) ; like the other two, but takes an argument (negative is previous)
+(global-set-key (kbd "C-<") 'mark-previous-like-this)
+(global-set-key (kbd "C->") 'mark-next-like-this)
+;; like the other two, but takes an argument (negative is previous)
+(global-set-key (kbd "C-M-m") 'mark-more-like-this)
 (global-set-key (kbd "C-*") 'mark-all-like-this)
 
 ;; sgml `html` mode 中， 同时修改开始和标签
@@ -430,6 +414,5 @@ mouse-3: delete other windows"
           (lambda ()
             (require 'rename-sgml-tag)
             (define-key sgml-mode-map (kbd "C-c C-r") 'rename-sgml-tag)))
-
 
 (provide 'my-emacs-config)
