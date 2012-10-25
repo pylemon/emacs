@@ -23,9 +23,8 @@
 (require 'python-mode)
 (require 'python-pep8)
 (require 'python-pylint)
-(require 'yasnippet-settings)
+;; (require 'yasnippet-settings)
 (require 'tramp)
-;; (require 'textmate)
 (require 'iy-go-to-char)
 (require 'key-chord)
 (require 'weibo)
@@ -266,6 +265,44 @@ mouse-3: delete other windows"
 (autoload 'pymacs-load "pymacs" nil t)
 (autoload 'pymacs-autoload "pymacs")
 
+;; yasnippet!
+(require 'dropdown-list)
+(setq yas/prompt-functions '(yas/dropdown-prompt
+                             yas/ido-prompt
+                             yas/completing-prompt))
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/emacs/snippets/")
+;; 自动补全的配置
+(require 'auto-complete)
+(global-auto-complete-mode t)
+(setq-default ac-sources '(ac-source-words-in-same-mode-buffers))
+(add-hook 'emacs-lisp-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-symbols)))
+(add-hook 'auto-complete-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-filename)))
+
+(setq company-backends '((company-pycomplete)))
+;; The ac-source can be enabled solely using
+(setq ac-sources '(ac-source-pycomplete))
+;; or before the other sources using
+(add-to-list 'ac-sources 'ac-source-pycomplete)
+
+(setq ac-auto-start 2)
+(setq ac-dwim t)
+
+(define-globalized-minor-mode real-global-auto-complete-mode
+  auto-complete-mode (lambda ()
+		       (if (not (minibufferp (current-buffer)))
+			   (auto-complete-mode 1))))
+(real-global-auto-complete-mode t)
+
+(define-key ac-completing-map "\M-n" 'ac-next)
+(define-key ac-completing-map "\M-p" 'ac-previous)
+(setq ac-auto-start 2)
+(setq ac-dwim t)
+
+;; autocomplete in orgmode
+(define-key ac-complete-mode-map [tab] 'ac-expand)
+
 ;; trailling whitespace when save
 (add-hook 'c-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 (add-hook 'python-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
@@ -283,10 +320,6 @@ mouse-3: delete other windows"
   (highlight-lines-matching-regexp "^[ ]*import ipdb; ipdb.set_trace()"))
 (define-key python-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
 
-;; enable textmate mode
-;; (textmate-mode)
-;; autocomplete in orgmode
-(define-key ac-complete-mode-map [tab] 'ac-expand)
 ;; github gist settings
 (setq gist-view-gist t)
 ;; electric-pair-mode
@@ -380,11 +413,17 @@ mouse-3: delete other windows"
 (global-set-key (kbd "<f10>") 'todo-show)
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key (kbd "C-\\") nil)
+(defun comment-or-uncomment-region-or-line ()
+  "Like comment-or-uncomment-region, but if there's no mark \(that means no
+region\) apply comment-or-uncomment to the current line"
+  (interactive)
+  (if (not mark-active)
+      (comment-or-uncomment-region
+        (line-beginning-position) (line-end-position))
+      (if (< (point) (mark))
+          (comment-or-uncomment-region (point) (mark))
+        (comment-or-uncomment-region (mark) (point)))))
 (global-set-key  (kbd "M-;") 'comment-or-uncomment-region-or-line)
-;; (global-set-key  (kbd "M-<up>") 'textmate-column-up)
-;; (global-set-key  (kbd "M-<down>") 'textmate-column-down)
-;; (global-set-key  (kbd "M-S-<up>") 'textmate-column-up-with-select)
-;; (global-set-key  (kbd "M-S-<down>") 'textmate-column-down-with-select)
 ;; make cursor movement keys under right hand's home-row.
 ;; was mark-paragraph
 (global-set-key (kbd "M-h") 'backward-char)
