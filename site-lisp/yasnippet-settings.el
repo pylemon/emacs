@@ -2,6 +2,11 @@
 
 (require 'auto-complete)
 (require 'yasnippet)
+(require 'dropdown-list)
+(setq yas/prompt-functions '(yas/dropdown-prompt
+                              yas/ido-prompt
+                              yas/completing-prompt))
+
 
 ;; 自动补全的配置
 (add-to-list 'ac-dictionary-directories "~/emacs/auto-complete/ac-dict")
@@ -9,6 +14,12 @@
 (setq-default ac-sources '(ac-source-words-in-same-mode-buffers))
 (add-hook 'emacs-lisp-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-symbols)))
 (add-hook 'auto-complete-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-filename)))
+
+(setq company-backends '((company-pycomplete)))
+;; The ac-source can be enabled solely using
+(setq ac-sources '(ac-source-pycomplete))
+;; or before the other sources using
+(add-to-list 'ac-sources 'ac-source-pycomplete)
 
 (setq ac-auto-start 2)
 (setq ac-dwim t)

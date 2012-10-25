@@ -20,13 +20,12 @@
 (require 'idomenu)
 (require 'ido)
 (require 'wrap-it)
-(require 'ipython)
 (require 'python-mode)
 (require 'python-pep8)
 (require 'python-pylint)
 (require 'yasnippet-settings)
 (require 'tramp)
-(require 'textmate)
+;; (require 'textmate)
 (require 'iy-go-to-char)
 (require 'key-chord)
 (require 'weibo)
@@ -115,6 +114,9 @@
 (defun tabbar-buffer-groups () "tabbar group"
   (list (cond ((string-equal "*scratch*" (buffer-name)) "emacs")
 	      ((string-equal "*Messages*" (buffer-name)) "emacs")
+	      ((string-equal "*Python*" (buffer-name)) "emacs")
+	      ((string-equal "*Completions*" (buffer-name)) "emacs")
+	      ((string-equal "*Compile-Log*" (buffer-name)) "emacs")
 	      ((string-equal "*Bookmark List*" (buffer-name)) "emacs")
 	      ;; ((string-equal "*" (substring (buffer-name) 0 1)) "emacs")
 	      ;; ((memq major-mode '(c-mode c++-mode)) "cc")
@@ -180,18 +182,8 @@ mouse-3: delete other windows"
 (add-hook 'diff-mode-hook 'remove-dos-eo)
 
 ;; make `incremental search mode` more powerful
-;; (define-key isearch-mode-map (kbd "C-e") 'isearch-move-point)
-;; (define-key isearch-mode-map (kbd "C-a") 'isearch-move-point)
-;; (define-key isearch-mode-map (kbd "M-e") 'isearch-move-point)
-;; (define-key isearch-mode-map (kbd "M-a") 'isearch-move-point)
-;; (define-key isearch-mode-map (kbd "C-M-e") 'isearch-move-point)
-;; (define-key isearch-mode-map (kbd "C-M-a") 'isearch-move-point)
 (define-key isearch-mode-map (kbd "C-f") 'isearch-move-point)
 (define-key isearch-mode-map (kbd "C-b") 'isearch-move-point)
-;; (define-key isearch-mode-map (kbd "M-f") 'isearch-move-point)
-;; (define-key isearch-mode-map (kbd "M-b") 'isearch-move-point)
-;; (define-key isearch-mode-map (kbd "C-M-f") 'isearch-move-point)
-;; (define-key isearch-mode-map (kbd "C-M-b") 'isearch-move-point)
 (defun isearch-move-point ()
   (interactive)
   (when isearch-success
@@ -266,12 +258,17 @@ mouse-3: delete other windows"
 (autoload 'pylookup-update "pylookup"
   "Run pylookup-update and create the database at `pylookup-db-file'." t)
 
+;; pymacs
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-autoload "pymacs")
+
 ;; trailling whitespace when save
 (add-hook 'c-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 (add-hook 'python-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
-
-;; set default python shell
-(setq py-shell-name "ipython")
 
 ;; highlight ipdb line in python-mode
 (defun annotate-pdb ()
@@ -279,9 +276,15 @@ mouse-3: delete other windows"
   (highlight-lines-matching-regexp "import ipdb")
   (highlight-lines-matching-regexp "ipdb.set_trace()"))
 (add-hook 'python-mode-hook 'annotate-pdb)
+(defun python-add-breakpoint ()
+  (interactive)
+  (py-newline-and-indent)
+  (insert "import ipdb; ipdb.set_trace()")
+  (highlight-lines-matching-regexp "^[ ]*import ipdb; ipdb.set_trace()"))
+(define-key python-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
 
 ;; enable textmate mode
-(textmate-mode)
+;; (textmate-mode)
 ;; autocomplete in orgmode
 (define-key ac-complete-mode-map [tab] 'ac-expand)
 ;; github gist settings
@@ -296,7 +299,6 @@ mouse-3: delete other windows"
 (add-to-list 'auto-mode-alist '("\\.po$" . po-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.md$" . gfm-mode))
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 
 ;; auto insert template when create a new file
 ;; (define-auto-insert 'python-mode  "~/emacs/snippets/templates/python.tpl" )
@@ -379,10 +381,10 @@ mouse-3: delete other windows"
 (global-set-key (kbd "<XF86WakeUp>") 'set-mark-command)
 (global-set-key (kbd "C-\\") nil)
 (global-set-key  (kbd "M-;") 'comment-or-uncomment-region-or-line)
-(global-set-key  (kbd "M-<up>") 'textmate-column-up)
-(global-set-key  (kbd "M-<down>") 'textmate-column-down)
-(global-set-key  (kbd "M-S-<up>") 'textmate-column-up-with-select)
-(global-set-key  (kbd "M-S-<down>") 'textmate-column-down-with-select)
+;; (global-set-key  (kbd "M-<up>") 'textmate-column-up)
+;; (global-set-key  (kbd "M-<down>") 'textmate-column-down)
+;; (global-set-key  (kbd "M-S-<up>") 'textmate-column-up-with-select)
+;; (global-set-key  (kbd "M-S-<down>") 'textmate-column-down-with-select)
 ;; make cursor movement keys under right hand's home-row.
 ;; was mark-paragraph
 (global-set-key (kbd "M-h") 'backward-char)
