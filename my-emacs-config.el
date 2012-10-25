@@ -19,7 +19,10 @@
 (require 'idomenu)
 (require 'ido)
 (require 'wrap-it)
+(require 'ipython)
+(require 'python-mode)
 (require 'python-pep8)
+(require 'python-pylint)
 (require 'yasnippet-settings)
 (require 'tramp)
 (require 'textmate)
@@ -246,15 +249,35 @@ mouse-3: delete other windows"
 
 
 ;; programming
+
+;; pylookup for get document in python
+(require 'pylookup)
+;; set executable file and db file
+(setq pylookup-program "~/emacs/pylookup.py")
+(setq pylookup-db-file "~/emacs/pylookup.db")
+;; set search option if you want
+(setq pylookup-search-options '("--insensitive" "0" "--desc" "0"))
+;; to speedup, just load it on demand
+(autoload 'pylookup-lookup "pylookup"
+  "Lookup SEARCH-TERM in the Python HTML indexes." t)
+(autoload 'pylookup-update "pylookup"
+  "Run pylookup-update and create the database at `pylookup-db-file'." t)
+(global-set-key "\C-ch" 'pylookup-lookup)
+
 ;; trailling whitespace when save
 (add-hook 'c-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 (add-hook 'python-mode-hook (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
+;; set default python shell
+(setq py-shell-name "ipython")
+
 ;; highlight ipdb line in python-mode
 (defun annotate-pdb ()
   (interactive)
   (highlight-lines-matching-regexp "import ipdb")
   (highlight-lines-matching-regexp "ipdb.set_trace()"))
 (add-hook 'python-mode-hook 'annotate-pdb)
+
 ;; enable textmate mode
 (textmate-mode)
 ;; autocomplete in orgmode
@@ -271,6 +294,8 @@ mouse-3: delete other windows"
 (add-to-list 'auto-mode-alist '("\\.po$" . po-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.md$" . gfm-mode))
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+
 ;; auto insert template when create a new file
 ;; (define-auto-insert 'python-mode  "~/emacs/snippets/templates/python.tpl" )
 ;; 上面这个方法不知道怎么定义光标的位置
