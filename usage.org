@@ -1,0 +1,1259 @@
+* Usage
+
+** helm  
+
+** projectile & helm-projectile
+   C-c p [*]  # helm-projectile
+
+** org
+   checkbox - todos
+
+** help [apropos-...] [describe-...]
+   F1-a => search command function [apropos-command]
+   C-u F1-a => search all functions
+   [emacs-index-search]
+   [elisp-index-search]
+
+** bookmark+
+bmkp-bookmark-set-confirm-overwrite
+bookmark-jump
+bmkp-tag-a-file (create an autofile bookmark)
+bookmark-bmenu-list
+bmkp-describe-bookmark
+bmkp-bmenu-mode-status-help
+
+*** features
+    1. optional bookmark annotation [Bookmark Annotations]
+    2. tag bookmarks [Tagging Files]
+    3. [Autofile Bookmarks]
+    4. bookmark a region of text, not just a position
+
+*** bookmark types
+    1. Autofile bookmarks
+    2. Dired bookmarks
+    3. Dired-tree bookmarks
+    4. Bookmark-list bookmarks
+    5. Desktop bookmarks
+    6. Gnus bookmarks
+    7. Non-file (buffer) bookmarks
+    8. Function bookmarks
+    9. Sequence (composite) bookmarks
+    10. Lisp Variable bookmarks
+    11. Snippet bookmarks
+
+*** [Using Multiple Bookmark Files]
+
+
+*** key bindings
+    C-x p/j *
+
+    bookmark-map – C-x p
+    bmkp-set-map – C-x p c
+    bmkp-jump-map – C-x j
+    bmkp-jump-other-window-map – C-x 4 j
+
+** window frame buffer
+C-x r w <register> to save your current window (all window in current frame) config to that register
+C-x r f <register> to save your current frame (all frames)
+C-x r j <register> to restore the window config at that register
+    
+* Hack Rules
+** TODO 在合适的时候配置emacs,大部分时候使用默认配置
+** TODO 记忆命令对应的函数名而不是快捷键本身
+   
+* Making Emacs Better
+** TODO 添加一个单词检查,就是检查中文和英文单词的东西
+** TODO add yasnippet in init.el not other files
+** TODO 需要一个项目管理的插件. 直接发现某个代码
+** TODO 每个项目有一个bookmark管理
+** TODO 默认的TODO可以添加在这个usage.org里面
+** TODO Emacs的配置文件使用一个呢还是使用多个?如果使用一个,那么需要一个structure的东西,这个东西和org有相似之处
+** TODO emacs window-number OR switch-window - will be used if I works in emacs => add later
+** TODO MultiFrame window,这个frame切换相当于workspace,也许是个不错的功能
+** TODO Add ace-jump to emacs to emacs
+** TODO emacs mark-point jump and pop and a lot to jump
+** TODO C-x C-c not work in ansi-term??
+** TODO create multi anti-term and jump to specific one! - 创建多个shell,实时的跳转过去
+** TODO kill-buffer or delete-window (关键是前面有没有其他的buffer...有的话就是kill没有就是delete)
+** TODO 很多的emacs的功能是...下次如果想改变某个功能,除非简单或者有特别的优势...不然先使用旧的功能几天...不合适再换
+** TODO ipython notebook like ansi-term send a block text
+** TODO evil ggtags ace-jump-mode
+** TODO 1. helm-swoop 不能够使用当前的symbol 2. 里面的排版 line nubmer右对齐 [org structure]
+** TODO pop up window always on [bottom-right-left]
+** TODO ansi-term line-mode & char-mode;; it also need a block-mode! = just ipython notebook
+** TODO a better ein mode - current one looks so ugly! - ansi-term is ugly either
+** TODO helm-swoop --- truncate mode inside
+** TODO helm很多的搜索命令....需要使用C-j才能够跳转过去....是不是直接跳转过去比较好呢[目前 swoop+grep 是可以直接跳转的] - 但是真的需要么...先思考一下,多用几天,看看使用的习惯
+** TODO ggtags可以搜索的是项目里面的tags,但是无法搜索sys/types.h这样的文件,这个如何处理?是不是必须的
+** TODO annot OR bookmark+ OR org-annotate-file => mark & annotation support
+** TODO bookmark+目前解决了bookmark文件的问题 - 还有一个问题就是条目排序,如果可以手工排序就OK了,添加anno的方式也不大好 [先使用一段时间]
+** TODO add kill-buffer & close-window == function || add quit-window function
+** TODO 保存现在的全部工作变量 => 安装一个软件包 => 返回这个工作环境 (workspace looks great)
+** TODO mark-point之间的跳转...这个功能感觉很好用,看看如何管理
+** TODO ggtags use multi tag files
+** TODO restclient => json error....just show html!!!
+** TODO org-restclient
+** TODO a better window control emacs! control windows & mark point
+** TODO company - one char + 0.5 seconds
+** TODO 像pycharm一样的窗口管理 + 那个搜索可以保存的功能 感觉非常不错
+** TODO scroll-bar alwarysoff
+** TODO C-x C-e to eval-region!
+** TODO C-w o => jump to window
+** TODO C-w C-f/b => cicle support
+** TODO maybe => different persp with different bookmark file
+** TODO auto-highlight-symbol did i really need it?
+** TODO always display message in minibuffer-right! not in mode-line
+
+* Hacker
+** TODO workspace-mode : just a new emacs!
+** TODO ipython-notebook OR block-mode[char-mode, line-mode]
+** TODO c-w c-n/c-p skip some buffer
+** TODO Helm search all functions
+** TODO Org-mode source code
+
+* elisp
+#+BEGIN_SRC emacs-lisp
+  ;; defvar defconst defcustom
+
+  ;; defadvice
+
+  ;; (setq setq a)
+  (defadvice er/expand-region ...)
+  (global-set-key (kbd "C-=") 'er/expand-region)
+  (setq global-set-key 1)
+
+  (defun foo (var1 var2 &optional opt1 opt2 &rest rest)
+    (list var1 var2 opt1 opt2 rest))
+
+  ;; (foo 1 2)
+  ;; (1 2 nil nil nil)
+
+  ;; (foo 1 2 3 4)
+  ;; (1 2 3 4 nil)
+
+  ;; (foo 1 2 3 4 5 6)
+  ;; (1 2 3 4 (5 6))
+
+  ;; (foo :a 1 :b 2 :c 3)
+  ;; (:a 1 :b 2 (:c 3))
+
+
+  ;; defvar : 只能设置一次,无法覆盖(但是元素的值是可变的)
+  ;; defcustom setq
+
+  ;; defadvice
+
+  ;; http://ergoemacs.org/emacs/elisp_library_system.html
+  ;; load-file load require autoload
+#+END_SRC
+* Introduction
+
+* Lisp Data Types
+   A few fundamental object types are built into Emacs.  These, from
+which all other types are constructed, are called "primitive types".
+Each object belongs to one and only one primitive type.  These types
+include "integer", "float", "cons", "symbol", "string", "vector",
+"hash-table", "subr", and "byte-code function", plus several special
+types, such as "buffer", that are related to editing.
+
+#+BEGIN_SRC emacs-lisp
+  (current-buffer)
+#+END_SRC
+
+** Programming Types
+*** Interger Type
+   The read syntax for integers is a sequence of (base ten) digits with
+an optional sign at the beginning and an optional period at the end.
+The printed representation produced by the Lisp interpreter never has a
+leading `+' or a final `.'.
+
+     -1               ; The integer -1.
+     1                ; The integer 1.
+     1.               ; Also the integer 1.
+     +1               ; Also the integer 1.
+
+As a special exception, if a sequence of digits specifies an integer
+too large or too small to be a valid integer object, the Lisp reader
+reads it as a floating-point number (*note Floating-Point Type::).  For
+instance, if Emacs integers are 30 bits, `536870912' is read as the
+floating-point number `536870912.0'.
+
+*** Floating-Point Type
+Emacs uses the C data type `double' to store the value, and internally
+this records a power of 2 rather than a power of 10.
+
+*** Character Type
+A "character" in Emacs Lisp is nothing more than an integer.
+
+The usual read syntax for alphanumeric characters is a question mark
+followed by the character; thus, `?A' for the character `A', `?B' for
+the character `B', and `?a' for the character `a'.
+
+     ?\a => 7                 ; control-g, `C-g'
+     ?\b => 8                 ; backspace, <BS>, `C-h'
+     ?\t => 9                 ; tab, <TAB>, `C-i'
+     ?\n => 10                ; newline, `C-j'
+     ?\v => 11                ; vertical tab, `C-k'
+     ?\f => 12                ; formfeed character, `C-l'
+     ?\r => 13                ; carriage return, <RET>, `C-m'
+     ?\e => 27                ; escape character, <ESC>, `C-['
+     ?\s => 32                ; space character, <SPC>
+     ?\\ => 92                ; backslash character, `\'
+     ?\d => 127               ; delete character, <DEL>
+
+*** Symbol Type
+A "symbol" in GNU Emacs Lisp is an object with a name.  The symbol name
+serves as the printed representation of the symbol.  In ordinary Lisp
+use, with one single obarray (*note Creating Symbols::), a symbol's
+name is unique--no two symbols have the same name.
+
+A symbol whose name starts with a colon (`:') is called a "keyword
+symbol".  These symbols automatically act as constants, and are
+normally used only by comparing an unknown symbol with a few specific
+alternatives.  *Note Constant Variables::.
+
+
+*** Sequence Type
+A "sequence" is a Lisp object that represents an ordered set of
+elements.  There are two kinds of sequence in Emacs Lisp: "lists" and
+"arrays".
+
+Arrays are fixed-length sequences.
+
+There is one exception: the empty list `()' always stands for the same
+object, `nil'.
+
+*** Cons Cell and List Type
+car cdr
+
+#+BEGIN_SRC emacs-lisp
+  (car '(1 2 3))
+
+  (a) => (a . nil)
+  (a . b)
+  (1 2 3) => (1 . (2 . (3 . nil)))
+
+  (setq alist-of-colors
+        '((rose . red) (lily . white) (buttercup . yellow)))
+#+END_SRC
+
+*** Array Type
+Emacs defines four types of array: strings, vectors, bool-vectors,
+and char-tables.
+
+   A string is an array of characters and a vector is an array of
+arbitrary objects.  A bool-vector can hold only `t' or `nil'.  These
+kinds of array may have any length up to the largest integer.
+Char-tables are sparse arrays indexed by any valid character code; they
+can hold arbitrary objects.
+
+*** String Type
+The read syntax for a string is a double-quote, an arbitrary number of
+characters, and another double-quote, `"like this"'.  To include a
+double-quote in a string, precede it with a backslash; thus, `"\""' is
+a string containing just a single double-quote character.  Likewise,
+you can include a backslash by preceding it with another backslash,
+like this: `"this \\ is a single embedded backslash"'.
+
+**** Non-ASCII Characters in Strings				      :later:
+
+*** Vector Type
+A "vector" is a one-dimensional array of elements of any type.
+
+     [1 "two" (three)]      ; A vector of three elements.
+          => [1 "two" (three)]
+
+*** Char-Table Type
+A "char-table" is a one-dimensional array of elements of any type,
+indexed by character codes.     
+
+*** Bool-Vector Type
+A "bool-vector" is a one-dimensional array whose elements must be `t'
+or `nil'.
+
+*** Hash Table Type
+
+*** Function Type
+Lisp functions are executable code, just like functions in other
+programming languages.  In Lisp, unlike most languages, functions are
+also Lisp objects.  A non-compiled function in Lisp is a lambda
+expression: that is, a list whose first element is the symbol `lambda'
+(*note Lambda Expressions::).
+
+   In most programming languages, it is impossible to have a function
+without a name.  In Lisp, a function has no intrinsic name.  A lambda
+expression can be called as a function even though it has no name; to
+emphasize this, we also call it an "anonymous function" (*note
+Anonymous Functions::).  A named function in Lisp is just a symbol with
+a valid function in its function cell (*note Defining Functions::).
+
+   Most of the time, functions are called when their names are written
+in Lisp expressions in Lisp programs.  However, you can construct or
+obtain a function object at run time and then call it with the primitive
+functions `funcall' and `apply'.  *Note Calling Functions::.
+
+*** Macro Type
+
+*** Primitive Function Type
+A "primitive function" is a function callable from Lisp but written in
+the C programming language.
+
+*** Byte-Code Function Type
+
+*** Autoload Type
+An "autoload object" is a list whose first element is the symbol
+`autoload'.  It is stored as the function definition of a symbol, where
+it serves as a placeholder for the real definition.  The autoload
+object says that the real definition is found in a file of Lisp code
+that should be loaded when necessary.  It contains the name of the file,
+plus some other information about the real definition.
+
+** Editing Types
+*** Buffer Type
+A "buffer" is an object that holds text that can be edited (*note
+Buffers::).  Most buffers hold the contents of a disk file (*note
+Files::) so they can be edited, but some are used for other purposes.
+Most buffers are also meant to be seen by the user, and therefore
+displayed, at some time, in a window (*note Windows::).  But a buffer
+need not be displayed in any window.  Each buffer has a designated
+position called "point" (*note Positions::); most editing commands act
+on the contents of the current buffer in the neighborhood of point.  At
+any time, one buffer is the "current buffer".
+
+   Many of the standard Emacs functions manipulate or test the
+characters in the current buffer; a whole chapter in this manual is
+devoted to describing these functions (*note Text::).
+
+   Several other data structures are associated with each buffer:
+
+   * a local syntax table (*note Syntax Tables::);
+
+   * a local keymap (*note Keymaps::); and,
+
+   * a list of buffer-local variable bindings (*note Buffer-Local
+     Variables::).
+
+   * overlays (*note Overlays::).
+
+   * text properties for the text in the buffer (*note Text
+     Properties::).
+
+The local keymap and variable list contain entries that individually
+override global bindings or values.  These are used to customize the
+behavior of programs in different buffers, without actually changing the
+programs.
+
+   A buffer may be "indirect", which means it shares the text of
+another buffer, but presents it differently.  *Note Indirect Buffers::.
+
+*** Marker Type
+A "marker" denotes a position in a specific buffer.  Markers therefore
+have two components: one for the buffer, and one for the position.
+Changes in the buffer's text automatically relocate the position value
+as necessary to ensure that the marker always points between the same
+two characters in the buffer.
+
+   Markers have no read syntax.  They print in hash notation, giving the
+current character position and the name of the buffer.
+
+     (point-marker)
+          => #<marker at 10779 in objects.texi>
+
+*** Window Type
+A "window" describes the portion of the terminal screen that Emacs uses
+to display a buffer.  Every window has one associated buffer, whose
+contents appear in the window.  By contrast, a given buffer may appear
+in one window, no window, or several windows.
+
+Windows are grouped on the screen into frames; each window belongs to
+one and only one frame.  *Note Frame Type::.
+
+     (selected-window)
+          => #<window 1 on objects.texi>
+
+*** Frame Type
+A "frame" is a screen area that contains one or more Emacs windows; we
+also use the term "frame" to refer to the Lisp object that Emacs uses
+to refer to the screen area.
+
+     (selected-frame)
+          => #<frame emacs@psilocin.gnu.org 0xdac80>
+
+*** Terminal Type
+A "terminal" is a device capable of displaying one or more Emacs frames
+(*note Frame Type::).
+
+*** Window Configuration Type
+A "window configuration" stores information about the positions, sizes,
+and contents of the windows in a frame, so you can recreate the same
+arrangement of windows later.
+
+*** Frame Configuration Type
+A "frame configuration" stores information about the positions, sizes,
+and contents of the windows in all frames.  It is not a primitive
+type--it is actually a list whose CAR is `frame-configuration' and
+whose CDR is an alist.  Each alist element describes one frame, which
+appears as the CAR of that element.
+
+*** Process Type
+
+The word "process" usually means a running program.  Emacs itself runs
+in a process of this sort.  However, in Emacs Lisp, a process is a Lisp
+object that designates a subprocess created by the Emacs process.
+Programs such as shells, GDB, ftp, and compilers, running in
+subprocesses of Emacs, extend the capabilities of Emacs.    An Emacs
+subprocess takes textual input from Emacs and returns textual output to
+Emacs for further manipulation.  Emacs can also send signals to the
+subprocess.
+
+   Process objects have no read syntax.  They print in hash notation,
+giving the name of the process:
+
+     (process-list)
+          => (#<process shell>)
+
+*** Stream Type
+A "stream" is an object that can be used as a source or sink for
+characters--either to supply characters for input or to accept them as
+output.
+
+*** Keymap Type
+A "keymap" maps keys typed by the user to commands.  This mapping
+controls how the user's command input is executed.  A keymap is actually
+a list whose CAR is the symbol `keymap'.
+
+*** Overlay Type
+An "overlay" specifies properties that apply to a part of a buffer.
+Each overlay applies to a specified range of the buffer, and contains a
+property list (a list whose elements are alternating property names and
+values).  Overlay properties are used to present parts of the buffer
+temporarily in a different display style.  Overlays have no read
+syntax, and print in hash notation, giving the buffer name and range of
+positions.
+
+*** Font Type
+A "font" specifies how to display text on a graphical terminal.  There
+are actually three separate font types--"font objects", "font specs",
+and "font entities"--each of which has slightly different properties.
+
+** Read Syntax for Circular Objects
+To represent shared or circular structures within a complex of Lisp
+objects, you can use the reader constructs `#N=' and `#N#'.
+
+   Use `#N=' before an object to label it for later reference;
+subsequently, you can use `#N#' to refer the same object in another
+place.  Here, N is some integer.  For example, here is how to make a
+list in which the first element recurs as the third element:
+
+     (#1=(a) b #1#)
+
+This differs from ordinary syntax such as this
+
+     ((a) b (a))
+
+which would result in a list whose first and third elements look alike
+but are not the same Lisp object.  This shows the difference:
+
+     (prog1 nil
+       (setq x '(#1=(a) b #1#)))
+     (eq (nth 0 x) (nth 2 x))
+          => t
+     (setq x '((a) b (a)))
+     (eq (nth 0 x) (nth 2 x))
+          => nil
+
+   You can also use the same syntax to make a circular structure, which
+appears as an "element" within itself.  Here is an example:
+
+     #1=(a #1#)
+
+This makes a list whose second element is the list itself.  Here's how
+you can see that it really works:
+
+     (prog1 nil
+       (setq x '#1=(a #1#)))
+     (eq x (cadr x))
+          => t
+
+** Type Predicates
+`atom'
+`arrayp'
+`bool-vector-p'
+`bufferp'
+`byte-code-function-p'
+`case-table-p'
+`char-or-string-p'
+`char-table-p'
+`commandp'
+`consp'
+`custom-variable-p'
+`display-table-p'
+`floatp'
+`fontp'
+`frame-configuration-p'
+`frame-live-p'
+`framep'
+`functionp'
+`hash-table-p'
+`integer-or-marker-p'
+`integerp'
+`keymapp'
+`keywordp'
+`listp'
+`markerp'
+`wholenump'
+`nlistp'
+`numberp'
+`number-or-marker-p'
+`overlayp'
+`processp'
+`sequencep'
+`stringp'
+`subrp'
+`symbolp'
+`syntax-table-p'
+`vectorp'
+`window-configuration-p'
+`window-live-p'
+`windowp'
+`booleanp'
+`string-or-null-p'
+
+ -- Function: type-of object
+     This function returns a symbol naming the primitive type of
+     OBJECT.  The value is one of the symbols `bool-vector', `buffer',
+     `char-table', `compiled-function', `cons', `float', `font-entity',
+     `font-object', `font-spec', `frame', `hash-table', `integer',
+     `marker', `overlay', `process', `string', `subr', `symbol',
+     `vector', `window', or `window-configuration'.
+
+          (type-of 1)
+               => integer
+          (type-of 'nil)
+               => symbol
+          (type-of '())    ; `()' is `nil'.
+               => symbol
+          (type-of '(x))
+               => cons
+
+** Equality Predicates
+-- Function: eq object1 object2
+    This function returns `t' if OBJECT1 and OBJECT2 are the same
+    object, and `nil' otherwise.
+
+-- Function: equal object1 object2
+    This function returns `t' if OBJECT1 and OBJECT2 have equal
+    components, and `nil' otherwise.  Whereas `eq' tests if its
+    arguments are the same object, `equal' looks inside nonidentical
+    arguments to see if their elements or contents are the same.  So,
+    if two objects are `eq', they are `equal', but the converse is not
+    always true.
+
+-- Function: equal-including-properties object1 object2
+    This function behaves like `equal' in all cases but also requires
+    that for two strings to be equal, they have the same text
+    properties.
+
+* Numbers
+To test numbers for numerical equality, you should normally use `=',
+not `eq'.  There can be many distinct floating-point objects with the
+same numeric value.  If you use `eq' to compare them, then you test
+whether two values are the same _object_.  By contrast, `=' compares
+only the numeric values of the objects.
+
+   In Emacs Lisp, each integer is a unique Lisp object.  Therefore,
+`eq' is equivalent to `=' where integers are concerned.  It is
+sometimes convenient to use `eq' for comparing an unknown value with an
+integer, because `eq' does not report an error if the unknown value is
+not a number--it accepts arguments of any type.  By contrast, `='
+signals an error if the arguments are not numbers or markers.  However,
+it is better programming practice to use `=' if you can, even for
+comparing integers.
+
+* Strings and Characters 
+** String and Character Basics
+   A string is a fixed sequence of characters.  It is a type of
+sequence called a "array", meaning that its length is fixed and cannot
+be altered once it is created (*note Sequences Arrays Vectors::).
+Unlike in C, Emacs Lisp strings are _not_ terminated by a distinguished
+character code.
+
+** Creating Strings
+
+* Lists
+A "list" represents a sequence of zero or more elements (which may be
+any Lisp objects).  The important difference between lists and vectors
+is that two or more lists can share part of their structure; in
+addition, you can insert or delete elements in a list without copying
+the whole list.
+
+** Cons Cells
+Lists in Lisp are not a primitive data type; they are built up from
+"cons cells" (*note Cons Cell Type::).  A cons cell is a data object
+that represents an ordered pair.  That is, it has two slots, and each
+slot "holds", or "refers to", some Lisp object.  One slot is known as
+the CAR, and the other is known as the CDR.  (These names are
+traditional; see *note Cons Cell Type::.)  CDR is pronounced "could-er".
+
+** Building Cons Cells and Lists
+
+** Using Lists as Sets
+
+** Association Lists
+
+** Property Lists
+
+* Sequences, Arrays, and Vectors
+
+* Hash Tables
+
+* Symbols
+A "symbol" is an object with a unique name.  This chapter describes
+symbols, their components, their property lists, and how they are
+created and interned.
+
+** Symbol Components
+Each symbol has four components (or "cells"), each of which references
+another object:
+
+Print name
+     The symbol's name.
+
+Value
+     The symbol's current value as a variable.
+
+Function
+     The symbol's function definition.  It can also hold a symbol, a
+     keymap, or a keyboard macro.
+
+Property list
+     The symbol's property list.
+
+   The property list cell normally should hold a correctly formatted
+property list.  To get a symbol's property list, use the function
+`symbol-plist'.  *Note Symbol Properties::.
+
+** Defining Symbols
+   `defvar' and `defconst' are special forms that define a symbol as a
+"global variable"--a variable that can be accessed at any point in a
+Lisp program.
+
+   `defmacro' defines a symbol as a macro.  It creates a macro object
+and stores it in the function cell of the symbol.  Note that a given
+symbol can be a macro or a function, but not both at once, because both
+macro and function definitions are kept in the function cell, and that
+cell can hold only one Lisp object at any given time.
+
+** Creating and Interning Symbols
+Name - Value - Function - Properties
+'symbol => object
+(.. symbol-value) => value
+(symbol-fun ...) => function
+(get/put 'symbol ...) => properties
+name - for us to read ~
+
+   Interning ensures that each obarray has just one symbol with any
+particular name.  Other like-named symbols may exist, but not in the
+same obarray.  Thus, the reader gets the same symbols for the same
+names, as long as you keep reading with the same obarray.
+
+   Interning usually happens automatically in the reader, but sometimes
+other programs need to do it.  For example, after the `M-x' command
+obtains the command name as a string using the minibuffer, it then
+interns the string, to get the interned symbol with that name.
+
+   No obarray contains all symbols; in fact, some symbols are not in any
+obarray.  They are called "uninterned symbols".  An uninterned symbol
+has the same four cells as other symbols; however, the only way to gain
+access to it is by finding it in some other object or as the value of a
+variable.
+   
+** Symbol Properties
+*** Accessing Symbol Propertyies
+(symbol-plist 'fly)
+
+*** Standard Symbol Properties
+
+* Evaluation
+The "evaluation" of expressions in Emacs Lisp is performed by the "Lisp
+interpreter"--a program that receives a Lisp object as input and
+computes its "value as an expression".  How it does this depends on the
+data type of the object, according to rules described in this chapter.
+The interpreter runs automatically to evaluate portions of your
+program, but can also be called explicitly via the Lisp primitive
+function `eval'.
+
+** Introduction to Evaluation
+
+** Kinds of Forms
+Emacs has three different kinds of form that are evaluated differently:
+symbols, lists, and "all other types".
+
+*** Self-Evaluating Forms
+
+*** Symbol Forms
+When a symbol is evaluated, it is treated as a variable.
+
+The symbols `nil' and `t' are treated specially, so that the value
+of `nil' is always `nil', and the value of `t' is always `t'; you
+cannot set or bind them to any other values.
+
+*** Classification of List Forms
+1. a function call
+2. a macro call
+3. a special form
+
+*** Symbol Function Indirection
+If the first element of the list is a symbol then evaluation examines
+the symbol's function cell, and uses its contents instead of the
+original symbol.  If the contents are another symbol, this process,
+called "symbol function indirection", is repeated until it obtains a
+non-symbol.
+
+*** Evaluation of Function Forms
+
+*** Lisp Macro Evaluation
+The macro definition computes a replacement form, called the
+"expansion" of the macro, to be evaluated in place of the original
+form.  The expansion may be any sort of form: a self-evaluating
+constant, a symbol, or a list.
+
+*** Special Forms
+A "special form" is a primitive function specially marked so that its
+arguments are not all evaluated.  Most special forms define control
+structures or perform variable bindings--things which functions cannot
+do.
+
+   Each special form has its own rules for which arguments are evaluated
+and which are used without evaluation.  Whether a particular argument is
+evaluated may depend on the results of evaluating other arguments.
+
+   If an expression's first symbol is that of a special form, the
+expression should follow the rules of that special form; otherwise,
+Emacs's behavior is not well-defined (though it will not crash).  For
+example, `((lambda (x) x . 3) 4)' contains a subexpression that begins
+with `lambda' but is not a well-formed `lambda' expression, so Emacs
+may signal an error, or may return 3 or 4 or `nil', or may behave in
+other ways.
+
+
+   Here is a list, in alphabetical order, of all of the special forms in
+Emacs Lisp with a reference to where each is described.
+
+    `and'
+    `catch'
+    `cond'
+    `condition-case'
+    `defconst'
+    `defvar'
+    `function'
+    `if'
+    `interactive'
+    `lambda'
+    `let'
+    `let*'
+    `or'
+    `prog1'
+    `prog2'
+    `progn'
+    `quote'
+    `save-current-buffer'
+    `save-excursion'
+    `save-restriction'
+    `setq'
+    `setq-default'
+    `track-mouse'
+    `unwind-protect'
+    `while'
+
+*** Autoloading
+The "autoload" feature allows you to call a function or macro whose
+function definition has not yet been loaded into Emacs.  It specifies
+which file contains the definition.  When an autoload object appears as
+a symbol's function definition, calling that symbol as a function
+automatically loads the specified file; then it calls the real
+definition loaded from that file.
+
+** Quoting
+(type-of (car '(aa 1 1)))  => symbol
+
+The special form `quote' returns its single argument, as written,
+without evaluating it.  This provides a way to include constant symbols
+and lists, which are not self-evaluating objects, in a program.  (It is
+not necessary to quote self-evaluating objects such as numbers, strings,
+and vectors.)
+
+** Backquote
+`(1 2 (3 ,(+ 4 5)))
+     => (1 2 (3 9))
+
+** Eval
+Function: eval form &optional lexical
+Command: eval-region start end &optional stream read-function
+Command: eval-buffer &optional buffer-or-name stream filename unibyte print
+
+* Control Structures
+** Sequencing
+(prog1 ...)
+(prog2 ...)
+(progn A B C ...)
+
+** Conditions
+(if condition then-form else-forms...)  => non-nil
+(when condition then-forms...)
+(unless condition then-forms...)
+
+(cond clause...)
+clause=> (CONDITION BODY-FORMS...)
+
+*** Pattern matching case statement
+(pcase (get-return-code x)
+  (`success       (message "Done!"))
+  (`would-block   (message "Sorry, can't do it now"))
+  (`read-only     (message "The shmliblick is read-only"))
+  (`access-denied (message "You do not have the needed rights"))
+  (code           (message "Unknown return code %S" code)))
+
+   In the last clause, `code' is a variable that gets bound to the
+value that was returned by `(get-return-code x)'.
+
+** Constructs for Combining Conditions
+(not condition)
+(and conditions...)
+(or conditions...)
+
+** Iteration
+Iteration means executing part of a program repetitively.
+
+(while condition forms...)
+(dolist (var list [result]) body...)
+(dotimes (var count [result]) body...)
+
+** Nonlocal Exits
+A "nonlocal exit" is a transfer of control from one point in a program
+to another remote point.  Nonlocal exits can occur in Emacs Lisp as a
+result of errors; you can also use them under explicit control.
+Nonlocal exits unbind all variable bindings made by the constructs being
+exited.
+
+*** Explicit Nonlocal Exits: `catch' and `throw'
+(catch tag body...)
+(throw tag value)
+
+Most control constructs affect only the flow of control within the
+construct itself.  The function `throw' is the exception to this rule
+of normal program execution: it performs a nonlocal exit on request.
+(There are other exceptions, but they are for error handling only.)
+`throw' is used inside a `catch', and jumps back to that `catch'.  For
+example:
+
+     (defun foo-outer ()
+       (catch 'foo
+         (foo-inner)))
+
+     (defun foo-inner ()
+       ...
+       (if x
+           (throw 'foo t))
+       ...)
+
+The `throw' form, if executed, transfers control straight back to the
+corresponding `catch', which returns immediately.  The code following
+the `throw' is not executed.  The second argument of `throw' is used as
+the return value of the `catch'.
+
+   The function `throw' finds the matching `catch' based on the first
+argument: it searches for a `catch' whose first argument is `eq' to the
+one specified in the `throw'.  If there is more than one applicable
+`catch', the innermost one takes precedence.  Thus, in the above
+example, the `throw' specifies `foo', and the `catch' in `foo-outer'
+specifies the same symbol, so that `catch' is the applicable one
+(assuming there is no other matching `catch' in between).
+
+*** Errors
+**** How to Signal an Error
+   Most errors are signaled "automatically" within Lisp primitives
+which you call for other purposes, such as if you try to take the CAR
+of an integer or move forward a character at the end of the buffer.
+You can also signal errors explicitly with the functions `error' and
+`signal'.
+
+   Quitting, which happens when the user types `C-g', is not considered
+an error, but it is handled almost like an error.
+
+Function: error format-string &rest args
+Function: signal error-symbol data
+Function: user-error format-string &rest args
+
+**** How Emacs Processing Errors
+
+**** Writing Code to Handle Errors
+A simple example looks like this:
+
+     (condition-case nil
+         (delete-file filename)
+       (error nil))
+
+This deletes the file named FILENAME, catching any error and returning
+`nil' if an error occurs.  (You can use the macro `ignore-errors' for a
+simple case like this; see below.)
+
+**** Error Symbols and Condition Names
+When you signal an error, you specify an "error symbol" to specify the
+kind of error you have in mind.  Each error has one and only one error
+symbol to categorize it.  This is the finest classification of errors
+defined by the Emacs Lisp language.
+
+Function: define-error name message &optional parent
+
+**** Cleaning Up from Nonlocal Exits
+The `unwind-protect' construct is essential whenever you temporarily
+put a data structure in an inconsistent state; it permits you to make
+the data consistent again in the event of an error or throw.
+
+Special Form: unwind-protect body-form cleanup-forms...
+
+* Variables
+A "variable" is a name used in a program to stand for a value.  In
+Lisp, each variable is represented by a Lisp symbol (*note Symbols::).
+The variable name is simply the symbol's name, and the variable's value
+is stored in the symbol's value cell. 
+In Emacs Lisp, the use of a symbol as a variable is independent of its
+use as a function name.
+
+** Global Variables
+(setq x '(a b))
+
+** Variables tha Never Change
+
+** Local Variables
+Special Form: let (bindings...) forms...
+Special Form: let* (bindings...) forms...
+
+** When a Variable is "Void"
+We say that a variable is void if its symbol has an unassigned value
+cell.
+
+** Define Global Variables
+defvar defconst 
+
+** Setting Variable Values
+Special Form: setq [symbol form]...
+Function: set symbol value
+
+** Scoping Rules for Variable Bindings
+   By default, the local bindings that Emacs creates are "dynamic
+bindings".  Such a binding has "dynamic scope", meaning that any part
+of the program can potentially access the variable binding.  It also
+has "dynamic extent", meaning that the binding lasts only while the
+binding construct (such as the body of a `let' form) is being executed.
+
+   Emacs can optionally create "lexical bindings".  A lexical binding
+has "lexical scope", meaning that any reference to the variable must be
+located textually within the binding construct(1).  It also has
+"indefinite extent", meaning that under some circumstances the binding
+can live on even after the binding construct has finished executing, by
+means of special objects called "closures".
+
+*** Dynamic Binding
+   By default, the local variable bindings made by Emacs are dynamic
+bindings.  When a variable is dynamically bound, its current binding at
+any point in the execution of the Lisp program is simply the most
+recently-created dynamic local binding for that symbol, or the global
+binding if there is no such local binding.
+
+*** Lexical Binding
+   A lexically-bound variable has "lexical scope", meaning that any
+reference to the variable must be located textually within the binding
+construct.
+
+** Buffer-local Variables
+   Emacs, however, also supports additional, unusual kinds of variable 
+binding, such as "buffer-local" bindings, which apply only in one buffer.  
+Having different values for a variable in different buffers is an 
+important customization method.
+
+*** Introduction to Buffer-Local Variables
+   A buffer-local variable has a buffer-local binding associated with a
+particular buffer.  The binding is in effect when that buffer is
+current; otherwise, it is not in effect.  If you set the variable while
+a buffer-local binding is in effect, the new value goes in that binding,
+so its other bindings are unchanged.  This means that the change is
+visible only in the buffer where you made it.
+
+   A variable can have buffer-local bindings in some buffers but not in
+other buffers.  The default binding is shared by all the buffers that
+don't have their own bindings for the variable.  (This includes all
+newly-created buffers.)  If you set the variable in a buffer that does
+not have a buffer-local binding for it, this sets the default binding,
+so the new value is visible in all the buffers that see the default
+binding.
+
+   The usual way to make a buffer-local binding is with
+`make-local-variable', which is what major mode commands typically use.
+This affects just the current buffer; all other buffers (including
+those yet to be created) will continue to share the default value unless
+they are explicitly given their own buffer-local bindings.
+
+   A more powerful operation is to mark the variable as "automatically
+buffer-local" by calling `make-variable-buffer-local'.  You can think
+of this as making the variable local in all buffers, even those yet to
+be created.  More precisely, the effect is that setting the variable
+automatically makes the variable local to the current buffer if it is
+not already so. 
+
+*** Creating and Deleting Buffer-Local Bindings
+Command: make-local-variable variable
+Macro: setq-local variable value
+Command: make-variable-buffer-local variable
+Macro: defvar-local variable value &optional docstring
+...
+
+*** The Default Value of a Buffer-Local Variable
+
+*** File Local Variables
+A file can specify local variable values; Emacs uses these to create
+buffer-local bindings for those variables in the buffer visiting that
+file.
+
+*** Directory Local Variables
+
+*** Variable Aliases
+It is sometimes useful to make two variables synonyms, so that both
+variables always have the same value, and changing either one also
+changes the other.  Whenever you change the name of a variable--either
+because you realize its old name was not well chosen, or because its
+meaning has partly changed--it can be useful to keep the old name as an
+_alias_ of the new one for compatibility.  You can do this with
+`defvaralias'.
+
+*** Variables with Restricted Values
+
+*** Generalized Variables
+Generalized variables are analogous to "lvalues" in the C language.
+
+* Functions
+** What Is a Function
+   In most computer languages, every function has a name.  But in Lisp,
+a function in the strictest sense has no name: it is an object which
+can _optionally_ be associated with a symbol (e.g., `car') that serves
+as the function name.
+
+- lambda expression 
+  A function (in the strict sense, i.e., a function object) which is
+  written in Lisp.
+- primitive
+  A function which is callable from Lisp but is actually written in
+  C.
+- special form
+  A primitive that is like a function but does not evaluate all of
+  its arguments in the usual way.
+- macro
+  A construct defined in Lisp, which differs from a function in that
+  it translates a Lisp expression into another expression which is
+  to be evaluated instead of the original expression.
+- command
+  An object which can be invoked via the `command-execute'
+  primitive, usually due to the user typing in a key sequence
+  "bound" to that command.
+- closure
+  A function object that is much like a lambda expression, except
+  that it also encloses an "environment" of lexical variable
+  bindings.
+- byte-code function
+  A function that has been compiled by the byte compiler.
+- autoload object
+  A place-holder for a real function.  If the autoload object is
+  called, Emacs loads the file containing the definition of the real
+  function, and then calls the real function.
+
+** Lambda Expressions
+A lambda expression is a function object written in Lisp.   
+
+*** Components of a Lambda Expression
+(lambda (ARG-VARIABLES...)
+  [DOCUMENTATION-STRING]
+  [INTERACTIVE-DECLARATION]
+  BODY-FORMS...)
+
+*** Other Features of Argument Lists
+Thus, the complete syntax for an argument list is as follows:
+
+  (REQUIRED-VARS...
+   [&optional OPTIONAL-VARS...]
+   [&rest REST-VAR])
+
+** Naming a Function
+
+** Defining Functions
+Macro: defun name args [doc] [declare] [interactive] body...
+
+** Calling Functions
+
+** Mapping Functions
+
+** Anonymous Functions
+
+** Accessing Function Cell Contents
+The "function definition" of a symbol is the object stored in the
+function cell of the symbol.
+
+** Closures
+As explained in *note Variable Scoping::, Emacs can optionally enable
+lexical binding of variables.  When lexical binding is enabled, any
+named function that you create (e.g., with `defun'), as well as any
+anonymous function that you create using the `lambda' macro or the
+`function' special form or the `#'' syntax (*note Anonymous
+Functions::), is automatically converted into a "closure".
+
+   A closure is a function that also carries a record of the lexical
+environment that existed when the function was defined.  When it is
+invoked, any lexical variable references within its definition use the
+retained lexical environment.  In all other respects, closures behave
+much like ordinary functions; in particular, they can be called in the
+same way as ordinary functions.
+
+** Advising Emacs Lisp Functions
+   The "advice" feature lets you add to the existing definition of a
+function, by "advising the function".  This is a cleaner method than
+redefining the whole function.
+
+*** Primitives to manipulate advices
+
+*** Advising Named Functions
+
+*** Ways to compose advices
+:before 
+
+:after 
+
+:override 
+
+:around
+Call FUNCTION instead of the old function, but provide the old
+function as an extra argument to FUNCTION.
+
+:before-while
+:before-until
+:after-while
+:after-until
+:filter-args
+:filter-return
+
+*** Adapting code using the old defadvice
+A lot of code uses the old `defadvice' mechanism, which is largely made
+obsolete by the new `advice-add', whose implementation and semantics is
+significantly simpler.
+
+** Declaring Functions Obsolete
+You can mark a named function as "obsolete", meaning that it may be
+removed at some point in the future.  This causes Emacs to warn that
+the function is obsolete whenever it byte-compiles code containing that
+function, and whenever it displays the documentation for that function.
+In all other respects, an obsolete function behaves like any other
+function.
+
+** Inline Functions
+An "inline function" is a function that works just like an ordinary
+function, except for one thing: when you byte-compile a call to the
+function (*note Byte Compilation::), the function's definition is
+expanded into the caller.
+
+** The `declar' Form
+`declare' is a special macro which can be used to add "meta" properties
+to a function or macro: for example, marking it as obsolete, or giving
+its forms a special <TAB> indentation convention in Emacs Lisp mode.
+
+** Telling the Compiler that a Function is Defined
+(declare-function gud-find-c-expr "gud.el" nil)
+
+** Determing whether a Function is Safe to Call
+
+** Other Topics Related to Functions
+
+* Macros
+"Macros" enable you to define new control constructs and other language
+features.  A macro is defined much like a function, but instead of
+telling how to compute a value, it tells how to compute another Lisp
+expression which will in turn compute the value.  We call this
+expression the "expansion" of the macro.
+
+** Expansion of a Macro Call
+
+** Macros and Byte Compilation
+
+** Defining Macros
+
+** Common Problems Using Macros
+
+* Customizationg Settings
+** Common Item Keywords
+
+** Defining Customization Groups
+
+* Loading
+
+** How Programs Do Loading
+
+** Autoload
+
+** Features
+
+** Unloading
+
+* Byte Compilation
+** Dynamic Loading of Individual Functions
+When you compile a file, you can optionally enable the "dynamic
+function loading" feature (also known as "lazy loading").  With dynamic
+function loading, loading the file doesn't fully read the function
+definitions in the file.  Instead, each function definition contains a
+place-holder which refers to the file.  The first time each function is
+called, it reads the full definition from the file, to replace the
+place-holder.
+
+* Debugging Lisp Programs
+
+* Reading and Printing Lisp Objects
+** Introduction to Reading and Printing
+
+** Input Streams
+Possible types of input streams:
+BUFFER MARKER STRING FUNCTION SYMBOL 
+`t' => minibuffer
+`nil'
+
+** Input Functions
+
+** Output Steams
+BUFFER MARKER FUNCTION `t' `nil' SYMBOL
+
+** Output Functions
+
+* Minibuffers
+** Introduction to Minibuffers
+
+** Reading Text Strings with the Minibuffer
+
+** Minibuffer History
+
+** Completion
+
+* Command Loop
+When you run Emacs, it enters the "editor command loop" almost
+immediately.  This loop reads key sequences, executes their definitions,
+and displays the results.
+
+** Defining Commands
+
+* Keymaps
+
+* Modes
+A "mode" is a set of definitions that customize Emacs and can be turned
+on and off while you edit.  There are two varieties of modes: "major
+modes", which are mutually exclusive and used for editing particular
+kinds of text, and "minor modes", which provide features that users can
+enable individually.
+
+* Documentation
+
+* Files

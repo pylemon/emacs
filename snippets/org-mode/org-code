@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: org-code
+# key: ~
+# binding: direct-keybinding
+# --
+~${1:code}~$0
