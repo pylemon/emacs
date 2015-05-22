@@ -50,7 +50,7 @@
  (ex/linux
   (progn
     (setq default-frame-alist '((width . 210) (height . 51)))
-    (custom-set-faces '(default ((t (:family "M+_2pm"
+    (custom-set-faces '(default ((t (:family "Source Code Pro"
                                      :foundry "apple"
                                      :slant normal
                                      :weight normal
@@ -549,3 +549,35 @@ point reaches the beginning or end of the buffer, stop there."
 (add-hook 'go-mode-hook (lambda ()
   (set (make-local-variable 'company-backends) '(company-go))
   (company-mode)))
+
+(setq jedi:server-args
+      '("--virtual-env" "/home/liwei/Envs/bolo"
+        "--sys-path" "/home/liwei/bolo-server/core/src"))
+
+ ;; don't use default keybindings from jedi.el; keep C-. free
+ (setq jedi:setup-keys nil)
+ (setq jedi:tooltip-method nil)
+ (autoload 'jedi:setup "jedi" nil t)
+ (add-hook 'python-mode-hook 'jedi:setup)
+
+(defvar jedi:goto-stack '())
+(defun jedi:jump-to-definition ()
+  (interactive)
+  (add-to-list 'jedi:goto-stack
+               (list (buffer-name) (point)))
+  (jedi:goto-definition))
+(defun jedi:jump-back ()
+  (interactive)
+  (let ((p (pop jedi:goto-stack)))
+    (if p (progn
+            (switch-to-buffer (nth 0 p))
+            (goto-char (nth 1 p))))))
+
+;; redefine jedi's C-. (jedi:goto-definition)
+;; to remember position, and set C-, to jump back
+(add-hook 'python-mode-hook
+          '(lambda ()
+             (local-set-key (kbd "C-.") 'jedi:jump-to-definition)
+             (local-set-key (kbd "C-,") 'jedi:jump-back)
+             (local-set-key (kbd "C-c d") 'jedi:show-doc)
+             (local-set-key (kbd "C-<tab>") 'jedi:complete)))
