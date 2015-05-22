@@ -742,7 +742,6 @@ quick browser elisp code, jump[M-.] & back[M-,]
   (local-set-key (kbd "C-x f") 'helm-projectile-grep)))
 (add-hook 'go-mode-hook '(lambda () 
   (local-set-key (kbd "C-c C-j") 'godef-jump-other-window)))
-(global-set-key (kbd "C-x C-x") 'helm-imenu)
 
 (add-hook 'go-mode-hook 'company-mode)
 (add-hook 'before-save-hook 'gofmt-before-save)
@@ -762,7 +761,7 @@ quick browser elisp code, jump[M-.] & back[M-,]
  (setq jedi:tooltip-method nil)
  (autoload 'jedi:setup "jedi" nil t)
  (add-hook 'python-mode-hook 'jedi:setup)
-
+ (add-hook 'python-mode-hook 'jedi:ac-setup)
 (defvar jedi:goto-stack '())
 (defun jedi:jump-to-definition ()
   (interactive)
@@ -784,4 +783,9 @@ quick browser elisp code, jump[M-.] & back[M-,]
              (local-set-key (kbd "C-,") 'jedi:jump-back)
              (local-set-key (kbd "C-c d") 'jedi:show-doc)
              (local-set-key (kbd "C-<tab>") 'jedi:complete)))
+
+(eval-after-load "python"
+  '(define-key python-mode-map (kbd "C-x C-x") 'jedi-direx:pop-to-buffer))
+(add-hook 'jedi-mode-hook 'jedi-direx:setup)
+
 #+END_SRC

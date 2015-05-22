@@ -559,7 +559,7 @@ point reaches the beginning or end of the buffer, stop there."
  (setq jedi:tooltip-method nil)
  (autoload 'jedi:setup "jedi" nil t)
  (add-hook 'python-mode-hook 'jedi:setup)
-
+ (add-hook 'python-mode-hook 'jedi:ac-setup)
 (defvar jedi:goto-stack '())
 (defun jedi:jump-to-definition ()
   (interactive)
@@ -581,3 +581,7 @@ point reaches the beginning or end of the buffer, stop there."
              (local-set-key (kbd "C-,") 'jedi:jump-back)
              (local-set-key (kbd "C-c d") 'jedi:show-doc)
              (local-set-key (kbd "C-<tab>") 'jedi:complete)))
+
+(eval-after-load "python"
+  '(define-key python-mode-map "\C-x \C-x" 'jedi-direx:pop-to-buffer))
+(add-hook 'jedi-mode-hook 'jedi-direx:setup)
